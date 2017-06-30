@@ -4,7 +4,8 @@ realpath
 qemu-arm-static:qemu-user-static
 debootstrap
 zerofree
-pxz zip
+pxz
+zip
 mkdosfs:dosfstools
 capsh:libcap2-bin
 bsdtar
