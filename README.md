@@ -68,9 +68,3 @@ for a lite system), place an empty file named `SKIP` in each of the `./stage`
 directories you wish not to include.
 
 Then remove the `EXPORT*` files from `./stage2` (if building a minimal system).
-
-```bash
-# Example for building a lite system
-echo "IMG_NAME='Raspbian'" > config
-sudo ./build.sh
-```
