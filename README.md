@@ -66,29 +66,21 @@ maintenance and allows for more easy customization.
    enhancements, etc.  This is a base desktop system, with some development
    tools installed.
 
- - **Stage 4** - Raspbian system meant to fit on a 4GB card.  More development
-   tools, an email client, learning tools like Scratch, specialized packages
-   like sonic-pi, system documentation, office productivity, etc.  This is the
-   stage that installs all of the things that make Raspbian friendly to new
-   users.
-
 ### Stage specification
 
 If you wish to build up to a specified stage (such as building up to stage 2
 for a lite system), place an empty file named `SKIP` in each of the `./stage`
 directories you wish not to include.
 
-Then remove the `EXPORT*` files from `./stage4` (if building up to stage 2) or
-from `./stage2` (if building a minimal system).
+Then remove the `EXPORT*` files from `./stage2` (if building a minimal system).
 
 ```bash
 # Example for building a lite system
 echo "IMG_NAME='Raspbian'" > config
-touch ./stage3/SKIP ./stage4/SKIP
-rm stage4/EXPORT*
+touch ./stage3/SKIP
 sudo ./build.sh
 ```
 
 If you wish to build further configurations upon (for example) the lite
-system, you can also delete the contents of `./stage3` and `./stage4` and
+system, you can also delete the contents of `./stage3` and
 replace with your own contents in the same format.
