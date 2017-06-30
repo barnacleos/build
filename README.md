@@ -72,9 +72,6 @@ maintenance and allows for more easy customization.
    stage that installs all of the things that make Raspbian friendly to new
    users.
 
- - **Stage 5** - The official Raspbian Desktop image. Right now only adds
-   Mathematica.
-
 ### Stage specification
 
 If you wish to build up to a specified stage (such as building up to stage 2
@@ -87,7 +84,7 @@ from `./stage2` (if building a minimal system).
 ```bash
 # Example for building a lite system
 echo "IMG_NAME='Raspbian'" > config
-touch ./stage3/SKIP ./stage4/SKIP ./stage5/SKIP
+touch ./stage3/SKIP ./stage4/SKIP
 rm stage4/EXPORT*
 sudo ./build.sh
 ```
