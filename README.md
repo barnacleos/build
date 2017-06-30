@@ -1,8 +1,7 @@
 branacleos/build
 ================
 
-_Tool used to create the raspberrypi.org Raspbian images_
-
+Tool used to create the BarnacleOS images.
 
 ### TODO
 1. Documentation
