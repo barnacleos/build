@@ -3,9 +3,6 @@ branacleos/build
 
 Tool used to create the BarnacleOS images.
 
-### TODO
-1. Documentation
-
 
 ## Dependencies
 
