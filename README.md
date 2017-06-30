@@ -20,56 +20,6 @@ package is `<tool>[:<debian-package>]`.
 
 
 
-Config
-------
-
-Upon execution, `build.sh` will source the file `config` in the current
-working directory.  This bash shell fragment is intended to set needed
-environment variables.
-
-The following environment variables are supported:
-
- * `IMG_NAME` **required** (Default: unset)
-
-   The name of the image to build with the current stage directories.  Setting
-   `IMG_NAME=Raspbian` is logical for an unmodified RPi-Distro/pi-gen build,
-   but you should use something else for a customized version.  Export files
-   in stages may add suffixes to `IMG_NAME`.
-
- * `APT_PROXY` (Default: unset)
-
-   If you require the use of an apt proxy, set it here.  This proxy setting
-   will not be included in the image, making it safe to use an `apt-cacher` or
-   similar package for development.
-
- * `BASE_DIR`  (Default: location of `build.sh`)
-
-   **CAUTION**: Currently, changing this value will probably break build.sh
-
-   Top-level directory for `pi-gen`.  Contains stage directories, build
-   scripts, and by default both work and deployment directories.
-
- * `WORK_DIR`  (Default: `"$BASE_DIR/work"`)
-
-   Directory in which `pi-gen` builds the target system.  This value can be
-   changed if you have a suitably large, fast storage location for stages to
-   be built and cached.  Note, `WORK_DIR` stores a complete copy of the target
-   system for each build stage, amounting to tens of gigabytes in the case of
-   Raspbian.
-
- * `DEPLOY_DIR`  (Default: `"$BASE_DIR/deploy"`)
-
-   Output directory for target system images and NOOBS bundles.
-
-
-A simple example for building Raspbian:
-
-```bash
-IMG_NAME='Raspbian'
-```
-
-
-
 Stage Anatomy
 -------------
 
