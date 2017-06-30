@@ -61,11 +61,6 @@ maintenance and allows for more easy customization.
    you were looking for something between truly minimal and Raspbian-lite,
    here's where you start trimming.
 
- - **Stage 3** - desktop system.  Here's where you get the full desktop system
-   with X11 and LXDE, web browsers, git for development, Raspbian custom UI
-   enhancements, etc.  This is a base desktop system, with some development
-   tools installed.
-
 ### Stage specification
 
 If you wish to build up to a specified stage (such as building up to stage 2
@@ -77,10 +72,5 @@ Then remove the `EXPORT*` files from `./stage2` (if building a minimal system).
 ```bash
 # Example for building a lite system
 echo "IMG_NAME='Raspbian'" > config
-touch ./stage3/SKIP
 sudo ./build.sh
 ```
-
-If you wish to build further configurations upon (for example) the lite
-system, you can also delete the contents of `./stage3` and
-replace with your own contents in the same format.
