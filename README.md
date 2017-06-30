@@ -4,7 +4,9 @@ branacleos/build
 Tool used to create the BarnacleOS images.
 
 
-## Dependencies
+
+Dependencies
+------------
 
 On Debian-based systems:
 
@@ -17,7 +19,9 @@ The file `depends` contains a list of tools needed.  The format of this
 package is `<tool>[:<debian-package>]`.
 
 
-## Config
+
+Config
+------
 
 Upon execution, `build.sh` will source the file `config` in the current
 working directory.  This bash shell fragment is intended to set needed
@@ -65,7 +69,9 @@ IMG_NAME='Raspbian'
 ```
 
 
-## Stage Anatomy
+
+Stage Anatomy
+-------------
 
 ### Raspbian Stage Overview
 
