@@ -133,6 +133,16 @@ if [ -z "${HOSTNAME}" ]; then
 	exit 1
 fi
 
+if [ -z "${USERNAME}" ]; then
+	echo "USERNAME not set" 1>&2
+	exit 1
+fi
+
+if [ -z "${PASSWORD}" ]; then
+	echo "PASSWORD not set" 1>&2
+	exit 1
+fi
+
 export IMG_DATE=${IMG_DATE:-"$(date +%Y-%m-%d)"}
 
 export BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -144,6 +154,8 @@ export LOG_FILE="${WORK_DIR}/build.log"
 export CLEAN
 export IMG_NAME
 export HOSTNAME
+export USERNAME
+export PASSWORD
 export APT_PROXY
 
 export STAGE
