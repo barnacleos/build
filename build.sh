@@ -148,8 +148,6 @@ export PREV_STAGE_DIR
 export ROOTFS_DIR
 export PREV_ROOTFS_DIR
 export IMG_SUFFIX
-export NOOBS_NAME
-export NOOBS_DESCRIPTION
 export EXPORT_DIR
 export EXPORT_ROOTFS_DIR
 
@@ -177,11 +175,6 @@ for EXPORT_DIR in ${EXPORT_DIRS}; do
 	source "${EXPORT_DIR}/EXPORT_IMAGE"
 	EXPORT_ROOTFS_DIR=${WORK_DIR}/$(basename ${EXPORT_DIR})/rootfs
 	run_stage
-	if [ -e ${EXPORT_DIR}/EXPORT_NOOBS ]; then
-		source ${EXPORT_DIR}/EXPORT_NOOBS
-		STAGE_DIR=${BASE_DIR}/export-noobs
-		run_stage
-	fi
 done
 
 if [ -x postrun.sh ]; then
