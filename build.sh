@@ -128,6 +128,11 @@ if [ -z "${IMG_NAME}" ]; then
 	exit 1
 fi
 
+if [ -z "${HOSTNAME}" ]; then
+	echo "HOSTNAME not set" 1>&2
+	exit 1
+fi
+
 export IMG_DATE=${IMG_DATE:-"$(date +%Y-%m-%d)"}
 
 export BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -138,6 +143,7 @@ export LOG_FILE="${WORK_DIR}/build.log"
 
 export CLEAN
 export IMG_NAME
+export HOSTNAME
 export APT_PROXY
 
 export STAGE
