@@ -43,9 +43,6 @@ done
 
 rm -f "${ROOTFS_DIR}/root/.vnc/private.key"
 
-update_issue $(basename ${EXPORT_DIR})
-install -m 644 ${ROOTFS_DIR}/etc/rpi-issue ${ROOTFS_DIR}/boot/issue.txt
-
 ROOT_DEV=$(mount | grep "${ROOTFS_DIR} " | cut -f1 -d' ')
 
 unmount ${ROOTFS_DIR}
