@@ -67,9 +67,8 @@ main() {
 run_base() {
   log_begin "$BASE_DIR"
 
-  for STAGE_DIR in $BASE_DIR/stage*; do
-    run_stage
-  done
+  STAGE_DIR="$BASE_DIR/stage0"
+  run_stage
 
   log_end "$BASE_DIR"
 }
