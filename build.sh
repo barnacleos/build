@@ -1,11 +1,12 @@
 #!/bin/bash -e
 
-export IMG_DATE="$(date +%Y-%m-%d)"
 export BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 export SCRIPT_DIR="$BASE_DIR/scripts"
 export FUNCTIONS_DIR="$BASE_DIR/functions"
-export WORK_DIR="$BASE_DIR/work/$IMG_DATE-$IMG_NAME"
 export DEPLOY_DIR="$BASE_DIR/deploy"
+
+export IMG_DATE
+export WORK_DIR
 
 export CLEAN
 export IMG_NAME
@@ -60,6 +61,9 @@ main() {
     echo 'PASSWORD not set' 1>&2
     exit 1
   fi
+
+  IMG_DATE="$(date +%Y-%m-%d)"
+  WORK_DIR="$BASE_DIR/work/$IMG_DATE-$IMG_NAME"
 
   mkdir -p "$WORK_DIR"
   run_base
