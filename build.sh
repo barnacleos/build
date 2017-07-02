@@ -101,7 +101,16 @@ run_sub_stage() {
 		task_debconf     "$SUB_STAGE_DIR/$i-debconf"
 		task_packages_nr "$SUB_STAGE_DIR/$i-packages-nr"
 		task_packages    "$SUB_STAGE_DIR/$i-packages"
+		task_patches
+		task_run        "$SUB_STAGE_DIR/$i-run.sh"
+		task_run_chroot "$SUB_STAGE_DIR/$i-run-chroot.sh"
+	done
 
+	popd > /dev/null
+	log_end "$SUB_STAGE_DIR"
+}
+
+task_patches() {
 		if [ -d ${i}-patches ]; then
 			log_begin "$SUB_STAGE_DIR/$i-patches"
 			pushd ${STAGE_WORK_DIR} > /dev/null
@@ -137,13 +146,6 @@ run_sub_stage() {
 			popd > /dev/null
 			log_end "$SUB_STAGE_DIR/$i-patches"
 		fi
-
-		task_run        "$SUB_STAGE_DIR/$i-run.sh"
-		task_run_chroot "$SUB_STAGE_DIR/$i-run-chroot.sh"
-	done
-
-	popd > /dev/null
-	log_end "$SUB_STAGE_DIR"
 }
 
 task_debconf() {
