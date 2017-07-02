@@ -62,8 +62,8 @@ main() {
 
   mkdir -p "$WORK_DIR"
 
-  STAGE_DIR="$BASE_DIR/stage0"
-  STAGE=$(basename "$STAGE_DIR")
+  STAGE='stage0'
+  STAGE_DIR="$BASE_DIR/$STAGE"
   STAGE_WORK_DIR="$WORK_DIR/$STAGE"
   ROOTFS_DIR="$STAGE_WORK_DIR/rootfs"
 
