@@ -7,7 +7,6 @@ export SCRIPT_DIR="$BASE_DIR/scripts"
 export FUNCTIONS_DIR="$BASE_DIR/functions"
 export WORK_DIR="$BASE_DIR/work/$IMG_DATE-$IMG_NAME"
 export DEPLOY_DIR="$BASE_DIR/deploy"
-export LOG_FILE="$WORK_DIR/build.log"
 
 export CLEAN
 export IMG_NAME

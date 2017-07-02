@@ -1,6 +1,6 @@
 log() {
   tput setaf 2 # Green color
-  date +"[%T] $@" | tee -a "$LOG_FILE"
+  date +"[%T] $@"
   tput sgr0 # No color
 }
 
