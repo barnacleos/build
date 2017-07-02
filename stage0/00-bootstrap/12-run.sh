@@ -35,3 +35,30 @@ usermod --pass='*' root
 EOF
 
 rm -f "$ROOTFS_DIR/etc/ssh/ssh_host_*_key*"
+
+on_chroot << EOF
+apt-get install -y   \
+wpasupplicant        \
+wireless-tools       \
+firmware-atheros     \
+firmware-brcm80211   \
+firmware-libertas    \
+firmware-ralink      \
+firmware-realtek     \
+raspberrypi-net-mods \
+dhcpcd5
+EOF
+
+install -v -d						${ROOTFS_DIR}/etc/systemd/system/dhcpcd.service.d
+install -v -m 644 files/wait.conf			${ROOTFS_DIR}/etc/systemd/system/dhcpcd.service.d/
+
+install -v -d                                           ${ROOTFS_DIR}/etc/wpa_supplicant
+install -v -m 600 files/wpa_supplicant.conf             ${ROOTFS_DIR}/etc/wpa_supplicant/
+
+on_chroot << EOF
+apt-get install -y vim
+EOF
+
+on_chroot << EOF
+update-alternatives --set editor /usr/bin/vim.basic
+EOF
