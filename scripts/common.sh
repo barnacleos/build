@@ -6,7 +6,6 @@ copy_previous() {
 	mkdir -p "${ROOTFS_DIR}"
 	rsync -aHAXx --exclude var/cache/apt/archives "${PREV_ROOTFS_DIR}/" "${ROOTFS_DIR}/"
 }
-export -f copy_previous
 
 unmount() {
 	if [ -z "$1" ]; then
@@ -23,7 +22,6 @@ unmount() {
 		done
 	done
 }
-export -f unmount
 
 unmount_image() {
 	sync
@@ -42,7 +40,6 @@ unmount_image() {
 		fi
 	done
 }
-export -f unmount_image
 
 on_chroot() {
 	if ! mount | grep -q "$(realpath "${ROOTFS_DIR}"/proc)"; then
@@ -63,5 +60,8 @@ on_chroot() {
 
 	capsh --drop=cap_setfcap "--chroot=${ROOTFS_DIR}/" -- "$@"
 }
-export -f on_chroot
 
+export -f copy_previous
+export -f unmount
+export -f unmount_image
+export -f on_chroot
