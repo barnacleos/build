@@ -71,9 +71,9 @@ run_stage() {
 	pushd ${STAGE_DIR} > /dev/null
 
 	STAGE=$(basename ${STAGE_DIR})
-	unmount ${WORK_DIR}/${STAGE}
 	STAGE_WORK_DIR=${WORK_DIR}/${STAGE}
 	ROOTFS_DIR=${STAGE_WORK_DIR}/rootfs
+	unmount ${WORK_DIR}/${STAGE}
 	if [ ! -f SKIP ]; then
 		if [ -x prerun.sh ]; then
 			log_begin "$STAGE_DIR/prerun.sh"
