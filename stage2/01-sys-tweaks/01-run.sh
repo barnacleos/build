@@ -12,7 +12,6 @@ install -m 644 files/console-setup   			${ROOTFS_DIR}/etc/default/
 
 on_chroot << EOF
 systemctl disable hwclock.sh
-systemctl disable nfs-common
 systemctl disable rpcbind
 systemctl disable ssh
 systemctl enable regenerate_ssh_host_keys
