@@ -92,11 +92,7 @@ main() {
 
   unmount "$STAGE_WORK_DIR"
 
-  for substage_dir in $STAGE_DIR/*; do
-    if [ -d "$substage_dir" ]; then
-      run_sub_stage "$substage_dir"
-    fi
-  done
+  run_sub_stage "$STAGE_DIR/00-bootstrap"
 
   unmount "$STAGE_WORK_DIR"
 }
