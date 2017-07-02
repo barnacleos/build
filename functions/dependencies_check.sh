@@ -27,4 +27,3 @@ dependencies_check() {
 		false
 	fi
 }
-export -f dependencies_check

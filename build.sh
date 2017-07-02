@@ -30,7 +30,7 @@ export QUILT_REFRESH_ARGS='-p ab'
 
 source "$FUNCTIONS_DIR/logging.sh"
 source "$SCRIPT_DIR/common.sh"
-source "$SCRIPT_DIR/dependencies_check.sh"
+source "$FUNCTIONS_DIR/dependencies_check.sh"
 
 main() {
   dependencies_check "$BASE_DIR/depends"
