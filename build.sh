@@ -67,28 +67,28 @@ main() {
 }
 
 run_stage() {
-	log_begin "$STAGE_DIR"
-	pushd "$STAGE_DIR" > /dev/null
+  log_begin "$STAGE_DIR"
+  pushd "$STAGE_DIR" > /dev/null
 
-	STAGE=$(basename ${STAGE_DIR})
-	STAGE_WORK_DIR=${WORK_DIR}/${STAGE}
-	ROOTFS_DIR=${STAGE_WORK_DIR}/rootfs
+  STAGE=$(basename ${STAGE_DIR})
+  STAGE_WORK_DIR=${WORK_DIR}/${STAGE}
+  ROOTFS_DIR=${STAGE_WORK_DIR}/rootfs
 
-	unmount ${WORK_DIR}/${STAGE}
+  unmount ${WORK_DIR}/${STAGE}
 
-	if [ ! -f SKIP ]; then
-		for SUB_STAGE_DIR in ${STAGE_DIR}/*; do
-			if [ -d ${SUB_STAGE_DIR} ] &&
-			   [ ! -f ${SUB_STAGE_DIR}/SKIP ]; then
-				run_sub_stage
-			fi
-		done
-	fi
+  if [ ! -f SKIP ]; then
+    for SUB_STAGE_DIR in ${STAGE_DIR}/*; do
+      if [ -d ${SUB_STAGE_DIR} ] &&
+        [ ! -f ${SUB_STAGE_DIR}/SKIP ]; then
+        run_sub_stage
+      fi
+    done
+  fi
 
-	unmount ${WORK_DIR}/${STAGE}
+  unmount ${WORK_DIR}/${STAGE}
 
-	popd > /dev/null
-	log_end "$STAGE_DIR"
+  popd > /dev/null
+  log_end "$STAGE_DIR"
 }
 
 run_sub_stage() {
