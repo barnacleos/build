@@ -23,6 +23,7 @@ dependencies_check() {
       echo "  * $package_name"
     done
     tput sgr0 # No color
+
     false
   fi
 }
