@@ -37,7 +37,8 @@ EOF
 on_chroot << EOF
 apt-get install -y     \
 locales                \
-raspberrypi-bootloader
+raspberrypi-bootloader \
+ssh
 EOF
 
 install -m 644 files/cmdline.txt "$BOOTFS_DIR"

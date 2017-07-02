@@ -62,7 +62,6 @@ EOF
 
 on_chroot << EOF
 apt-get install -y     \
-ssh                    \
 less                   \
 fbset                  \
 sudo                   \
