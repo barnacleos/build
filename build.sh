@@ -95,7 +95,16 @@ run_sub_stage() {
 			mkdir -p $SUB_STAGE_QUILT_PATCH_DIR
 			ln -snf $SUB_STAGE_QUILT_PATCH_DIR .pc
 			if [ -e ${SUB_STAGE_DIR}/${i}-patches/EDIT ]; then
+				tput setaf 3 # Yellow color
 				echo "Dropping into bash to edit patches..."
+				echo "Tutorial: https://raphaelhertzog.com/2012/08/08/how-to-use-quilt-to-manage-patches-in-debian-packages/"
+				echo "Example:"
+				echo "  quilt new XX-name-of-the-patch.diff"
+				echo "  quilt edit rootfs/path/to/file"
+				echo "  quilt diff"
+				echo "  quilt refresh"
+				tput sgr0 # No color
+
 				bash
 			fi
 			quilt upgrade
