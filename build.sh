@@ -177,35 +177,6 @@ run_base() {
   log_end "$BASE_DIR"
 }
 
-if [ "$(id -u)" != "0" ]; then
-	echo "Please run as root" 1>&2
-	exit 1
-fi
-
-if [ -f config ]; then
-	source config
-fi
-
-if [ -z "${IMG_NAME}" ]; then
-	echo "IMG_NAME not set" 1>&2
-	exit 1
-fi
-
-if [ -z "${HOSTNAME}" ]; then
-	echo "HOSTNAME not set" 1>&2
-	exit 1
-fi
-
-if [ -z "${USERNAME}" ]; then
-	echo "USERNAME not set" 1>&2
-	exit 1
-fi
-
-if [ -z "${PASSWORD}" ]; then
-	echo "PASSWORD not set" 1>&2
-	exit 1
-fi
-
 export IMG_DATE=${IMG_DATE:-"$(date +%Y-%m-%d)"}
 
 export BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -236,6 +207,35 @@ export QUILT_REFRESH_ARGS="-p ab"
 
 source "$SCRIPT_DIR/common.sh"
 source "$SCRIPT_DIR/dependencies_check.sh"
+
+if [ "$(id -u)" != "0" ]; then
+  echo "Please run as root" 1>&2
+  exit 1
+fi
+
+if [ -f config ]; then
+  source config
+fi
+
+if [ -z "${IMG_NAME}" ]; then
+  echo "IMG_NAME not set" 1>&2
+  exit 1
+fi
+
+if [ -z "${HOSTNAME}" ]; then
+  echo "HOSTNAME not set" 1>&2
+  exit 1
+fi
+
+if [ -z "${USERNAME}" ]; then
+  echo "USERNAME not set" 1>&2
+  exit 1
+fi
+
+if [ -z "${PASSWORD}" ]; then
+  echo "PASSWORD not set" 1>&2
+  exit 1
+fi
 
 dependencies_check "$BASE_DIR/depends"
 
