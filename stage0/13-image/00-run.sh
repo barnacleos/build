@@ -4,7 +4,7 @@ unmount_image "$IMG_FILE"
 
 rm -f "$IMG_FILE"
 
-BOOT_SIZE=$(du --apparent-size -s "$ROOTFS_DIR/boot" --block-size=1 | cut -f 1)
+BOOT_SIZE=$(du --apparent-size -s "$BOOTFS_DIR" --block-size=1 | cut -f 1)
 TOTAL_SIZE=$(du --apparent-size -s "$ROOTFS_DIR" --exclude var/cache/apt/archives --block-size=1 | cut -f 1)
 
 IMG_SIZE=$((BOOT_SIZE + TOTAL_SIZE + (800 * 1024 * 1024)))
@@ -51,4 +51,4 @@ mkdosfs -n boot -F 32 -v $BOOT_DEV > /dev/null
 mkfs.ext4 -O ^huge_file $ROOT_DEV > /dev/null
 
 mount -v $ROOT_DEV "$ROOTFS_DIR" -t ext4
-mount -v $BOOT_DEV "$ROOTFS_DIR/boot" -t vfat
+mount -v $BOOT_DEV "$BOOTFS_DIR" -t vfat

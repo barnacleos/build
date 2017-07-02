@@ -17,6 +17,7 @@ export STAGE
 export STAGE_DIR
 export STAGE_WORK_DIR
 export ROOTFS_DIR
+export BOOTFS_DIR
 
 export IMG_FILE
 export ZIP_FILE
@@ -67,6 +68,7 @@ main() {
   STAGE_DIR="$BASE_DIR/$STAGE"
   STAGE_WORK_DIR="$WORK_DIR/$STAGE"
   ROOTFS_DIR="$STAGE_WORK_DIR/rootfs"
+  BOOTFS_DIR="$ROOTFS_DIR/boot"
 
   IMG_FILE="$STAGE_WORK_DIR/$IMG_DATE-${IMG_NAME}.img"
   ZIP_FILE="$DEPLOY_DIR/image_$IMG_DATE-${IMG_NAME}.zip"
@@ -74,7 +76,7 @@ main() {
   mkdir -p "$WORK_DIR"
   mkdir -p "$DEPLOY_DIR"
   mkdir -p "$ROOTFS_DIR"
-  mkdir -p "$ROOTFS_DIR/boot"
+  mkdir -p "$BOOTFS_DIR"
 
   pushd "$STAGE_DIR" > /dev/null
 
