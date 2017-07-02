@@ -92,7 +92,7 @@ main() {
 
   unmount "$STAGE_WORK_DIR"
 
-  run_sub_stage "$STAGE_DIR/00-bootstrap"
+  run_sub_stage "$STAGE_DIR/00-substage"
 
   unmount "$STAGE_WORK_DIR"
 }
