@@ -114,12 +114,16 @@ task_patches() {
 		if [ -d ${i}-patches ]; then
 			log_begin "$SUB_STAGE_DIR/$i-patches"
 			pushd ${STAGE_WORK_DIR} > /dev/null
+
 			rm -rf .pc
 			rm -rf *-pc
+
 			QUILT_PATCHES=${SUB_STAGE_DIR}/${i}-patches
 			SUB_STAGE_QUILT_PATCH_DIR="$(basename $SUB_STAGE_DIR)-pc"
+
 			mkdir -p $SUB_STAGE_QUILT_PATCH_DIR
 			ln -snf $SUB_STAGE_QUILT_PATCH_DIR .pc
+
 			if [ -e ${SUB_STAGE_DIR}/${i}-patches/EDIT ]; then
 				tput setaf 3 # Yellow color
 				echo 'Dropping into bash to edit patches...'
@@ -133,9 +137,11 @@ task_patches() {
 
 				bash
 			fi
+
 			quilt upgrade
 			RC=0
 			quilt push -a || RC=$?
+
 			case "$RC" in
 				0|2)
 					;;
@@ -143,6 +149,7 @@ task_patches() {
 					false
 					;;
 			esac
+
 			popd > /dev/null
 			log_end "$SUB_STAGE_DIR/$i-patches"
 		fi
