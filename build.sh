@@ -1,8 +1,16 @@
 #!/bin/bash -e
 
+log_begin() {
+  log "Begin $1"
+}
+
+log_end() {
+  log "End   $1"
+}
+
 run_debconf() {
   if [ -f "$1" ]; then
-    log "Begin $1"
+    log_begin "$1"
 
     on_chroot << EOF
 debconf-set-selections <<SELEOF
@@ -10,13 +18,13 @@ debconf-set-selections <<SELEOF
 SELEOF
 EOF
 
-    log "End   $1"
+    log_end "$1"
   fi
 }
 
 run_packages_nr() {
   if [ -f "$1" ]; then
-    log "Begin $1"
+    log_begin "$1"
 
     PACKAGES="$(sed -f "$SCRIPT_DIR/remove-comments.sed" < "$1")"
 
@@ -26,7 +34,7 @@ apt-get install --n-install-recommends -y $PACKAGES
 EOF
     fi
 
-    log "End   $1"
+    log_end "$1"
   fi
 }
 
