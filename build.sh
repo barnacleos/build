@@ -73,7 +73,7 @@ main() {
   ZIP_FILE="$DEPLOY_DIR/image_$IMG_DATE-${IMG_NAME}.zip"
 
   tput setaf 2 # Green color
-  echo "Date: $IMG_DATE"
+  echo "$IMG_DATE $(date +"%T")"
   echo
   echo "Work dir:       $WORK_DIR"
   echo "Stage dir:      $STAGE_DIR"
