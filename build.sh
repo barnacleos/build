@@ -31,6 +31,14 @@ export QUILT_REFRESH_ARGS='-p ab'
 source "$SCRIPT_DIR/common.sh"
 source "$SCRIPT_DIR/dependencies_check.sh"
 
+log_begin() {
+  log "Begin $1"
+}
+
+log_end() {
+  log "End   $1"
+}
+
 main() {
   dependencies_check "$BASE_DIR/depends"
 
@@ -65,12 +73,107 @@ main() {
   run_base
 }
 
-log_begin() {
-  log "Begin $1"
+run_base() {
+  log_begin "$BASE_DIR"
+
+  for STAGE_DIR in $BASE_DIR/stage*; do
+    run_stage
+  done
+
+  CLEAN=1
+  STAGE_DIR="$BASE_DIR/export-image"
+  EXPORT_ROOTFS_DIR="$WORK_DIR/stage3/rootfs"
+  run_stage
+
+  log_end "$BASE_DIR"
 }
 
-log_end() {
-  log "End   $1"
+run_stage() {
+	log_begin "$STAGE_DIR"
+	STAGE=$(basename ${STAGE_DIR})
+	pushd ${STAGE_DIR} > /dev/null
+	unmount ${WORK_DIR}/${STAGE}
+	STAGE_WORK_DIR=${WORK_DIR}/${STAGE}
+	ROOTFS_DIR=${STAGE_WORK_DIR}/rootfs
+	if [ ! -f SKIP ]; then
+		if [ "${CLEAN}" = '1' ]; then
+			if [ -d ${ROOTFS_DIR} ]; then
+				rm -rf ${ROOTFS_DIR}
+			fi
+		fi
+		if [ -x prerun.sh ]; then
+			log_begin "$STAGE_DIR/prerun.sh"
+			./prerun.sh
+			log_end "$STAGE_DIR/prerun.sh"
+		fi
+		for SUB_STAGE_DIR in ${STAGE_DIR}/*; do
+			if [ -d ${SUB_STAGE_DIR} ] &&
+			   [ ! -f ${SUB_STAGE_DIR}/SKIP ]; then
+				run_sub_stage
+			fi
+		done
+	fi
+	unmount ${WORK_DIR}/${STAGE}
+	PREV_STAGE=${STAGE}
+	PREV_STAGE_DIR=${STAGE_DIR}
+	PREV_ROOTFS_DIR=${ROOTFS_DIR}
+	popd > /dev/null
+	log_end "$STAGE_DIR"
+}
+
+run_sub_stage() {
+	log_begin "$SUB_STAGE_DIR"
+	pushd "$SUB_STAGE_DIR" > /dev/null
+
+	for i in {00..99}; do
+		task_debconf     "$SUB_STAGE_DIR/$i-debconf"
+		task_packages_nr "$SUB_STAGE_DIR/$i-packages-nr"
+		task_packages    "$SUB_STAGE_DIR/$i-packages"
+
+		if [ -d ${i}-patches ]; then
+			log_begin "$SUB_STAGE_DIR/$i-patches"
+			pushd ${STAGE_WORK_DIR} > /dev/null
+			if [ "${CLEAN}" = '1' ]; then
+				rm -rf .pc
+				rm -rf *-pc
+			fi
+			QUILT_PATCHES=${SUB_STAGE_DIR}/${i}-patches
+			SUB_STAGE_QUILT_PATCH_DIR="$(basename $SUB_STAGE_DIR)-pc"
+			mkdir -p $SUB_STAGE_QUILT_PATCH_DIR
+			ln -snf $SUB_STAGE_QUILT_PATCH_DIR .pc
+			if [ -e ${SUB_STAGE_DIR}/${i}-patches/EDIT ]; then
+				tput setaf 3 # Yellow color
+				echo 'Dropping into bash to edit patches...'
+				echo 'Tutorial: https://raphaelhertzog.com/2012/08/08/how-to-use-quilt-to-manage-patches-in-debian-packages/'
+				echo 'Example:'
+				echo '  quilt new XX-name-of-the-patch.diff'
+				echo '  quilt edit rootfs/path/to/file'
+				echo '  quilt diff'
+				echo '  quilt refresh'
+				tput sgr0 # No color
+
+				bash
+			fi
+			quilt upgrade
+			RC=0
+			quilt push -a || RC=$?
+			case "$RC" in
+				0|2)
+					;;
+				*)
+					false
+					;;
+			esac
+			popd > /dev/null
+			log_end "$SUB_STAGE_DIR/$i-patches"
+		fi
+
+		task_run        "$SUB_STAGE_DIR/$i-run.sh"
+		task_run_chroot "$SUB_STAGE_DIR/$i-run-chroot.sh"
+	done
+
+	popd > /dev/null
+	log_end "$SUB_STAGE_DIR"
 }
 
 task_debconf() {
@@ -137,109 +240,6 @@ task_run_chroot() {
 
     log_end "$1"
   fi
-}
-
-run_sub_stage() {
-	log_begin "$SUB_STAGE_DIR"
-	pushd "$SUB_STAGE_DIR" > /dev/null
-
-	for i in {00..99}; do
-		task_debconf     "$SUB_STAGE_DIR/$i-debconf"
-		task_packages_nr "$SUB_STAGE_DIR/$i-packages-nr"
-		task_packages    "$SUB_STAGE_DIR/$i-packages"
-
-		if [ -d ${i}-patches ]; then
-			log_begin "$SUB_STAGE_DIR/$i-patches"
-			pushd ${STAGE_WORK_DIR} > /dev/null
-			if [ "${CLEAN}" = '1' ]; then
-				rm -rf .pc
-				rm -rf *-pc
-			fi
-			QUILT_PATCHES=${SUB_STAGE_DIR}/${i}-patches
-			SUB_STAGE_QUILT_PATCH_DIR="$(basename $SUB_STAGE_DIR)-pc"
-			mkdir -p $SUB_STAGE_QUILT_PATCH_DIR
-			ln -snf $SUB_STAGE_QUILT_PATCH_DIR .pc
-			if [ -e ${SUB_STAGE_DIR}/${i}-patches/EDIT ]; then
-				tput setaf 3 # Yellow color
-				echo 'Dropping into bash to edit patches...'
-				echo 'Tutorial: https://raphaelhertzog.com/2012/08/08/how-to-use-quilt-to-manage-patches-in-debian-packages/'
-				echo 'Example:'
-				echo '  quilt new XX-name-of-the-patch.diff'
-				echo '  quilt edit rootfs/path/to/file'
-				echo '  quilt diff'
-				echo '  quilt refresh'
-				tput sgr0 # No color
-
-				bash
-			fi
-			quilt upgrade
-			RC=0
-			quilt push -a || RC=$?
-			case "$RC" in
-				0|2)
-					;;
-				*)
-					false
-					;;
-			esac
-			popd > /dev/null
-			log_end "$SUB_STAGE_DIR/$i-patches"
-		fi
-
-		task_run        "$SUB_STAGE_DIR/$i-run.sh"
-		task_run_chroot "$SUB_STAGE_DIR/$i-run-chroot.sh"
-	done
-
-	popd > /dev/null
-	log_end "$SUB_STAGE_DIR"
-}
-
-run_stage() {
-	log_begin "$STAGE_DIR"
-	STAGE=$(basename ${STAGE_DIR})
-	pushd ${STAGE_DIR} > /dev/null
-	unmount ${WORK_DIR}/${STAGE}
-	STAGE_WORK_DIR=${WORK_DIR}/${STAGE}
-	ROOTFS_DIR=${STAGE_WORK_DIR}/rootfs
-	if [ ! -f SKIP ]; then
-		if [ "${CLEAN}" = '1' ]; then
-			if [ -d ${ROOTFS_DIR} ]; then
-				rm -rf ${ROOTFS_DIR}
-			fi
-		fi
-		if [ -x prerun.sh ]; then
-			log_begin "$STAGE_DIR/prerun.sh"
-			./prerun.sh
-			log_end "$STAGE_DIR/prerun.sh"
-		fi
-		for SUB_STAGE_DIR in ${STAGE_DIR}/*; do
-			if [ -d ${SUB_STAGE_DIR} ] &&
-			   [ ! -f ${SUB_STAGE_DIR}/SKIP ]; then
-				run_sub_stage
-			fi
-		done
-	fi
-	unmount ${WORK_DIR}/${STAGE}
-	PREV_STAGE=${STAGE}
-	PREV_STAGE_DIR=${STAGE_DIR}
-	PREV_ROOTFS_DIR=${ROOTFS_DIR}
-	popd > /dev/null
-	log_end "$STAGE_DIR"
-}
-
-run_base() {
-  log_begin "$BASE_DIR"
-
-  for STAGE_DIR in $BASE_DIR/stage*; do
-    run_stage
-  done
-
-  CLEAN=1
-  STAGE_DIR="$BASE_DIR/export-image"
-  EXPORT_ROOTFS_DIR="$WORK_DIR/stage3/rootfs"
-  run_stage
-
-  log_end "$BASE_DIR"
 }
 
 main
