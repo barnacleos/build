@@ -73,15 +73,15 @@ main() {
   ZIP_FILE="$DEPLOY_DIR/image_$IMG_DATE-${IMG_NAME}.zip"
 
   tput setaf 2 # Green color
-  log "Date: $IMG_DATE"
+  echo "Date: $IMG_DATE"
   echo
-  log "Work dir:       $WORK_DIR"
-  log "Stage dir:      $STAGE_DIR"
-  log "Stage work dir: $STAGE_WORK_DIR"
-  log "Root FS dir:    $ROOTFS_DIR"
-  log "Boot FS dir:    $BOOTFS_DIR"
-  log "Image file:     $IMG_FILE"
-  log "ZIP file:       $ZIP_FILE"
+  echo "Work dir:       $WORK_DIR"
+  echo "Stage dir:      $STAGE_DIR"
+  echo "Stage work dir: $STAGE_WORK_DIR"
+  echo "Root FS dir:    $ROOTFS_DIR"
+  echo "Boot FS dir:    $BOOTFS_DIR"
+  echo "Image file:     $IMG_FILE"
+  echo "ZIP file:       $ZIP_FILE"
   echo
   tput sgr0 # No color
 
