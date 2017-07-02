@@ -48,5 +48,8 @@ ROOT_DEV=$(losetup --show -f -o $ROOT_OFFSET --sizelimit $ROOT_LENGTH "$IMG_FILE
 mkdosfs -n boot -F 32 -v $BOOT_DEV > /dev/null
 mkfs.ext4 -O ^huge_file $ROOT_DEV > /dev/null
 
+mkdir -p "$ROOTFS_DIR"
 mount -v $ROOT_DEV "$ROOTFS_DIR" -t ext4
+
+mkdir -p "$BOOTFS_DIR"
 mount -v $BOOT_DEV "$BOOTFS_DIR" -t vfat
