@@ -1,4 +1,9 @@
 #!/bin/bash -e
+
+if [ -d "$ROOTFS_DIR" ]; then
+  rm -rf "$ROOTFS_DIR"
+fi
+
 IMG_FILE="${STAGE_WORK_DIR}/${IMG_DATE}-${IMG_NAME}.img"
 
 unmount_image ${IMG_FILE}

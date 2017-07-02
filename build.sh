@@ -8,7 +8,6 @@ export DEPLOY_DIR="$BASE_DIR/deploy"
 export IMG_DATE
 export WORK_DIR
 
-export CLEAN
 export IMG_NAME
 export HOSTNAME
 export USERNAME
@@ -73,7 +72,6 @@ run_base() {
     run_stage
   done
 
-  CLEAN=1
   STAGE_DIR="$BASE_DIR/export-image"
   EXPORT_ROOTFS_DIR="$WORK_DIR/stage0/rootfs"
   run_stage
@@ -89,11 +87,6 @@ run_stage() {
 	STAGE_WORK_DIR=${WORK_DIR}/${STAGE}
 	ROOTFS_DIR=${STAGE_WORK_DIR}/rootfs
 	if [ ! -f SKIP ]; then
-		if [ "${CLEAN}" = '1' ]; then
-			if [ -d ${ROOTFS_DIR} ]; then
-				rm -rf ${ROOTFS_DIR}
-			fi
-		fi
 		if [ -x prerun.sh ]; then
 			log_begin "$STAGE_DIR/prerun.sh"
 			./prerun.sh
