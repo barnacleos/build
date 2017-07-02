@@ -18,6 +18,8 @@ export STAGE_DIR
 export STAGE_WORK_DIR
 export ROOTFS_DIR
 
+export IMG_FILE
+
 export QUILT_PATCHES
 export QUILT_NO_DIFF_INDEX=1
 export QUILT_NO_DIFF_TIMESTAMPS=1
@@ -64,6 +66,8 @@ main() {
   STAGE_DIR="$BASE_DIR/$STAGE"
   STAGE_WORK_DIR="$WORK_DIR/$STAGE"
   ROOTFS_DIR="$STAGE_WORK_DIR/rootfs"
+
+  IMG_FILE="${STAGE_WORK_DIR}/${IMG_DATE}-${IMG_NAME}.img"
 
   mkdir -p "$WORK_DIR"
 

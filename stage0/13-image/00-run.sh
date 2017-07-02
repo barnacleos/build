@@ -1,7 +1,5 @@
 #!/bin/bash -e
 
-IMG_FILE="${STAGE_WORK_DIR}/${IMG_DATE}-${IMG_NAME}.img"
-
 unmount_image ${IMG_FILE}
 
 rm -f ${IMG_FILE}

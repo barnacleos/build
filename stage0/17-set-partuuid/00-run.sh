@@ -1,5 +1,4 @@
 #!/bin/bash -e
-IMG_FILE="${STAGE_WORK_DIR}/${IMG_DATE}-${IMG_NAME}.img"
 
 IMGID="$(fdisk -l ${IMG_FILE} | sed -n 's/Disk identifier: 0x\([^ ]*\)/\1/p')"
 

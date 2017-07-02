@@ -1,7 +1,5 @@
 #!/bin/bash -e
 
-IMG_FILE="${STAGE_WORK_DIR}/${IMG_DATE}-${IMG_NAME}.img"
-
 on_chroot << EOF
 /etc/init.d/fake-hwclock stop
 hardlink -t /usr/share/doc
