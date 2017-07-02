@@ -90,8 +90,6 @@ main() {
   mkdir -p "$WORK_DIR"
   mkdir -p "$DEPLOY_DIR"
 
-  pushd "$STAGE_DIR" > /dev/null
-
   unmount "$STAGE_WORK_DIR"
 
   for SUB_STAGE_DIR in $STAGE_DIR/*; do
@@ -101,8 +99,6 @@ main() {
   done
 
   unmount "$STAGE_WORK_DIR"
-
-  popd > /dev/null
 }
 
 run_sub_stage() {
