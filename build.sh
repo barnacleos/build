@@ -17,7 +17,6 @@ export STAGE
 export STAGE_DIR
 export STAGE_WORK_DIR
 export ROOTFS_DIR
-export EXPORT_ROOTFS_DIR
 
 export QUILT_PATCHES
 export QUILT_NO_DIFF_INDEX=1
@@ -67,8 +66,6 @@ main() {
 
 run_base() {
   log_begin "$BASE_DIR"
-
-  EXPORT_ROOTFS_DIR="$WORK_DIR/stage0/rootfs"
 
   for STAGE_DIR in $BASE_DIR/stage*; do
     run_stage
