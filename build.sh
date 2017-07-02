@@ -122,51 +122,6 @@ run_sub_stage() {
   log_end "$SUB_STAGE_DIR"
 }
 
-task_patches() {
-  if [ -d "$i-patches" ]; then
-    log_begin "$SUB_STAGE_DIR/$i-patches"
-    pushd "$STAGE_WORK_DIR" > /dev/null
-
-    rm -rf .pc
-    rm -rf *-pc
-
-    export QUILT_PATCHES="$SUB_STAGE_DIR/$i-patches"
-
-    SUB_STAGE_QUILT_PATCH_DIR="$(basename "$SUB_STAGE_DIR")-pc"
-    mkdir -p "$SUB_STAGE_QUILT_PATCH_DIR"
-    ln -snf "$SUB_STAGE_QUILT_PATCH_DIR" .pc
-
-    if [ -e "$SUB_STAGE_DIR/$i-patches/EDIT" ]; then
-      tput setaf 3 # Yellow color
-      echo 'Dropping into bash to edit patches...'
-      echo 'Tutorial: https://raphaelhertzog.com/2012/08/08/how-to-use-quilt-to-manage-patches-in-debian-packages/'
-      echo 'Example:'
-      echo '  quilt new XX-name-of-the-patch.diff'
-      echo '  quilt edit rootfs/path/to/file'
-      echo '  quilt diff'
-      echo '  quilt refresh'
-      tput sgr0 # No color
-
-      bash
-    fi
-
-    quilt upgrade
-    RC=0
-    quilt push -a || RC=$?
-
-    case "$RC" in
-    0|2)
-      ;;
-    *)
-      false
-      ;;
-    esac
-
-    popd > /dev/null
-    log_end "$SUB_STAGE_DIR/$i-patches"
-  fi
-}
-
 task_debconf() {
   if [ -f "$1" ]; then
     log_begin "$1"
@@ -210,6 +165,51 @@ EOF
     fi
 
     log_end "$1"
+  fi
+}
+
+task_patches() {
+  if [ -d "$i-patches" ]; then
+    log_begin "$SUB_STAGE_DIR/$i-patches"
+    pushd "$STAGE_WORK_DIR" > /dev/null
+
+    rm -rf .pc
+    rm -rf *-pc
+
+    export QUILT_PATCHES="$SUB_STAGE_DIR/$i-patches"
+
+    SUB_STAGE_QUILT_PATCH_DIR="$(basename "$SUB_STAGE_DIR")-pc"
+    mkdir -p "$SUB_STAGE_QUILT_PATCH_DIR"
+    ln -snf "$SUB_STAGE_QUILT_PATCH_DIR" .pc
+
+    if [ -e "$SUB_STAGE_DIR/$i-patches/EDIT" ]; then
+      tput setaf 3 # Yellow color
+      echo 'Dropping into bash to edit patches...'
+      echo 'Tutorial: https://raphaelhertzog.com/2012/08/08/how-to-use-quilt-to-manage-patches-in-debian-packages/'
+      echo 'Example:'
+      echo '  quilt new XX-name-of-the-patch.diff'
+      echo '  quilt edit rootfs/path/to/file'
+      echo '  quilt diff'
+      echo '  quilt refresh'
+      tput sgr0 # No color
+
+      bash
+    fi
+
+    quilt upgrade
+    RC=0
+    quilt push -a || RC=$?
+
+    case "$RC" in
+    0|2)
+      ;;
+    *)
+      false
+      ;;
+    esac
+
+    popd > /dev/null
+    log_end "$SUB_STAGE_DIR/$i-patches"
   fi
 }
 
