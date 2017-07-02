@@ -68,13 +68,11 @@ main() {
 run_base() {
   log_begin "$BASE_DIR"
 
+  EXPORT_ROOTFS_DIR="$WORK_DIR/stage0/rootfs"
+
   for STAGE_DIR in $BASE_DIR/stage*; do
     run_stage
   done
-
-  STAGE_DIR="$BASE_DIR/export-image"
-  EXPORT_ROOTFS_DIR="$WORK_DIR/stage0/rootfs"
-  run_stage
 
   log_end "$BASE_DIR"
 }
