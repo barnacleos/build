@@ -69,6 +69,7 @@ main() {
 run_stage() {
 	log_begin "$STAGE_DIR"
 	pushd ${STAGE_DIR} > /dev/null
+
 	STAGE=$(basename ${STAGE_DIR})
 	unmount ${WORK_DIR}/${STAGE}
 	STAGE_WORK_DIR=${WORK_DIR}/${STAGE}
@@ -87,6 +88,7 @@ run_stage() {
 		done
 	fi
 	unmount ${WORK_DIR}/${STAGE}
+
 	popd > /dev/null
 	log_end "$STAGE_DIR"
 }
