@@ -16,9 +16,11 @@ dependencies_check() {
   fi
 
   if [[ "$missing" ]]; then
+    tput setaf 1 # Red color
     echo 'Reqired dependencies not installed.'
     echo 'This can be resolved on Debian/Raspbian systems by installing the following packages:'
     echo "$missing"
+    tput sgr0 # No color
     false
   fi
 }
