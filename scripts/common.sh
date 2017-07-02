@@ -36,7 +36,7 @@ on_chroot() {
   local proc_fs="$ROOTFS_DIR/proc"
   local dev_fs="$ROOTFS_DIR/dev"
   local devpts_fs="$ROOTFS_DIR/dev/pts"
-  local sys_fs="$ROOTDS_DIR/sys"
+  local sys_fs="$ROOTFS_DIR/sys"
 
   if ! mount | grep -q "$(realpath "$proc_fs")"; then
     mount -t proc proc "$proc_fs"
