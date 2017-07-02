@@ -102,8 +102,8 @@ run_sub_stage() {
 		task_packages_nr "$SUB_STAGE_DIR/$i-packages-nr"
 		task_packages    "$SUB_STAGE_DIR/$i-packages"
 		task_patches
-		task_run        "$SUB_STAGE_DIR/$i-run.sh"
-		task_run_chroot "$SUB_STAGE_DIR/$i-run-chroot.sh"
+		task_run         "$SUB_STAGE_DIR/$i-run.sh"
+		task_run_chroot  "$SUB_STAGE_DIR/$i-run-chroot.sh"
 	done
 
 	popd > /dev/null
