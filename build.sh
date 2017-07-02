@@ -68,7 +68,7 @@ main() {
 
 run_stage() {
 	log_begin "$STAGE_DIR"
-	pushd ${STAGE_DIR} > /dev/null
+	pushd "$STAGE_DIR" > /dev/null
 
 	STAGE=$(basename ${STAGE_DIR})
 	STAGE_WORK_DIR=${WORK_DIR}/${STAGE}
