@@ -26,3 +26,19 @@ on_chroot << EOF
 apt-get update
 apt-get dist-upgrade -y
 EOF
+
+on_chroot << EOF
+debconf-set-selections <<SELEOF
+locales locales/locales_to_be_generated multiselect en_US.UTF-8 UTF-8
+locales locales/default_environment_locale select en_US.UTF-8
+SELEOF
+EOF
+
+on_chroot << EOF
+apt-get install -y     \
+locales                \
+raspberrypi-bootloader
+EOF
+
+install -m 644 files/cmdline.txt "$BOOTFS_DIR"
+install -m 644 files/config.txt  "$BOOTFS_DIR"
