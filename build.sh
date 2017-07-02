@@ -165,7 +165,7 @@ run_stage() {
 run_base() {
   log_begin "$BASE_DIR"
 
-  for STAGE_DIR in ${BASE_DIR}/stage*; do
+  for STAGE_DIR in $BASE_DIR/stage*; do
     run_stage
   done
 
@@ -234,11 +234,11 @@ export QUILT_NO_DIFF_INDEX=1
 export QUILT_NO_DIFF_TIMESTAMPS=1
 export QUILT_REFRESH_ARGS="-p ab"
 
-source ${SCRIPT_DIR}/common.sh
-source ${SCRIPT_DIR}/dependencies_check.sh
+source "$SCRIPT_DIR/common.sh"
+source "$SCRIPT_DIR/dependencies_check.sh"
 
-dependencies_check ${BASE_DIR}/depends
+dependencies_check "$BASE_DIR/depends"
 
-mkdir -p ${WORK_DIR}
+mkdir -p "$WORK_DIR"
 
 run_base
