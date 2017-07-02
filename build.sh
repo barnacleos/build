@@ -1,18 +1,24 @@
 #!/bin/bash -e
 
+run_debconf() {
+  if [ -f "${1}" ]; then
+    log "Begin ${1}"
+
+    on_chroot << EOF
+debconf-set-selections <<SELEOF
+`cat "${1}"`
+SELEOF
+EOF
+
+    log "End   ${1}"
+  fi
+}
+
 run_sub_stage() {
 	log "Begin ${SUB_STAGE_DIR}"
 	pushd ${SUB_STAGE_DIR} > /dev/null
 	for i in {00..99}; do
-		if [ -f ${i}-debconf ]; then
-			log "Begin ${SUB_STAGE_DIR}/${i}-debconf"
-			on_chroot << EOF
-debconf-set-selections <<SELEOF
-`cat ${i}-debconf`
-SELEOF
-EOF
-		log "End ${SUB_STAGE_DIR}/${i}-debconf"
-		fi
+		run_debconf "${SUB_STAGE_DIR}/${i}-debconf"
 		if [ -f ${i}-packages-nr ]; then
 			log "Begin ${SUB_STAGE_DIR}/${i}-packages-nr"
 			PACKAGES="$(sed -f "${SCRIPT_DIR}/remove-comments.sed" < ${i}-packages-nr)"
