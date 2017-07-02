@@ -26,7 +26,7 @@ export EXPORT_ROOTFS_DIR
 export QUILT_PATCHES
 export QUILT_NO_DIFF_INDEX=1
 export QUILT_NO_DIFF_TIMESTAMPS=1
-export QUILT_REFRESH_ARGS="-p ab"
+export QUILT_REFRESH_ARGS='-p ab'
 
 source "$SCRIPT_DIR/common.sh"
 source "$SCRIPT_DIR/dependencies_check.sh"
@@ -117,7 +117,7 @@ run_sub_stage() {
 		if [ -d ${i}-patches ]; then
 			log_begin "$SUB_STAGE_DIR/$i-patches"
 			pushd ${STAGE_WORK_DIR} > /dev/null
-			if [ "${CLEAN}" = "1" ]; then
+			if [ "${CLEAN}" = '1' ]; then
 				rm -rf .pc
 				rm -rf *-pc
 			fi
@@ -127,13 +127,13 @@ run_sub_stage() {
 			ln -snf $SUB_STAGE_QUILT_PATCH_DIR .pc
 			if [ -e ${SUB_STAGE_DIR}/${i}-patches/EDIT ]; then
 				tput setaf 3 # Yellow color
-				echo "Dropping into bash to edit patches..."
-				echo "Tutorial: https://raphaelhertzog.com/2012/08/08/how-to-use-quilt-to-manage-patches-in-debian-packages/"
-				echo "Example:"
-				echo "  quilt new XX-name-of-the-patch.diff"
-				echo "  quilt edit rootfs/path/to/file"
-				echo "  quilt diff"
-				echo "  quilt refresh"
+				echo 'Dropping into bash to edit patches...'
+				echo 'Tutorial: https://raphaelhertzog.com/2012/08/08/how-to-use-quilt-to-manage-patches-in-debian-packages/'
+				echo 'Example:'
+				echo '  quilt new XX-name-of-the-patch.diff'
+				echo '  quilt edit rootfs/path/to/file'
+				echo '  quilt diff'
+				echo '  quilt refresh'
 				tput sgr0 # No color
 
 				bash
@@ -168,7 +168,7 @@ run_stage() {
 	STAGE_WORK_DIR=${WORK_DIR}/${STAGE}
 	ROOTFS_DIR=${STAGE_WORK_DIR}/rootfs
 	if [ ! -f SKIP ]; then
-		if [ "${CLEAN}" = "1" ]; then
+		if [ "${CLEAN}" = '1' ]; then
 			if [ -d ${ROOTFS_DIR} ]; then
 				rm -rf ${ROOTFS_DIR}
 			fi
@@ -208,8 +208,8 @@ run_base() {
   log_end "$BASE_DIR"
 }
 
-if [ "$(id -u)" != "0" ]; then
-  echo "Please run as root" 1>&2
+if [ "$(id -u)" != '0' ]; then
+  echo 'Please run as root' 1>&2
   exit 1
 fi
 
@@ -218,22 +218,22 @@ if [ -f config ]; then
 fi
 
 if [ -z "${IMG_NAME}" ]; then
-  echo "IMG_NAME not set" 1>&2
+  echo 'IMG_NAME not set' 1>&2
   exit 1
 fi
 
 if [ -z "${HOSTNAME}" ]; then
-  echo "HOSTNAME not set" 1>&2
+  echo 'HOSTNAME not set' 1>&2
   exit 1
 fi
 
 if [ -z "${USERNAME}" ]; then
-  echo "USERNAME not set" 1>&2
+  echo 'USERNAME not set' 1>&2
   exit 1
 fi
 
 if [ -z "${PASSWORD}" ]; then
-  echo "PASSWORD not set" 1>&2
+  echo 'PASSWORD not set' 1>&2
   exit 1
 fi
 
