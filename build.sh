@@ -233,6 +233,9 @@ for STAGE_DIR in ${BASE_DIR}/stage*; do
 done
 
 CLEAN=1
+STAGE_DIR="$BASE_DIR/export-image"
+export EXPORT_ROOTFS_DIR="$WORK_DIR/stage3/rootfs"
+run_stage
 
 if [ -x postrun.sh ]; then
 	log "Begin postrun.sh"
