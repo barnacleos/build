@@ -162,6 +162,21 @@ run_stage() {
 	log_end "$STAGE_DIR"
 }
 
+run_base() {
+  log_begin "$BASE_DIR"
+
+  for STAGE_DIR in ${BASE_DIR}/stage*; do
+    run_stage
+  done
+
+  CLEAN=1
+  STAGE_DIR="$BASE_DIR/export-image"
+  EXPORT_ROOTFS_DIR="$WORK_DIR/stage3/rootfs"
+  run_stage
+
+  log_end "$BASE_DIR"
+}
+
 if [ "$(id -u)" != "0" ]; then
 	echo "Please run as root" 1>&2
 	exit 1
@@ -212,6 +227,7 @@ export PREV_STAGE
 export PREV_STAGE_DIR
 export ROOTFS_DIR
 export PREV_ROOTFS_DIR
+export EXPORT_ROOTFS_DIR
 
 export QUILT_PATCHES
 export QUILT_NO_DIFF_INDEX=1
@@ -224,15 +240,5 @@ source ${SCRIPT_DIR}/dependencies_check.sh
 dependencies_check ${BASE_DIR}/depends
 
 mkdir -p ${WORK_DIR}
-log_begin "$BASE_DIR"
 
-for STAGE_DIR in ${BASE_DIR}/stage*; do
-	run_stage
-done
-
-CLEAN=1
-STAGE_DIR="$BASE_DIR/export-image"
-export EXPORT_ROOTFS_DIR="$WORK_DIR/stage3/rootfs"
-run_stage
-
-log_end "$BASE_DIR"
+run_base
