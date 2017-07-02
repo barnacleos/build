@@ -11,8 +11,6 @@ bootstrap() {
 	local ARCH
 	ARCH=$(dpkg --print-architecture)
 
-	export http_proxy=${APT_PROXY}
-
 	if [ "$ARCH" !=  "armhf" ]; then
 		local BOOTSTRAP_CMD=qemu-debootstrap
 	else

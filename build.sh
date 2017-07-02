@@ -208,7 +208,6 @@ export IMG_NAME
 export HOSTNAME
 export USERNAME
 export PASSWORD
-export APT_PROXY
 
 export STAGE
 export STAGE_DIR
