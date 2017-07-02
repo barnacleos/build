@@ -61,6 +61,9 @@ maintenance and allows for more easy customization.
    you were looking for something between truly minimal and Raspbian-lite,
    here's where you start trimming.
 
+ - **Stage 3** - secure system. This stage configures SSH do disallow root
+   login, adds iptables rules, etc.
+
 ### Stage specification
 
 If you wish to build up to a specified stage (such as building up to stage 2
