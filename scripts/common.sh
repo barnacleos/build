@@ -1,20 +1,3 @@
-bootstrap() {
-	local ARCH
-	ARCH=$(dpkg --print-architecture)
-
-	if [ "$ARCH" !=  "armhf" ]; then
-		local BOOTSTRAP_CMD=qemu-debootstrap
-	else
-		local BOOTSTRAP_CMD=debootstrap
-	fi
-
-	capsh --drop=cap_setfcap -- -c "${BOOTSTRAP_CMD} --components=main,contrib,non-free \
-		--arch armhf \
-		--keyring "${STAGE_DIR}/files/raspberrypi.gpg" \
-		$1 $2 $3" || rmdir "$2/debootstrap"
-}
-export -f bootstrap
-
 copy_previous() {
 	if [ ! -d "${PREV_ROOTFS_DIR}" ]; then
 		echo "Previous stage rootfs not found"
