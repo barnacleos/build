@@ -57,8 +57,8 @@ on_chroot() {
   capsh --drop=cap_setfcap "--chroot=$ROOTFS_DIR/" -- "$@"
 
   umount "$proc_fs"
-  umount "$dev_fs"
   umount "$devpts_fs"
+  umount "$dev_fs"
   umount "$sys_fs"
 }
 
