@@ -26,3 +26,23 @@ apt-get install -y raspi-copies-and-fills
 EOF
 
 rm -f ${ROOTFS_DIR}/spindle_install
+
+on_chroot << EOF
+debconf-set-selections <<SELEOF
+
+console-setup console-setup/charmap47  select UTF-8
+console-setup console-setup/codeset47  select Guess optimal character set
+console-setup console-setup/fontface47 select Do not change the boot/kernel font
+
+tzdata tzdata/Areas     select Etc
+tzdata tzdata/Zones/Etc select UTC
+
+keyboard-configuration keyboard-configuration/altgr         select The default for the keyboard layout
+keyboard-configuration keyboard-configuration/model         select Generic 105-key (Intl) PC
+keyboard-configuration keyboard-configuration/xkb-keymap    select gb
+keyboard-configuration keyboard-configuration/compose       select No compose key
+keyboard-configuration keyboard-configuration/ctrl_alt_bksp boolean true
+keyboard-configuration keyboard-configuration/variant       select English (UK)
+
+SELEOF
+EOF
