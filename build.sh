@@ -84,7 +84,7 @@ run_sub_stage() {
 		task_packages    "$SUB_STAGE_DIR/$i-packages"
 
 		if [ -d ${i}-patches ]; then
-			log "Begin ${SUB_STAGE_DIR}/${i}-patches"
+			log_begin "$SUB_STAGE_DIR/$i-patches"
 			pushd ${STAGE_WORK_DIR} > /dev/null
 			if [ "${CLEAN}" = "1" ]; then
 				rm -rf .pc
@@ -118,7 +118,7 @@ run_sub_stage() {
 					;;
 			esac
 			popd > /dev/null
-			log "End ${SUB_STAGE_DIR}/${i}-patches"
+			log_end "$SUB_STAGE_DIR/$i-patches"
 		fi
 
 		task_run        "$SUB_STAGE_DIR/$i-run.sh"
@@ -131,7 +131,7 @@ run_sub_stage() {
 
 
 run_stage() {
-	log "Begin ${STAGE_DIR}"
+	log_begin "$STAGE_DIR"
 	STAGE=$(basename ${STAGE_DIR})
 	pushd ${STAGE_DIR} > /dev/null
 	unmount ${WORK_DIR}/${STAGE}
@@ -144,9 +144,9 @@ run_stage() {
 			fi
 		fi
 		if [ -x prerun.sh ]; then
-			log "Begin ${STAGE_DIR}/prerun.sh"
+			log_begin "$STAGE_DIR/prerun.sh"
 			./prerun.sh
-			log "End ${STAGE_DIR}/prerun.sh"
+			log_end "$STAGE_DIR/prerun.sh"
 		fi
 		for SUB_STAGE_DIR in ${STAGE_DIR}/*; do
 			if [ -d ${SUB_STAGE_DIR} ] &&
@@ -160,7 +160,7 @@ run_stage() {
 	PREV_STAGE_DIR=${STAGE_DIR}
 	PREV_ROOTFS_DIR=${ROOTFS_DIR}
 	popd > /dev/null
-	log "End ${STAGE_DIR}"
+	log_end "$STAGE_DIR"
 }
 
 if [ "$(id -u)" != "0" ]; then
@@ -226,7 +226,7 @@ source ${SCRIPT_DIR}/dependencies_check.sh
 dependencies_check ${BASE_DIR}/depends
 
 mkdir -p ${WORK_DIR}
-log "Begin ${BASE_DIR}"
+log_begin "$BASE_DIR"
 
 for STAGE_DIR in ${BASE_DIR}/stage*; do
 	run_stage
@@ -237,4 +237,4 @@ STAGE_DIR="$BASE_DIR/export-image"
 export EXPORT_ROOTFS_DIR="$WORK_DIR/stage3/rootfs"
 run_stage
 
-log "End ${BASE_DIR}"
+log_end "$BASE_DIR"
