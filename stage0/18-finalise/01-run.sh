@@ -50,9 +50,9 @@ unmount_image ${IMG_FILE}
 
 mkdir -p ${DEPLOY_DIR}
 
-rm -f ${DEPLOY_DIR}/image_${IMG_DATE}-${IMG_NAME}.zip
+rm -f "$ZIP_FILE"
 
-echo zip ${DEPLOY_DIR}/image_${IMG_DATE}-${IMG_NAME}.zip ${IMG_FILE}
+echo zip "$ZIP_FILE" ${IMG_FILE}
 pushd ${STAGE_WORK_DIR} > /dev/null
-zip ${DEPLOY_DIR}/image_${IMG_DATE}-${IMG_NAME}.zip $(basename ${IMG_FILE})
+zip "$ZIP_FILE" $(basename ${IMG_FILE})
 popd > /dev/null

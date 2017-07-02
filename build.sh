@@ -19,6 +19,7 @@ export STAGE_WORK_DIR
 export ROOTFS_DIR
 
 export IMG_FILE
+export ZIP_FILE
 
 export QUILT_PATCHES
 export QUILT_NO_DIFF_INDEX=1
@@ -68,6 +69,7 @@ main() {
   ROOTFS_DIR="$STAGE_WORK_DIR/rootfs"
 
   IMG_FILE="${STAGE_WORK_DIR}/${IMG_DATE}-${IMG_NAME}.img"
+  ZIP_FILE="$DEPLOY_DIR/image_$IMG_DATE-${IMG_NAME}.zip"
 
   mkdir -p "$WORK_DIR"
 
