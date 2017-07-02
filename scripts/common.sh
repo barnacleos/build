@@ -33,20 +33,25 @@ unmount_image() {
 }
 
 on_chroot() {
-  if ! mount | grep -q "$(realpath "$ROOTFS_DIR/proc")"; then
-    mount -t proc proc "$ROOTFS_DIR/proc"
+  local proc_fs="$ROOTFS_DIR/proc"
+  local dev_fs="$ROOTFS_DIR/dev"
+  local devpts_fs="$ROOTFS_DIR/dev/pts"
+  local sys_fs="$ROOTDS_DIR/sys"
+
+  if ! mount | grep -q "$(realpath "$proc_fs")"; then
+    mount -t proc proc "$proc_fs"
   fi
 
-  if ! mount | grep -q "$(realpath "$ROOTFS_DIR/dev")"; then
-    mount --bind /dev "$ROOTFS_DIR/dev"
+  if ! mount | grep -q "$(realpath "$dev_fs")"; then
+    mount --bind /dev "$dev_fs"
   fi
 	
-  if ! mount | grep -q "$(realpath "$ROOTFS_DIR/dev/pts")"; then
-    mount --bind /dev/pts "$ROOTFS_DIR/dev/pts"
+  if ! mount | grep -q "$(realpath "$devpts_fs")"; then
+    mount --bind /dev/pts "$devpts_fs"
   fi
 
-  if ! mount | grep -q "$(realpath "$ROOTFS_DIR/sys")"; then
-    mount --bind /sys "$ROOTFS_DIR/sys"
+  if ! mount | grep -q "$(realpath "$sys_fs")"; then
+    mount --bind /sys "$sys_fs"
   fi
 
   capsh --drop=cap_setfcap "--chroot=$ROOTFS_DIR/" -- "$@"
