@@ -1,12 +1,3 @@
-copy_previous() {
-	if [ ! -d "${PREV_ROOTFS_DIR}" ]; then
-		echo "Previous stage rootfs not found"
-		false
-	fi
-	mkdir -p "${ROOTFS_DIR}"
-	rsync -aHAXx --exclude var/cache/apt/archives "${PREV_ROOTFS_DIR}/" "${ROOTFS_DIR}/"
-}
-
 unmount() {
 	if [ -z "$1" ]; then
 		DIR=$PWD
@@ -61,7 +52,6 @@ on_chroot() {
 	capsh --drop=cap_setfcap "--chroot=${ROOTFS_DIR}/" -- "$@"
 }
 
-export -f copy_previous
 export -f unmount
 export -f unmount_image
 export -f on_chroot
