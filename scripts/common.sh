@@ -38,10 +38,10 @@ on_chroot() {
   local devpts_fs="$ROOTFS_DIR/dev/pts"
   local sys_fs="$ROOTFS_DIR/sys"
 
-  mount --bind /dev "$dev_fs"
+  mount --bind /dev     "$dev_fs"
   mount --bind /dev/pts "$devpts_fs"
-  mount -t proc proc "$proc_fs"
-  mount --bind /sys "$sys_fs"
+  mount -t proc proc    "$proc_fs"
+  mount --bind /sys     "$sys_fs"
 
   capsh --drop=cap_setfcap "--chroot=$ROOTFS_DIR/" -- "$@"
 
