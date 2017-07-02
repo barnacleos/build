@@ -77,11 +77,6 @@ run_stage() {
 	unmount ${WORK_DIR}/${STAGE}
 
 	if [ ! -f SKIP ]; then
-		if [ -x prerun.sh ]; then
-			log_begin "$STAGE_DIR/prerun.sh"
-			./prerun.sh
-			log_end "$STAGE_DIR/prerun.sh"
-		fi
 		for SUB_STAGE_DIR in ${STAGE_DIR}/*; do
 			if [ -d ${SUB_STAGE_DIR} ] &&
 			   [ ! -f ${SUB_STAGE_DIR}/SKIP ]; then
