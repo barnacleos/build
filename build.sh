@@ -102,8 +102,8 @@ run_sub_stage() {
   pushd "$1" > /dev/null
 
   for i in {00..99}; do
-    task_patches     "$1/$i-patches"
-    task_run         "$1/$i-run.sh"
+    task_patches "$1/$i-patches"
+    task_run     "$1/$i-run.sh"
   done
 
   popd > /dev/null
