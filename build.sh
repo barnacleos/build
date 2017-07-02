@@ -1,7 +1,6 @@
 #!/bin/bash -e
 
 export IMG_DATE="$(date +%Y-%m-%d)"
-
 export BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 export SCRIPT_DIR="$BASE_DIR/scripts"
 export FUNCTIONS_DIR="$BASE_DIR/functions"
