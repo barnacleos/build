@@ -37,22 +37,22 @@ main() {
     exit 1
   fi
 
-  if [ -z "${IMG_NAME}" ]; then
+  if [ -z "$IMG_NAME" ]; then
     echo 'IMG_NAME not set' 1>&2
     exit 1
   fi
 
-  if [ -z "${HOSTNAME}" ]; then
+  if [ -z "$HOSTNAME" ]; then
     echo 'HOSTNAME not set' 1>&2
     exit 1
   fi
 
-  if [ -z "${USERNAME}" ]; then
+  if [ -z "$USERNAME" ]; then
     echo 'USERNAME not set' 1>&2
     exit 1
   fi
 
-  if [ -z "${PASSWORD}" ]; then
+  if [ -z "$PASSWORD" ]; then
     echo 'PASSWORD not set' 1>&2
     exit 1
   fi
