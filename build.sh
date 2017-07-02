@@ -54,6 +54,16 @@ EOF
   fi
 }
 
+task_run() {
+  if [ -x "$1" ]; then
+    log_begin "$1"
+
+    "$1"
+
+    log_end "$1"
+  fi
+}
+
 run_sub_stage() {
 	log "Begin ${SUB_STAGE_DIR}"
 	pushd ${SUB_STAGE_DIR} > /dev/null
@@ -90,11 +100,9 @@ run_sub_stage() {
 			popd > /dev/null
 			log "End ${SUB_STAGE_DIR}/${i}-patches"
 		fi
-		if [ -x ${i}-run.sh ]; then
-			log "Begin ${SUB_STAGE_DIR}/${i}-run.sh"
-			./${i}-run.sh
-			log "End ${SUB_STAGE_DIR}/${i}-run.sh"
-		fi
+
+		task_run "$SUB_STAGE_DIR/$i-run.sh"
+
 		if [ -f ${i}-run-chroot.sh ]; then
 			log "Begin ${SUB_STAGE_DIR}/${i}-run-chroot.sh"
 			on_chroot < ${i}-run-chroot.sh
