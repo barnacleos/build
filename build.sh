@@ -107,11 +107,8 @@ run_sub_stage() {
 
   for i in {00..99}; do
     task_debconf     "$1/$i-debconf"
-    task_packages_nr "$1/$i-packages-nr"
-    task_packages    "$1/$i-packages"
     task_patches     "$1/$i-patches"
     task_run         "$1/$i-run.sh"
-    task_run_chroot  "$1/$i-run-chroot.sh"
   done
 
   popd > /dev/null
@@ -127,38 +124,6 @@ debconf-set-selections <<SELEOF
 `cat "$1"`
 SELEOF
 EOF
-
-    log_end "$1"
-  fi
-}
-
-task_packages_nr() {
-  if [ -f "$1" ]; then
-    log_begin "$1"
-
-    local PACKAGES="$(sed -f "$SCRIPT_DIR/remove-comments.sed" < "$1")"
-
-    if [ -n "$PACKAGES" ]; then
-      on_chroot <<EOF
-apt-get install --no-install-recommends -y $PACKAGES
-EOF
-    fi
-
-    log_end "$1"
-  fi
-}
-
-task_packages() {
-  if [ -f "$1" ]; then
-    log_begin "$1"
-
-    local PACKAGES="$(sed -f "$SCRIPT_DIR/remove-comments.sed" < "$1")"
-
-    if [ -n "$PACKAGES" ]; then
-      on_chroot <<EOF
-apt-get install -y $PACKAGES
-EOF
-    fi
 
     log_end "$1"
   fi
@@ -217,16 +182,6 @@ task_run() {
     log_begin "$1"
 
     "$1"
-
-    log_end "$1"
-  fi
-}
-
-task_run_chroot() {
-  if [ -f "$1" ]; then
-    log_begin "$1"
-
-    on_chroot < "$1"
 
     log_end "$1"
   fi
