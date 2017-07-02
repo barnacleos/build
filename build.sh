@@ -94,7 +94,7 @@ main() {
 
   for SUB_STAGE_DIR in $STAGE_DIR/*; do
     if [ -d "$SUB_STAGE_DIR" ]; then
-      run_sub_stage
+      run_sub_stage "$SUB_STAGE_DIR"
     fi
   done
 
@@ -102,20 +102,20 @@ main() {
 }
 
 run_sub_stage() {
-  log_begin "$SUB_STAGE_DIR"
-  pushd "$SUB_STAGE_DIR" > /dev/null
+  log_begin "$1"
+  pushd "$1" > /dev/null
 
   for i in {00..99}; do
-    task_debconf     "$SUB_STAGE_DIR/$i-debconf"
-    task_packages_nr "$SUB_STAGE_DIR/$i-packages-nr"
-    task_packages    "$SUB_STAGE_DIR/$i-packages"
-    task_patches     "$SUB_STAGE_DIR/$i-patches"
-    task_run         "$SUB_STAGE_DIR/$i-run.sh"
-    task_run_chroot  "$SUB_STAGE_DIR/$i-run-chroot.sh"
+    task_debconf     "$1/$i-debconf"
+    task_packages_nr "$1/$i-packages-nr"
+    task_packages    "$1/$i-packages"
+    task_patches     "$1/$i-patches"
+    task_run         "$1/$i-run.sh"
+    task_run_chroot  "$1/$i-run-chroot.sh"
   done
 
   popd > /dev/null
-  log_end "$SUB_STAGE_DIR"
+  log_end "$1"
 }
 
 task_debconf() {
