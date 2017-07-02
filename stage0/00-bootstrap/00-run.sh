@@ -18,8 +18,8 @@ if [ ! -d "$ROOTFS_DIR" ]; then
     http://mirrordirector.raspbian.org/raspbian/" || rmdir "$ROOTFS_DIR/debootstrap"
 fi
 
-install -m 644 files/sources.list ${ROOTFS_DIR}/etc/apt/
-install -m 644 files/raspi.list ${ROOTFS_DIR}/etc/apt/sources.list.d/
+install -m 644 files/sources.list "$ROOTFS_DIR/etc/apt/"
+install -m 644 files/raspi.list   "$ROOTFS_DIR/etc/apt/sources.list.d/"
 
 on_chroot apt-key add - < files/raspberrypi.gpg.key
 on_chroot << EOF
