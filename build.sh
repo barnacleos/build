@@ -63,11 +63,7 @@ main() {
   mkdir -p "$WORK_DIR"
 
   STAGE_DIR="$BASE_DIR/stage0"
-  run_stage
-}
 
-run_stage() {
-  log_begin "$STAGE_DIR"
   pushd "$STAGE_DIR" > /dev/null
 
   STAGE=$(basename "$STAGE_DIR")
@@ -85,7 +81,6 @@ run_stage() {
   unmount "$STAGE_WORK_DIR"
 
   popd > /dev/null
-  log_end "$STAGE_DIR"
 }
 
 run_sub_stage() {
