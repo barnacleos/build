@@ -237,11 +237,4 @@ STAGE_DIR="$BASE_DIR/export-image"
 export EXPORT_ROOTFS_DIR="$WORK_DIR/stage3/rootfs"
 run_stage
 
-if [ -x postrun.sh ]; then
-	log "Begin postrun.sh"
-	cd "${BASE_DIR}"
-	./postrun.sh
-	log "End postrun.sh"
-fi
-
 log "End ${BASE_DIR}"
