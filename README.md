@@ -18,7 +18,7 @@ dosfstools bsdtar libcap2-bin grep rsync
 ```
 
 The file `depends` contains a list of tools needed. The format of this
-package is `<tool>[:<debian-package>]`.
+file is `<tool>[:<debian-package>]`.
 
 
 
