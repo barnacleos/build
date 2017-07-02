@@ -63,12 +63,11 @@ main() {
   mkdir -p "$WORK_DIR"
 
   STAGE_DIR="$BASE_DIR/stage0"
-
-  pushd "$STAGE_DIR" > /dev/null
-
   STAGE=$(basename "$STAGE_DIR")
   STAGE_WORK_DIR="$WORK_DIR/$STAGE"
   ROOTFS_DIR="$STAGE_WORK_DIR/rootfs"
+
+  pushd "$STAGE_DIR" > /dev/null
 
   unmount "$STAGE_WORK_DIR"
 
