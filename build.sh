@@ -72,6 +72,7 @@ main() {
   ZIP_FILE="$DEPLOY_DIR/image_$IMG_DATE-${IMG_NAME}.zip"
 
   mkdir -p "$WORK_DIR"
+  mkdir -p "$DEPLOY_DIR"
 
   pushd "$STAGE_DIR" > /dev/null
 

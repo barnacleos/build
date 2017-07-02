@@ -48,8 +48,6 @@ zerofree -v ${ROOT_DEV}
 
 unmount_image ${IMG_FILE}
 
-mkdir -p ${DEPLOY_DIR}
-
 rm -f "$ZIP_FILE"
 
 echo zip "$ZIP_FILE" ${IMG_FILE}
