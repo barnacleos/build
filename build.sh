@@ -87,8 +87,6 @@ main() {
 
   mkdir -p "$WORK_DIR"
   mkdir -p "$DEPLOY_DIR"
-  mkdir -p "$ROOTFS_DIR"
-  mkdir -p "$BOOTFS_DIR"
 
   pushd "$STAGE_DIR" > /dev/null
 
