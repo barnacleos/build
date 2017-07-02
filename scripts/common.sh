@@ -1,12 +1,3 @@
-log() {
-  tput setaf 2 # Green color
-  date +"[%T] $@"
-  tput sgr0 # No color
-
-  date +"[%T] $@" >> "$LOG_FILE"
-}
-export -f log
-
 bootstrap() {
 	local ARCH
 	ARCH=$(dpkg --print-architecture)

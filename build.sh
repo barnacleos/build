@@ -4,6 +4,7 @@ export IMG_DATE="$(date +%Y-%m-%d)"
 
 export BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 export SCRIPT_DIR="$BASE_DIR/scripts"
+export FUNCTIONS_DIR="$BASE_DIR/functions"
 export WORK_DIR="$BASE_DIR/work/$IMG_DATE-$IMG_NAME"
 export DEPLOY_DIR="$BASE_DIR/deploy"
 export LOG_FILE="$WORK_DIR/build.log"
@@ -28,16 +29,9 @@ export QUILT_NO_DIFF_INDEX=1
 export QUILT_NO_DIFF_TIMESTAMPS=1
 export QUILT_REFRESH_ARGS='-p ab'
 
+source "$FUNCTIONS_DIR/logging.sh"
 source "$SCRIPT_DIR/common.sh"
 source "$SCRIPT_DIR/dependencies_check.sh"
-
-log_begin() {
-  log "Begin $1"
-}
-
-log_end() {
-  log "End   $1"
-}
 
 main() {
   dependencies_check "$BASE_DIR/depends"
