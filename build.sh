@@ -38,23 +38,30 @@ EOF
   fi
 }
 
+run_packages() {
+  if [ -f "$1" ]; then
+    log_begin "$1"
+
+    PACKAGES="$(sed -f "$SCRIPT_DIR/remove-comments.sed" < "$1")"
+
+    if [ -n "$PACKAGES" ]; then
+      on_chroot <<EOF
+apt-get install --n-install-recommends -y $PACKAGES
+EOF
+    fi
+
+    log_end "$1"
+  fi
+}
+
 run_sub_stage() {
 	log "Begin ${SUB_STAGE_DIR}"
 	pushd ${SUB_STAGE_DIR} > /dev/null
 	for i in {00..99}; do
 		run_debconf     "$SUB_STAGE_DIR/$i-debconf"
 		run_packages_nr "$SUB_STAGE_DIR/$i-packages-nr"
+		run_packages    "$SUB_STAGE_DIR/$i-packages"
 
-		if [ -f ${i}-packages ]; then
-			log "Begin ${SUB_STAGE_DIR}/${i}-packages"
-			PACKAGES="$(sed -f "${SCRIPT_DIR}/remove-comments.sed" < ${i}-packages)"
-			if [ -n "$PACKAGES" ]; then
-				on_chroot << EOF
-apt-get install -y $PACKAGES
-EOF
-			fi
-			log "End ${SUB_STAGE_DIR}/${i}-packages"
-		fi
 		if [ -d ${i}-patches ]; then
 			log "Begin ${SUB_STAGE_DIR}/${i}-patches"
 			pushd ${STAGE_WORK_DIR} > /dev/null
