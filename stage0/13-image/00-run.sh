@@ -44,9 +44,6 @@ ROOT_LENGTH=$(echo "$PARTED_OUT" | grep -e '^ 2' | xargs echo -n \
 BOOT_DEV=$(losetup --show -f -o $BOOT_OFFSET --sizelimit $BOOT_LENGTH "$IMG_FILE")
 ROOT_DEV=$(losetup --show -f -o $ROOT_OFFSET --sizelimit $ROOT_LENGTH "$IMG_FILE")
 
-echo "/boot: offset $BOOT_OFFSET, length $BOOT_LENGTH"
-echo "/:     offset $ROOT_OFFSET, length $ROOT_LENGTH"
-
 mkdosfs -n boot -F 32 -v $BOOT_DEV > /dev/null
 mkfs.ext4 -O ^huge_file $ROOT_DEV > /dev/null
 
