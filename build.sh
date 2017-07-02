@@ -30,7 +30,7 @@ run_packages_nr() {
 
     if [ -n "$PACKAGES" ]; then
       on_chroot <<EOF
-apt-get install --n-install-recommends -y $PACKAGES
+apt-get install --no-install-recommends -y $PACKAGES
 EOF
     fi
 
@@ -46,7 +46,7 @@ run_packages() {
 
     if [ -n "$PACKAGES" ]; then
       on_chroot <<EOF
-apt-get install --n-install-recommends -y $PACKAGES
+apt-get install -y $PACKAGES
 EOF
     fi
 
