@@ -76,14 +76,12 @@ run_stage() {
 
   unmount ${WORK_DIR}/${STAGE}
 
-  if [ ! -f SKIP ]; then
-    for SUB_STAGE_DIR in ${STAGE_DIR}/*; do
-      if [ -d ${SUB_STAGE_DIR} ] &&
-        [ ! -f ${SUB_STAGE_DIR}/SKIP ]; then
-        run_sub_stage
-      fi
-    done
-  fi
+  for SUB_STAGE_DIR in ${STAGE_DIR}/*; do
+    if [ -d ${SUB_STAGE_DIR} ] &&
+      [ ! -f ${SUB_STAGE_DIR}/SKIP ]; then
+      run_sub_stage
+    fi
+  done
 
   unmount ${WORK_DIR}/${STAGE}
 
