@@ -124,20 +124,20 @@ run_sub_stage() {
 }
 
 task_patches() {
-  if [ -d ${i}-patches ]; then
+  if [ -d "$i-patches" ]; then
     log_begin "$SUB_STAGE_DIR/$i-patches"
-    pushd ${STAGE_WORK_DIR} > /dev/null
+    pushd "$STAGE_WORK_DIR" > /dev/null
 
     rm -rf .pc
     rm -rf *-pc
 
-    QUILT_PATCHES=${SUB_STAGE_DIR}/${i}-patches
-    SUB_STAGE_QUILT_PATCH_DIR="$(basename $SUB_STAGE_DIR)-pc"
+    QUILT_PATCHES="$SUB_STAGE_DIR/$i-patches"
+    SUB_STAGE_QUILT_PATCH_DIR="$(basename "$SUB_STAGE_DIR")-pc"
 
-    mkdir -p $SUB_STAGE_QUILT_PATCH_DIR
-    ln -snf $SUB_STAGE_QUILT_PATCH_DIR .pc
+    mkdir -p "$SUB_STAGE_QUILT_PATCH_DIR"
+    ln -snf "$SUB_STAGE_QUILT_PATCH_DIR" .pc
 
-    if [ -e ${SUB_STAGE_DIR}/${i}-patches/EDIT ]; then
+    if [ -e "$SUB_STAGE_DIR/$i-patches/EDIT" ]; then
       tput setaf 3 # Yellow color
       echo 'Dropping into bash to edit patches...'
       echo 'Tutorial: https://raphaelhertzog.com/2012/08/08/how-to-use-quilt-to-manage-patches-in-debian-packages/'
