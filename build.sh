@@ -62,12 +62,8 @@ main() {
 
   mkdir -p "$WORK_DIR"
 
-  log_begin "$BASE_DIR"
-
   STAGE_DIR="$BASE_DIR/stage0"
   run_stage
-
-  log_end "$BASE_DIR"
 }
 
 run_stage() {
