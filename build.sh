@@ -73,7 +73,9 @@ run_stage() {
 	STAGE=$(basename ${STAGE_DIR})
 	STAGE_WORK_DIR=${WORK_DIR}/${STAGE}
 	ROOTFS_DIR=${STAGE_WORK_DIR}/rootfs
+
 	unmount ${WORK_DIR}/${STAGE}
+
 	if [ ! -f SKIP ]; then
 		if [ -x prerun.sh ]; then
 			log_begin "$STAGE_DIR/prerun.sh"
@@ -87,6 +89,7 @@ run_stage() {
 			fi
 		done
 	fi
+
 	unmount ${WORK_DIR}/${STAGE}
 
 	popd > /dev/null
