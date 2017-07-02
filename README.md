@@ -25,8 +25,6 @@ file is `<tool>[:<debian-package>]`.
 Stage Anatomy
 -------------
 
-### Raspbian Stage Overview
-
 The build of Raspbian is divided up into several stages for logical clarity
 and modularity. This causes some initial complexity, but it simplifies
 maintenance and allows for more easy customization.
@@ -65,11 +63,3 @@ maintenance and allows for more easy customization.
 
  - **Stage 3** - secure system. This stage configures SSH do disallow root
    login, adds iptables rules, etc.
-
-### Stage specification
-
-If you wish to build up to a specified stage (such as building up to stage 2
-for a lite system), place an empty file named `SKIP` in each of the `./stage`
-directories you wish not to include.
-
-Then remove the `EXPORT*` files from `./stage2` (if building a minimal system).

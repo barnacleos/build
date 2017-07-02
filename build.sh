@@ -137,9 +137,6 @@ run_stage() {
 	unmount ${WORK_DIR}/${STAGE}
 	STAGE_WORK_DIR=${WORK_DIR}/${STAGE}
 	ROOTFS_DIR=${STAGE_WORK_DIR}/rootfs
-	if [ -f ${STAGE_DIR}/EXPORT_IMAGE ]; then
-		EXPORT_DIRS="${EXPORT_DIRS} ${STAGE_DIR}"
-	fi
 	if [ ! -f SKIP ]; then
 		if [ "${CLEAN}" = "1" ]; then
 			if [ -d ${ROOTFS_DIR} ]; then
@@ -216,9 +213,6 @@ export PREV_STAGE
 export PREV_STAGE_DIR
 export ROOTFS_DIR
 export PREV_ROOTFS_DIR
-export IMG_SUFFIX
-export EXPORT_DIR
-export EXPORT_ROOTFS_DIR
 
 export QUILT_PATCHES
 export QUILT_NO_DIFF_INDEX=1
@@ -239,12 +233,6 @@ for STAGE_DIR in ${BASE_DIR}/stage*; do
 done
 
 CLEAN=1
-for EXPORT_DIR in ${EXPORT_DIRS}; do
-	STAGE_DIR=${BASE_DIR}/export-image
-	source "${EXPORT_DIR}/EXPORT_IMAGE"
-	EXPORT_ROOTFS_DIR=${WORK_DIR}/$(basename ${EXPORT_DIR})/rootfs
-	run_stage
-done
 
 if [ -x postrun.sh ]; then
 	log "Begin postrun.sh"
