@@ -76,8 +76,8 @@ run_stage() {
 
   unmount "$WORK_DIR/$STAGE"
 
-  for SUB_STAGE_DIR in ${STAGE_DIR}/*; do
-    if [ -d ${SUB_STAGE_DIR} ]; then
+  for SUB_STAGE_DIR in $STAGE_DIR/*; do
+    if [ -d "$SUB_STAGE_DIR" ]; then
       run_sub_stage
     fi
   done
