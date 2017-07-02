@@ -16,9 +16,8 @@ dependencies_check() {
   fi
 
   if [[ "$missing" ]]; then
-    echo "Reqired dependencies not installed"
-    echo
-    echo "This can be resolved on Debian/Raspbian systems by installing:"
+    echo "Reqired dependencies not installed."
+    echo "This can be resolved on Debian/Raspbian systems by installing the following packages:"
     echo "$missing"
     false
   fi
