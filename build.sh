@@ -74,6 +74,7 @@ main() {
   mkdir -p "$WORK_DIR"
   mkdir -p "$DEPLOY_DIR"
   mkdir -p "$ROOTFS_DIR"
+  mkdir -p "$ROOTFS_DIR/boot"
 
   pushd "$STAGE_DIR" > /dev/null
 
