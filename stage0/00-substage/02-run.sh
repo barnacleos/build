@@ -12,5 +12,3 @@ fi
 echo "$USERNAME:$PASSWORD" | chpasswd
 passwd -d root
 EOF
-
-
