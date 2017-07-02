@@ -129,7 +129,6 @@ run_sub_stage() {
 	log_end "$SUB_STAGE_DIR"
 }
 
-
 run_stage() {
 	log_begin "$STAGE_DIR"
 	STAGE=$(basename ${STAGE_DIR})
@@ -221,7 +220,6 @@ export QUILT_REFRESH_ARGS="-p ab"
 
 source ${SCRIPT_DIR}/common.sh
 source ${SCRIPT_DIR}/dependencies_check.sh
-
 
 dependencies_check ${BASE_DIR}/depends
 
