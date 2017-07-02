@@ -51,8 +51,6 @@ unmount_image ${IMG_FILE}
 
 rm -f "$ZIP_FILE"
 
-echo zip "$ZIP_FILE" ${IMG_FILE}
-
 pushd ${STAGE_WORK_DIR} > /dev/null
 zip "$ZIP_FILE" $(basename ${IMG_FILE})
 popd > /dev/null
