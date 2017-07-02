@@ -75,8 +75,9 @@ task_run_chroot() {
 }
 
 run_sub_stage() {
-	log "Begin ${SUB_STAGE_DIR}"
-	pushd ${SUB_STAGE_DIR} > /dev/null
+	log_begin "$SUB_STAGE_DIR"
+	pushd "$SUB_STAGE_DIR" > /dev/null
+
 	for i in {00..99}; do
 		task_debconf     "$SUB_STAGE_DIR/$i-debconf"
 		task_packages_nr "$SUB_STAGE_DIR/$i-packages-nr"
@@ -114,8 +115,9 @@ run_sub_stage() {
 		task_run        "$SUB_STAGE_DIR/$i-run.sh"
 		task_run_chroot "$SUB_STAGE_DIR/$i-run-chroot.sh"
 	done
+
 	popd > /dev/null
-	log "End ${SUB_STAGE_DIR}"
+	log_end "$SUB_STAGE_DIR"
 }
 
 
