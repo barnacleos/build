@@ -136,7 +136,7 @@ task_packages_nr() {
   if [ -f "$1" ]; then
     log_begin "$1"
 
-    PACKAGES="$(sed -f "$SCRIPT_DIR/remove-comments.sed" < "$1")"
+    local PACKAGES="$(sed -f "$SCRIPT_DIR/remove-comments.sed" < "$1")"
 
     if [ -n "$PACKAGES" ]; then
       on_chroot <<EOF
@@ -152,7 +152,7 @@ task_packages() {
   if [ -f "$1" ]; then
     log_begin "$1"
 
-    PACKAGES="$(sed -f "$SCRIPT_DIR/remove-comments.sed" < "$1")"
+    local PACKAGES="$(sed -f "$SCRIPT_DIR/remove-comments.sed" < "$1")"
 
     if [ -n "$PACKAGES" ]; then
       on_chroot <<EOF
