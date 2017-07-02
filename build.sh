@@ -22,7 +22,6 @@ export BOOTFS_DIR
 export IMG_FILE
 export ZIP_FILE
 
-export QUILT_PATCHES
 export QUILT_NO_DIFF_INDEX=1
 export QUILT_NO_DIFF_TIMESTAMPS=1
 export QUILT_REFRESH_ARGS='-p ab'
@@ -131,9 +130,9 @@ task_patches() {
     rm -rf .pc
     rm -rf *-pc
 
-    QUILT_PATCHES="$SUB_STAGE_DIR/$i-patches"
-    SUB_STAGE_QUILT_PATCH_DIR="$(basename "$SUB_STAGE_DIR")-pc"
+    export QUILT_PATCHES="$SUB_STAGE_DIR/$i-patches"
 
+    SUB_STAGE_QUILT_PATCH_DIR="$(basename "$SUB_STAGE_DIR")-pc"
     mkdir -p "$SUB_STAGE_QUILT_PATCH_DIR"
     ln -snf "$SUB_STAGE_QUILT_PATCH_DIR" .pc
 
