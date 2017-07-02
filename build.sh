@@ -42,8 +42,8 @@ run_sub_stage() {
 	log "Begin ${SUB_STAGE_DIR}"
 	pushd ${SUB_STAGE_DIR} > /dev/null
 	for i in {00..99}; do
-		run_debconf "${SUB_STAGE_DIR}/${i}-debconf"
-		run_packages_nr "${SUB_STAGE_DIR}/${i}-packages-nr"
+		run_debconf     "$SUB_STAGE_DIR/$i-debconf"
+		run_packages_nr "$SUB_STAGE_DIR/$i-packages-nr"
 
 		if [ -f ${i}-packages ]; then
 			log "Begin ${SUB_STAGE_DIR}/${i}-packages"
