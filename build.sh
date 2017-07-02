@@ -61,10 +61,7 @@ main() {
   WORK_DIR="$BASE_DIR/work/$IMG_DATE-$IMG_NAME"
 
   mkdir -p "$WORK_DIR"
-  run_base
-}
 
-run_base() {
   log_begin "$BASE_DIR"
 
   STAGE_DIR="$BASE_DIR/stage0"
