@@ -78,7 +78,7 @@ run_base() {
 
   CLEAN=1
   STAGE_DIR="$BASE_DIR/export-image"
-  EXPORT_ROOTFS_DIR="$WORK_DIR/stage3/rootfs"
+  EXPORT_ROOTFS_DIR="$WORK_DIR/stage0/rootfs"
   run_stage
 
   log_end "$BASE_DIR"
