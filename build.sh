@@ -79,11 +79,11 @@ main() {
   echo "Stage dir:      $STAGE_DIR"
   echo "Stage work dir: $STAGE_WORK_DIR"
   echo
-  echo "Root FS dir:    $ROOTFS_DIR"
-  echo "Boot FS dir:    $BOOTFS_DIR"
+  echo "Root FS dir: $ROOTFS_DIR"
+  echo "Boot FS dir: $BOOTFS_DIR"
   echo
-  echo "Image file:     $IMG_FILE"
-  echo "ZIP file:       $ZIP_FILE"
+  echo "Image file: $IMG_FILE"
+  echo "ZIP file:   $ZIP_FILE"
   echo
   tput sgr0 # No color
 
