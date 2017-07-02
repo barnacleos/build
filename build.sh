@@ -1,5 +1,36 @@
 #!/bin/bash -e
 
+export IMG_DATE=${IMG_DATE:-"$(date +%Y-%m-%d)"}
+
+export BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+export SCRIPT_DIR="${BASE_DIR}/scripts"
+export WORK_DIR=${WORK_DIR:-"${BASE_DIR}/work/${IMG_DATE}-${IMG_NAME}"}
+export DEPLOY_DIR=${DEPLOY_DIR:-"${BASE_DIR}/deploy"}
+export LOG_FILE="${WORK_DIR}/build.log"
+
+export CLEAN
+export IMG_NAME
+export HOSTNAME
+export USERNAME
+export PASSWORD
+
+export STAGE
+export STAGE_DIR
+export STAGE_WORK_DIR
+export PREV_STAGE
+export PREV_STAGE_DIR
+export ROOTFS_DIR
+export PREV_ROOTFS_DIR
+export EXPORT_ROOTFS_DIR
+
+export QUILT_PATCHES
+export QUILT_NO_DIFF_INDEX=1
+export QUILT_NO_DIFF_TIMESTAMPS=1
+export QUILT_REFRESH_ARGS="-p ab"
+
+source "$SCRIPT_DIR/common.sh"
+source "$SCRIPT_DIR/dependencies_check.sh"
+
 log_begin() {
   log "Begin $1"
 }
@@ -176,37 +207,6 @@ run_base() {
 
   log_end "$BASE_DIR"
 }
-
-export IMG_DATE=${IMG_DATE:-"$(date +%Y-%m-%d)"}
-
-export BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-export SCRIPT_DIR="${BASE_DIR}/scripts"
-export WORK_DIR=${WORK_DIR:-"${BASE_DIR}/work/${IMG_DATE}-${IMG_NAME}"}
-export DEPLOY_DIR=${DEPLOY_DIR:-"${BASE_DIR}/deploy"}
-export LOG_FILE="${WORK_DIR}/build.log"
-
-export CLEAN
-export IMG_NAME
-export HOSTNAME
-export USERNAME
-export PASSWORD
-
-export STAGE
-export STAGE_DIR
-export STAGE_WORK_DIR
-export PREV_STAGE
-export PREV_STAGE_DIR
-export ROOTFS_DIR
-export PREV_ROOTFS_DIR
-export EXPORT_ROOTFS_DIR
-
-export QUILT_PATCHES
-export QUILT_NO_DIFF_INDEX=1
-export QUILT_NO_DIFF_TIMESTAMPS=1
-export QUILT_REFRESH_ARGS="-p ab"
-
-source "$SCRIPT_DIR/common.sh"
-source "$SCRIPT_DIR/dependencies_check.sh"
 
 if [ "$(id -u)" != "0" ]; then
   echo "Please run as root" 1>&2
