@@ -4,7 +4,6 @@ unmount_image "$IMG_FILE"
 
 rm -f "$IMG_FILE"
 
-rm -rf "$ROOTFS_DIR"
 mkdir -p "$ROOTFS_DIR"
 
 BOOT_SIZE=$(du --apparent-size -s "$ROOTFS_DIR/boot" --block-size=1 | cut -f 1)
