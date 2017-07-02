@@ -60,12 +60,12 @@ main() {
   IMG_DATE="$(date +%Y-%m-%d)"
   WORK_DIR="$BASE_DIR/work/$IMG_DATE-$IMG_NAME"
 
-  mkdir -p "$WORK_DIR"
-
   STAGE='stage0'
   STAGE_DIR="$BASE_DIR/$STAGE"
   STAGE_WORK_DIR="$WORK_DIR/$STAGE"
   ROOTFS_DIR="$STAGE_WORK_DIR/rootfs"
+
+  mkdir -p "$WORK_DIR"
 
   pushd "$STAGE_DIR" > /dev/null
 
