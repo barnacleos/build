@@ -8,7 +8,7 @@ log_end() {
   log "End   $1"
 }
 
-run_debconf() {
+task_debconf() {
   if [ -f "$1" ]; then
     log_begin "$1"
 
@@ -22,7 +22,7 @@ EOF
   fi
 }
 
-run_packages_nr() {
+task_packages_nr() {
   if [ -f "$1" ]; then
     log_begin "$1"
 
@@ -38,7 +38,7 @@ EOF
   fi
 }
 
-run_packages() {
+task_packages() {
   if [ -f "$1" ]; then
     log_begin "$1"
 
@@ -58,9 +58,9 @@ run_sub_stage() {
 	log "Begin ${SUB_STAGE_DIR}"
 	pushd ${SUB_STAGE_DIR} > /dev/null
 	for i in {00..99}; do
-		run_debconf     "$SUB_STAGE_DIR/$i-debconf"
-		run_packages_nr "$SUB_STAGE_DIR/$i-packages-nr"
-		run_packages    "$SUB_STAGE_DIR/$i-packages"
+		task_debconf     "$SUB_STAGE_DIR/$i-debconf"
+		task_packages_nr "$SUB_STAGE_DIR/$i-packages-nr"
+		task_packages    "$SUB_STAGE_DIR/$i-packages"
 
 		if [ -d ${i}-patches ]; then
 			log "Begin ${SUB_STAGE_DIR}/${i}-patches"
