@@ -53,3 +53,11 @@ mount -v $ROOT_DEV "$ROOTFS_DIR" -t ext4
 
 mkdir -p "$BOOTFS_DIR"
 mount -v $BOOT_DEV "$BOOTFS_DIR" -t vfat
+
+if [ -e ${ROOTFS_DIR}/etc/ld.so.preload ]; then
+	mv ${ROOTFS_DIR}/etc/ld.so.preload ${ROOTFS_DIR}/etc/ld.so.preload.disabled
+fi
+
+if [ ! -x ${ROOTFS_DIR}/usr/bin/qemu-arm-static ]; then
+	cp /usr/bin/qemu-arm-static ${ROOTFS_DIR}/usr/bin/
+fi
