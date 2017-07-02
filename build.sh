@@ -74,7 +74,7 @@ run_stage() {
   STAGE_WORK_DIR="$WORK_DIR/$STAGE"
   ROOTFS_DIR="$STAGE_WORK_DIR/rootfs"
 
-  unmount "$WORK_DIR/$STAGE"
+  unmount "$STAGE_WORK_DIR"
 
   for SUB_STAGE_DIR in $STAGE_DIR/*; do
     if [ -d "$SUB_STAGE_DIR" ]; then
@@ -82,7 +82,7 @@ run_stage() {
     fi
   done
 
-  unmount "$WORK_DIR/$STAGE"
+  unmount "$STAGE_WORK_DIR"
 
   popd > /dev/null
   log_end "$STAGE_DIR"
