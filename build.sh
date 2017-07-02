@@ -167,6 +167,7 @@ EOF
 task_patches() {
   if [ -d "$1" ]; then
     local SUB_STAGE_DIR=$(dirname "$1")
+    local SUB_STAGE_NAME=$(basename "$SUB_STAGE_DIR")
 
     log_begin "$1"
     pushd "$STAGE_WORK_DIR" > /dev/null
@@ -176,7 +177,7 @@ task_patches() {
 
     export QUILT_PATCHES="$1"
 
-    SUB_STAGE_QUILT_PATCH_DIR="$(basename "$SUB_STAGE_DIR")-pc"
+    SUB_STAGE_QUILT_PATCH_DIR="$SUB_STAGE_NAME-pc"
     mkdir -p "$SUB_STAGE_QUILT_PATCH_DIR"
     ln -snf "$SUB_STAGE_QUILT_PATCH_DIR" .pc
 
