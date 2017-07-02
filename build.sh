@@ -64,6 +64,16 @@ task_run() {
   fi
 }
 
+task_run_chroot() {
+  if [ -f "$1" ]; then
+    log_begin "$1"
+
+    on_chroot < "$1"
+
+    log_end "$1"
+  fi
+}
+
 run_sub_stage() {
 	log "Begin ${SUB_STAGE_DIR}"
 	pushd ${SUB_STAGE_DIR} > /dev/null
@@ -101,13 +111,8 @@ run_sub_stage() {
 			log "End ${SUB_STAGE_DIR}/${i}-patches"
 		fi
 
-		task_run "$SUB_STAGE_DIR/$i-run.sh"
-
-		if [ -f ${i}-run-chroot.sh ]; then
-			log "Begin ${SUB_STAGE_DIR}/${i}-run-chroot.sh"
-			on_chroot < ${i}-run-chroot.sh
-			log "End ${SUB_STAGE_DIR}/${i}-run-chroot.sh"
-		fi
+		task_run        "$SUB_STAGE_DIR/$i-run.sh"
+		task_run_chroot "$SUB_STAGE_DIR/$i-run-chroot.sh"
 	done
 	popd > /dev/null
 	log "End ${SUB_STAGE_DIR}"
