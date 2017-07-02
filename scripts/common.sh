@@ -1,5 +1,9 @@
 log() {
-	date +"[%T] $@" | tee -a "${LOG_FILE}"
+  tput setaf 2 # Green color
+  date +"[%T] $@"
+  tput sgr0 # No color
+
+  date +"[%T] $@" >> "$LOG_FILE"
 }
 export -f log
 
