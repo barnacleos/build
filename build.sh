@@ -102,27 +102,12 @@ run_sub_stage() {
   pushd "$1" > /dev/null
 
   for i in {00..99}; do
-    task_debconf     "$1/$i-debconf"
     task_patches     "$1/$i-patches"
     task_run         "$1/$i-run.sh"
   done
 
   popd > /dev/null
   log_end "$1"
-}
-
-task_debconf() {
-  if [ -f "$1" ]; then
-    log_begin "$1"
-
-    on_chroot << EOF
-debconf-set-selections <<SELEOF
-`cat "$1"`
-SELEOF
-EOF
-
-    log_end "$1"
-  fi
 }
 
 task_patches() {
