@@ -1,7 +1,6 @@
 #!/bin/bash -e
 
-run_sub_stage()
-{
+run_sub_stage() {
 	log "Begin ${SUB_STAGE_DIR}"
 	pushd ${SUB_STAGE_DIR} > /dev/null
 	for i in {00..99}; do
@@ -78,7 +77,7 @@ EOF
 }
 
 
-run_stage(){
+run_stage() {
 	log "Begin ${STAGE_DIR}"
 	STAGE=$(basename ${STAGE_DIR})
 	pushd ${STAGE_DIR} > /dev/null
