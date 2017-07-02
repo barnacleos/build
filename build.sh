@@ -17,8 +17,6 @@ export PASSWORD
 export STAGE
 export STAGE_DIR
 export STAGE_WORK_DIR
-export PREV_STAGE
-export PREV_STAGE_DIR
 export ROOTFS_DIR
 export EXPORT_ROOTFS_DIR
 
@@ -109,8 +107,6 @@ run_stage() {
 		done
 	fi
 	unmount ${WORK_DIR}/${STAGE}
-	PREV_STAGE=${STAGE}
-	PREV_STAGE_DIR=${STAGE_DIR}
 	popd > /dev/null
 	log_end "$STAGE_DIR"
 }
