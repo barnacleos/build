@@ -4,8 +4,7 @@
 # Each dependency is in the form of a tool to test for, optionally followed by
 # a : and the name of a package if the package on a Debian-ish system is not
 # named for the tool (i.e., qemu-user-static).
-dependencies_check()
-{
+dependencies_check() {
 	local depfile deps missing
 
 	for depfile in "$@"; do

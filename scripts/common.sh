@@ -1,9 +1,9 @@
-log (){
+log() {
 	date +"[%T] $@" | tee -a "${LOG_FILE}"
 }
 export -f log
 
-bootstrap(){
+bootstrap() {
 	local ARCH
 	ARCH=$(dpkg --print-architecture)
 
@@ -22,7 +22,7 @@ bootstrap(){
 }
 export -f bootstrap
 
-copy_previous(){
+copy_previous() {
 	if [ ! -d "${PREV_ROOTFS_DIR}" ]; then
 		echo "Previous stage rootfs not found"
 		false
@@ -32,7 +32,7 @@ copy_previous(){
 }
 export -f copy_previous
 
-unmount(){
+unmount() {
 	if [ -z "$1" ]; then
 		DIR=$PWD
 	else
@@ -49,7 +49,7 @@ unmount(){
 }
 export -f unmount
 
-unmount_image(){
+unmount_image() {
 	sync
 	sleep 1
 	local LOOP_DEVICES
