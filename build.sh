@@ -1,5 +1,10 @@
 #!/bin/bash -e
 
+export IMG_NAME='BarnacleOS'
+export HOSTNAME='barnacleos'
+export USERNAME='user'
+export PASSWORD='password'
+
 export BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 export SCRIPT_DIR="$BASE_DIR/scripts"
 export FUNCTIONS_DIR="$BASE_DIR/functions"
@@ -10,11 +15,6 @@ export MOUNT_DIR="$BASE_DIR/mnt"
 
 export IMG_DATE
 export WORK_DIR
-
-export IMG_NAME
-export HOSTNAME
-export USERNAME
-export PASSWORD
 
 export STAGE
 export STAGE_DIR
@@ -34,30 +34,8 @@ source "$FUNCTIONS_DIR/dependencies_check.sh"
 main() {
   dependencies_check "$BASE_DIR/depends"
 
-  source "$BASE_DIR/config"
-
   if [ "$(id -u)" != '0' ]; then
     echo 'Please run as root' 1>&2
-    exit 1
-  fi
-
-  if [ -z "$IMG_NAME" ]; then
-    echo 'IMG_NAME not set' 1>&2
-    exit 1
-  fi
-
-  if [ -z "$HOSTNAME" ]; then
-    echo 'HOSTNAME not set' 1>&2
-    exit 1
-  fi
-
-  if [ -z "$USERNAME" ]; then
-    echo 'USERNAME not set' 1>&2
-    exit 1
-  fi
-
-  if [ -z "$PASSWORD" ]; then
-    echo 'PASSWORD not set' 1>&2
     exit 1
   fi
 
