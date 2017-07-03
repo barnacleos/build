@@ -45,7 +45,7 @@ EOF
 install -m 644 files/cmdline.txt "$ROOTFS_DIR/boot"
 install -m 644 files/config.txt  "$ROOTFS_DIR/boot"
 
-apply_patches "$BASE_DIR/stage0/00-substage/patches/01"
+apply_patches "$BASE_DIR/patches/01"
 
 install -d                        "$ROOTFS_DIR/etc/systemd/system/getty@tty1.service.d"
 install -m 644 files/noclear.conf "$ROOTFS_DIR/etc/systemd/system/getty@tty1.service.d/noclear.conf"
@@ -146,7 +146,7 @@ on_chroot << EOF
 apt-get install --no-install-recommends -y cifs-utils
 EOF
 
-apply_patches "$BASE_DIR/stage0/00-substage/patches/02"
+apply_patches "$BASE_DIR/patches/02"
 
 install -m 644 files/regenerate_ssh_host_keys.service "$ROOTFS_DIR/lib/systemd/system/"
 install -m 755 files/resize2fs_once                   "$ROOTFS_DIR/etc/init.d/"
