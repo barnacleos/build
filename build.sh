@@ -60,31 +60,11 @@ dependencies_check() {
 }
 
 chroot_rootfs() {
-  mount --bind /dev     "$ROOTFS_DEV_DIR"
-  mount --bind /dev/pts "$ROOTFS_DEVPTS_DIR"
-  mount -t proc proc    "$ROOTFS_PROC_DIR"
-  mount --bind /sys     "$ROOTFS_SYS_DIR"
-
   capsh --drop=cap_setfcap "--chroot=$ROOTFS_DIR/" -- "$@"
-
-  umount "$ROOTFS_SYS_DIR"
-  umount "$ROOTFS_PROC_DIR"
-  umount "$ROOTFS_DEVPTS_DIR"
-  umount "$ROOTFS_DEV_DIR"
 }
 
 chroot_mount() {
-  mount --bind /dev     "$MOUNT_DEV_DIR"
-  mount --bind /dev/pts "$MOUNT_DEVPTS_DIR"
-  mount -t proc proc    "$MOUNT_PROC_DIR"
-  mount --bind /sys     "$MOUNT_SYS_DIR"
-
   capsh --drop=cap_setfcap "--chroot=$MOUNT_DIR/" -- "$@"
-
-  umount "$MOUNT_SYS_DIR"
-  umount "$MOUNT_PROC_DIR"
-  umount "$MOUNT_DEVPTS_DIR"
-  umount "$MOUNT_DEV_DIR"
 }
 
 apply_patches() {
@@ -180,6 +160,11 @@ if [ ! -d "$ROOTFS_DIR" ]; then
     $ROOTFS_DIR                                  \
     http://mirrordirector.raspbian.org/raspbian/" || rmdir "$ROOTFS_DIR/debootstrap"
 fi
+
+mount --bind /dev     "$ROOTFS_DEV_DIR"
+mount --bind /dev/pts "$ROOTFS_DEVPTS_DIR"
+mount -t proc proc    "$ROOTFS_PROC_DIR"
+mount --bind /sys     "$ROOTFS_SYS_DIR"
 
 install -m 644 files/sources.list "$ROOTFS_DIR/etc/apt/"
 install -m 644 files/raspi.list   "$ROOTFS_DIR/etc/apt/sources.list.d/"
@@ -349,6 +334,11 @@ EOF
 
 install -v -d "$ROOTFS_DIR/etc/systemd/system/dhcpcd.service.d"
 
+umount "$ROOTFS_SYS_DIR"
+umount "$ROOTFS_PROC_DIR"
+umount "$ROOTFS_DEVPTS_DIR"
+umount "$ROOTFS_DEV_DIR"
+
 unmount_image "$IMG_FILE"
 
 rm -f "$IMG_FILE"
@@ -404,6 +394,11 @@ mkdir -p "$MOUNT_DIR/boot"
 mount -v $BOOT_DEV "$MOUNT_DIR/boot" -t vfat
 
 rsync -aHAXx --exclude var/cache/apt/archives "$ROOTFS_DIR/" "$MOUNT_DIR/"
+
+mount --bind /dev     "$MOUNT_DEV_DIR"
+mount --bind /dev/pts "$MOUNT_DEVPTS_DIR"
+mount -t proc proc    "$MOUNT_PROC_DIR"
+mount --bind /sys     "$MOUNT_SYS_DIR"
 
 if [ -e "$MOUNT_DIR/etc/ld.so.preload" ]; then
   mv "$MOUNT_DIR/etc/ld.so.preload" "$MOUNT_DIR/etc/ld.so.preload.disabled"
@@ -464,6 +459,11 @@ rm -f "$MOUNT_DIR/root/.vnc/private.key"
 chroot_mount << EOF
 fake-hwclock save
 EOF
+
+umount "$MOUNT_SYS_DIR"
+umount "$MOUNT_PROC_DIR"
+umount "$MOUNT_DEVPTS_DIR"
+umount "$MOUNT_DEV_DIR"
 
 ROOT_DEV=$(mount | grep "$MOUNT_DIR " | cut -f1 -d' ')
 
