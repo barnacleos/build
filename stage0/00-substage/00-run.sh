@@ -145,3 +145,5 @@ EOF
 on_chroot << EOF
 apt-get install --no-install-recommends -y cifs-utils
 EOF
+
+apply_patches "$BASE_DIR/stage0/00-substage/patches/02"
