@@ -107,15 +107,15 @@ mount -v $BOOT_DEV "$MOUNT_DIR/boot" -t vfat
 
 rsync -aHAXx --exclude var/cache/apt/archives "$ROOTFS_DIR/" "$MOUNT_DIR/"
 
-if [ -e ${MOUNT_DIR}/etc/ld.so.preload ]; then
-  mv ${MOUNT_DIR}/etc/ld.so.preload ${MOUNT_DIR}/etc/ld.so.preload.disabled
+if [ -e "$MOUNT_DIR/etc/ld.so.preload" ]; then
+  mv "$MOUNT_DIR/etc/ld.so.preload" "$MOUNT_DIR/etc/ld.so.preload.disabled"
 fi
 
-if [ ! -x ${MOUNT_DIR}/usr/bin/qemu-arm-static ]; then
-  cp /usr/bin/qemu-arm-static ${MOUNT_DIR}/usr/bin/
+if [ ! -x "$MOUNT_DIR/usr/bin/qemu-arm-static" ]; then
+  cp /usr/bin/qemu-arm-static "$MOUNT_DIR/usr/bin/"
 fi
 
-install -m 644 files/resolv.conf ${MOUNT_DIR}/etc/
+install -m 644 files/resolv.conf "$MOUNT_DIR/etc/"
 
 IMGID="$(fdisk -l "$IMG_FILE" | sed -n 's/Disk identifier: 0x\([^ ]*\)/\1/p')"
 
