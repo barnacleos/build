@@ -156,6 +156,9 @@ mount --bind  /dev/pts "$ROOTFS_DIR/dev/pts"
 mount -t proc /proc    "$ROOTFS_DIR/proc"
 mount --bind  /sys     "$ROOTFS_DIR/sys"
 
+# Prevent services to start after package installation in chroot environment.
+install -m 744 files/policy-rc.d "$ROOTFS_DIR/usr/sbin/policy-rc.d"
+
 install -m 755 files/rc.local "$ROOTFS_DIR/etc/rc.local"
 
 install -m 644 files/sources.list "$ROOTFS_DIR/etc/apt/"
@@ -189,7 +192,6 @@ apply_patches "$BASE_DIR/patches/01"
 
 install -d                        "$ROOTFS_DIR/etc/systemd/system/getty@tty1.service.d"
 install -m 644 files/noclear.conf "$ROOTFS_DIR/etc/systemd/system/getty@tty1.service.d/noclear.conf"
-install -m 744 files/policy-rc.d  "$ROOTFS_DIR/usr/sbin/policy-rc.d" #TODO: Necessary in systemd?
 install -m 644 files/fstab        "$ROOTFS_DIR/etc/fstab"
 install -m 644 files/ipv6.conf    "$ROOTFS_DIR/etc/modprobe.d/ipv6.conf"
 install -m 644 files/interfaces   "$ROOTFS_DIR/etc/network/interfaces"
@@ -413,7 +415,6 @@ if [ -d "$MOUNT_DIR/home/$USERNAME/.config" ]; then
 fi
 
 rm -f "$MOUNT_DIR/etc/apt/apt.conf.d/51cache"
-rm -f "$MOUNT_DIR/usr/sbin/policy-rc.d"
 rm -f "$MOUNT_DIR/usr/bin/qemu-arm-static"
 
 if [ -e "$MOUNT_DIR/etc/ld.so.preload.disabled" ]; then
@@ -448,6 +449,9 @@ rm -f "$MOUNT_DIR/root/.vnc/private.key"
 chroot_mount << EOF
 fake-hwclock save
 EOF
+
+# Allow services to start.
+rm -f "$MOUNT_DIR/usr/sbin/policy-rc.d"
 
 umount "$MOUNT_DIR/sys"
 umount "$MOUNT_DIR/proc"
