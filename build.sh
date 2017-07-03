@@ -261,7 +261,6 @@ bash-completion        \
 gdb                    \
 pkg-config             \
 v4l-utils              \
-hardlink               \
 ca-certificates        \
 curl                   \
 fake-hwclock           \
