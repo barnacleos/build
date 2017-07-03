@@ -446,6 +446,7 @@ done
 
 rm -f "$MOUNT_DIR/root/.vnc/private.key"
 
+# Save fake hardware clock time for more realistic time after startup.
 chroot_mount 'fake-hwclock save'
 
 # Allow services to start.
