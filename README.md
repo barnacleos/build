@@ -1,4 +1,4 @@
-branacleos/build
+barnacleos/build
 ================
 
 Tool used to create the [BarnacleOS](https://github.com/barnacleos) images.
