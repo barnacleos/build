@@ -461,6 +461,10 @@ done
 
 rm -f "$MOUNT_DIR/root/.vnc/private.key"
 
+chroot_mount << EOF
+fake-hwclock save
+EOF
+
 ROOT_DEV=$(mount | grep "$MOUNT_DIR " | cut -f1 -d' ')
 
 unmount "$MOUNT_DIR"
