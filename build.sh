@@ -43,54 +43,10 @@ main() {
   pushd "$SUB_STAGE_DIR" > /dev/null
 
   for i in {00..99}; do
-    task_patches "$SUB_STAGE_DIR/$i-patches"
-    task_run     "$SUB_STAGE_DIR/$i-run.sh"
+    task_run "$SUB_STAGE_DIR/$i-run.sh"
   done
 
   popd > /dev/null
-}
-
-task_patches() {
-  if [ -d "$1" ]; then
-    log_begin "$1"
-    pushd "$ROOTFS_DIR" > /dev/null
-
-    export QUILT_PATCHES="$1"
-
-    rm -rf   .pc
-    mkdir -p .pc
-
-    if [ -e "$1/EDIT" ]; then
-      tput setaf 3 # Yellow color
-      echo 'Dropping into bash to edit patches...'
-      echo 'Tutorial: https://raphaelhertzog.com/2012/08/08/how-to-use-quilt-to-manage-patches-in-debian-packages/'
-      echo 'Example:'
-      echo '  quilt new XX-name-of-the-patch.diff'
-      echo '  quilt edit rootfs/path/to/file'
-      echo '  quilt diff'
-      echo '  quilt refresh'
-      tput sgr0 # No color
-
-      bash
-    fi
-
-    quilt upgrade
-    RC=0
-    quilt push -a || RC=$?
-
-    rm -rf .pc
-
-    case "$RC" in
-    0|2)
-      ;;
-    *)
-      false
-      ;;
-    esac
-
-    popd > /dev/null
-    log_end "$1"
-  fi
 }
 
 task_run() {
