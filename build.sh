@@ -306,10 +306,6 @@ chroot_rootfs << EOF
 setupcon --force --save-only -v
 EOF
 
-chroot_rootfs << EOF
-usermod --pass='*' root
-EOF
-
 rm -f "$ROOTFS_DIR/etc/ssh/ssh_host_*_key*"
 
 ##
