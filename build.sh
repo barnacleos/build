@@ -89,11 +89,7 @@ main() {
   mkdir -p "$WORK_DIR"
   mkdir -p "$DEPLOY_DIR"
 
-  unmount "$STAGE_WORK_DIR"
-
   run_sub_stage "$STAGE_DIR/00-substage"
-
-  unmount "$STAGE_WORK_DIR"
 }
 
 run_sub_stage() {
