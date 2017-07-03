@@ -312,6 +312,9 @@ EOF
 
 rm -f "$ROOTFS_DIR/etc/ssh/ssh_host_*_key*"
 
+##
+# Wi-Fi firmware and tools.
+#
 chroot_rootfs << EOF
 apt-get install -y   \
 wpasupplicant        \
@@ -321,13 +324,14 @@ firmware-brcm80211   \
 firmware-libertas    \
 firmware-ralink      \
 firmware-realtek     \
-raspberrypi-net-mods \
-dhcpcd5
+raspberrypi-net-mods
 EOF
 
 ##
-# DHCP client configuration file.
+# DHCP client.
 #
+chroot_rootfs 'apt-get install -y dhcpcd5'
+
 install -v -d "$ROOTFS_DIR/etc/systemd/system/dhcpcd.service.d"
 
 ##
