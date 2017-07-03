@@ -21,7 +21,6 @@ export QUILT_NO_DIFF_INDEX=1
 export QUILT_NO_DIFF_TIMESTAMPS=1
 export QUILT_REFRESH_ARGS='-p ab'
 
-source "$FUNCTIONS_DIR/logging.sh"
 source "$FUNCTIONS_DIR/dependencies_check.sh"
 
 on_chroot() {
