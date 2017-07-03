@@ -1,5 +1,5 @@
 # dependencies_check
-# $@	Dependnecy files to check
+# $@ Dependnecy files to check
 #
 # Each dependency is in the form of a tool to test for, optionally followed by
 # a : and the name of a package if the package on a Debian-ish system is not
