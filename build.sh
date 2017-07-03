@@ -3,12 +3,7 @@
 source "$FUNCTIONS_DIR/logging.sh"
 source "$FUNCTIONS_DIR/dependencies_check.sh"
 
-if [ "$(id -u)" != '0' ]; then
-  echo 'Please run as root' 1>&2
-  exit 1
-fi
-
-dependencies_check "$BASE_DIR/depends"
+source "$SCRIPT_DIR/common.sh"
 
 export IMG_NAME='BarnacleOS'
 export HOSTNAME='barnacleos'
@@ -37,7 +32,12 @@ export QUILT_NO_DIFF_INDEX=1
 export QUILT_NO_DIFF_TIMESTAMPS=1
 export QUILT_REFRESH_ARGS='-p ab'
 
-source "$SCRIPT_DIR/common.sh"
+if [ "$(id -u)" != '0' ]; then
+  echo 'Please run as root' 1>&2
+  exit 1
+fi
+
+dependencies_check "$BASE_DIR/depends"
 
 main() {
   tput setaf 2 # Green color
