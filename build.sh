@@ -285,9 +285,7 @@ systemctl enable resize2fs_once
 EOF
 
 on_chroot << \EOF
-for GRP in adm dialout cdrom audio users sudo video games plugdev netdev; do
-  adduser $USERNAME $GRP
-done
+adduser $USERNAME sudo
 EOF
 
 on_chroot << EOF
