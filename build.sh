@@ -122,6 +122,9 @@ unmount_image() {
   done
 }
 
+##
+# Prepare environment.
+#
 if [ "$(id -u)" != '0' ]; then
   echo 'Please run as root' 1>&2
   exit 1
@@ -134,6 +137,9 @@ mkdir -p "$MOUNT_DIR"
 
 cd "$BASE_DIR"
 
+##
+# Bootstrap a basic Debian system.
+#
 if [ ! -d "$ROOTFS_DIR" ]; then
   ARCH="$(dpkg --print-architecture)"
 
@@ -152,17 +158,28 @@ if [ ! -d "$ROOTFS_DIR" ]; then
     http://mirrordirector.raspbian.org/raspbian/" || rmdir "$ROOTFS_DIR/debootstrap"
 fi
 
+##
+# Mount virtual file systems.
+#
 unmount "$ROOTFS_DIR"
 mount --bind  /dev     "$ROOTFS_DIR/dev"
 mount --bind  /dev/pts "$ROOTFS_DIR/dev/pts"
 mount -t proc /proc    "$ROOTFS_DIR/proc"
 mount --bind  /sys     "$ROOTFS_DIR/sys"
 
+##
 # Prevent services to start after package installation in chroot environment.
+#
 install -m 744 files/policy-rc.d "$ROOTFS_DIR/usr/sbin/policy-rc.d"
 
+##
+# This script is executed at the end of each multiuser runlevel.
+#
 install -m 755 files/rc.local "$ROOTFS_DIR/etc/rc.local"
 
+##
+# Prepare package manager.
+#
 install -m 644 files/sources.list "$ROOTFS_DIR/etc/apt/"
 install -m 644 files/raspi.list   "$ROOTFS_DIR/etc/apt/sources.list.d/"
 
@@ -173,6 +190,9 @@ apt-get update
 apt-get dist-upgrade -y
 EOF
 
+##
+# Common system configuration.
+#
 chroot_rootfs << EOF
 debconf-set-selections <<SELEOF
 locales locales/locales_to_be_generated multiselect en_US.UTF-8 UTF-8
