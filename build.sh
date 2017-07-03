@@ -267,7 +267,6 @@ bash-completion        \
 gdb                    \
 pkg-config             \
 v4l-utils              \
-avahi-daemon           \
 hardlink               \
 ca-certificates        \
 curl                   \
