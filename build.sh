@@ -450,12 +450,13 @@ chroot_mount 'fake-hwclock save'
 # Allow services to start.
 rm -f "$MOUNT_DIR/usr/sbin/policy-rc.d"
 
+# Unmount all file systems and minimize image file for distribution.
 ROOT_DEV=$(mount | grep "$MOUNT_DIR " | cut -f1 -d ' ')
-
 unmount "$MOUNT_DIR"
 zerofree -v "$ROOT_DEV"
 unmount_image "$IMG_FILE"
 
+# Create zip archive with image file for distribution.
 rm -f "$ZIP_FILE"
 pushd $(dirname "$IMG_FILE") > /dev/null
 zip "$ZIP_FILE" $(basename "$IMG_FILE")
