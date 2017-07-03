@@ -1,5 +1,5 @@
---- stage0.orig/rootfs/etc/skel/.bashrc
-+++ stage0/rootfs/etc/skel/.bashrc
+--- rootfs.orig/etc/skel/.bashrc
++++ rootfs/etc/skel/.bashrc
 @@ -43,7 +43,7 @@ esac
  # uncomment for a colored prompt, if the terminal has the capability; turned
  # off by default to not distract the user: the focus in a terminal window

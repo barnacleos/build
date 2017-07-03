@@ -1,7 +1,5 @@
-Index: jessie-stage2/rootfs/etc/rc.local
-===================================================================
---- jessie-stage2.orig/rootfs/etc/rc.local
-+++ jessie-stage2/rootfs/etc/rc.local
+--- rootfs.orig/etc/rc.local
++++ rootfs/etc/rc.local
 @@ -11,4 +11,10 @@
  #
  # By default this script does nothing.

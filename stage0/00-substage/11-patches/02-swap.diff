@@ -1,7 +1,5 @@
-Index: jessie-stage2/rootfs/etc/dphys-swapfile
-===================================================================
---- jessie-stage2.orig/rootfs/etc/dphys-swapfile
-+++ jessie-stage2/rootfs/etc/dphys-swapfile
+--- rootfs.orig/etc/dphys-swapfile
++++ rootfs/etc/dphys-swapfile
 @@ -13,7 +13,7 @@
  
  # set size to absolute value, leaving empty (default) then uses computed value
