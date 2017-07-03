@@ -151,10 +151,10 @@ if [ ! -d "$ROOTFS_DIR" ]; then
     http://mirrordirector.raspbian.org/raspbian/" || rmdir "$ROOTFS_DIR/debootstrap"
 fi
 
-mount --bind /dev     "$ROOTFS_DIR/dev"
-mount --bind /dev/pts "$ROOTFS_DIR/dev/pts"
-mount -t proc proc    "$ROOTFS_DIR/proc"
-mount --bind /sys     "$ROOTFS_DIR/sys"
+mount --bind  /dev     "$ROOTFS_DIR/dev"
+mount --bind  /dev/pts "$ROOTFS_DIR/dev/pts"
+mount -t proc /proc    "$ROOTFS_DIR/proc"
+mount --bind  /sys     "$ROOTFS_DIR/sys"
 
 install -m 644 files/sources.list "$ROOTFS_DIR/etc/apt/"
 install -m 644 files/raspi.list   "$ROOTFS_DIR/etc/apt/sources.list.d/"
@@ -385,10 +385,10 @@ mount -v $BOOT_DEV "$MOUNT_DIR/boot" -t vfat
 
 rsync -aHAXx --exclude var/cache/apt/archives "$ROOTFS_DIR/" "$MOUNT_DIR/"
 
-mount --bind /dev     "$MOUNT_DIR/dev"
-mount --bind /dev/pts "$MOUNT_DIR/dev/pts"
-mount -t proc proc    "$MOUNT_DIR/proc"
-mount --bind /sys     "$MOUNT_DIR/sys"
+mount --bind  /dev     "$MOUNT_DIR/dev"
+mount --bind  /dev/pts "$MOUNT_DIR/dev/pts"
+mount -t proc /proc    "$MOUNT_DIR/proc"
+mount --bind  /sys     "$MOUNT_DIR/sys"
 
 if [ -e "$MOUNT_DIR/etc/ld.so.preload" ]; then
   mv "$MOUNT_DIR/etc/ld.so.preload" "$MOUNT_DIR/etc/ld.so.preload.disabled"
