@@ -10,7 +10,6 @@ export SCRIPT_DIR="$BASE_DIR/scripts"
 export FUNCTIONS_DIR="$BASE_DIR/functions"
 export DEPLOY_DIR="$BASE_DIR/deploy"
 export ROOTFS_DIR="$BASE_DIR/rootfs"
-export BOOTFS_DIR="$ROOTFS_DIR/boot"
 export MOUNT_DIR="$BASE_DIR/mnt"
 export WORK_DIR="$BASE_DIR/work"
 
@@ -46,7 +45,6 @@ main() {
   echo "Work dir: $WORK_DIR"
   echo
   echo "Root FS dir: $ROOTFS_DIR"
-  echo "Boot FS dir: $BOOTFS_DIR"
   echo
   echo "Image file: $IMG_FILE"
   echo "ZIP file:   $ZIP_FILE"

@@ -55,7 +55,7 @@ unmount_image "$IMG_FILE"
 
 rm -f "$IMG_FILE"
 
-BOOT_SIZE=$(du --apparent-size -s "$BOOTFS_DIR" --block-size=1 | cut -f 1)
+BOOT_SIZE=$(du --apparent-size -s "$ROOTFS_DIR/boot" --block-size=1 | cut -f 1)
 TOTAL_SIZE=$(du --apparent-size -s "$ROOTFS_DIR" --exclude var/cache/apt/archives --block-size=1 | cut -f 1)
 
 IMG_SIZE=$((BOOT_SIZE + TOTAL_SIZE + (800 * 1024 * 1024)))
