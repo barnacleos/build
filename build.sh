@@ -41,7 +41,7 @@ main() {
 
   mkdir -p "$WORK_DIR"
   mkdir -p "$DEPLOY_DIR"
-  mkdir -o "$MOUNT_DIR"
+  mkdir -p "$MOUNT_DIR"
 
   tput setaf 2 # Green color
   echo "$IMG_DATE $(date +"%T")"
