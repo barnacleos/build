@@ -58,20 +58,16 @@ main() {
   echo
   tput sgr0 # No color
 
-  run_sub_stage "$STAGE_DIR/00-substage"
-}
+  local SUB_STAGE_DIR="$STAGE_DIR/00-substage"
 
-run_sub_stage() {
-  log_begin "$1"
-  pushd "$1" > /dev/null
+  pushd "$SUB_STAGE_DIR" > /dev/null
 
   for i in {00..99}; do
-    task_patches "$1/$i-patches"
-    task_run     "$1/$i-run.sh"
+    task_patches "$SUB_STAGE_DIR/$i-patches"
+    task_run     "$SUB_STAGE_DIR/$i-run.sh"
   done
 
   popd > /dev/null
-  log_end "$1"
 }
 
 task_patches() {
