@@ -444,11 +444,11 @@ done
 
 rm -f "$MOUNT_DIR/root/.vnc/private.key"
 
-# Save fake hardware clock time for more realistic time after startup.
-chroot_mount 'fake-hwclock save'
-
 # Allow services to start.
 rm -f "$MOUNT_DIR/usr/sbin/policy-rc.d"
+
+# Save fake hardware clock time for more realistic time after startup.
+chroot_mount 'fake-hwclock save'
 
 # Unmount all file systems and minimize image file for distribution.
 ROOT_DEV=$(mount | grep "$MOUNT_DIR " | cut -f1 -d ' ')
