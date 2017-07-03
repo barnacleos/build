@@ -42,9 +42,11 @@ main() {
   tput setaf 2 # Green color
   echo "$IMG_DATE $(date +"%T")"
   echo
-  echo "Work dir: $WORK_DIR"
-  echo
+  echo "Base dir:    $BASE_DIR"
+  echo "Deploy dir:  $DEPLOY_DIR"
   echo "Root FS dir: $ROOTFS_DIR"
+  echo "Mount dir:   $MOUNT_DIR"
+  echo "Work dir:    $WORK_DIR"
   echo
   echo "Image file: $IMG_FILE"
   echo "ZIP file:   $ZIP_FILE"
