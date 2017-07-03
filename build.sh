@@ -39,8 +39,6 @@ mkdir -p "$MOUNT_DIR"
 
 local SUB_STAGE_DIR="$BASE_DIR/stage0/00-substage"
 
-pushd "$SUB_STAGE_DIR" > /dev/null
+cd "$SUB_STAGE_DIR"
 
 "$SUB_STAGE_DIR/00-run.sh"
-
-popd > /dev/null
