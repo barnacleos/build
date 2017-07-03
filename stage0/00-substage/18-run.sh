@@ -115,12 +115,6 @@ if [ ! -x ${MOUNT_DIR}/usr/bin/qemu-arm-static ]; then
   cp /usr/bin/qemu-arm-static ${MOUNT_DIR}/usr/bin/
 fi
 
-on_chroot << EOF
-apt-get update
-apt-get -y dist-upgrade
-apt-get clean
-EOF
-
 install -m 644 files/resolv.conf ${MOUNT_DIR}/etc/
 
 IMGID="$(fdisk -l "$IMG_FILE" | sed -n 's/Disk identifier: 0x\([^ ]*\)/\1/p')"
@@ -131,11 +125,6 @@ ROOT_PARTUUID="$IMGID-02"
 sed -i "s/BOOTDEV/PARTUUID=$BOOT_PARTUUID/" "$MOUNT_DIR/etc/fstab"
 sed -i "s/ROOTDEV/PARTUUID=$ROOT_PARTUUID/" "$MOUNT_DIR/etc/fstab"
 sed -i "s/ROOTDEV/PARTUUID=$ROOT_PARTUUID/" "$MOUNT_DIR/boot/cmdline.txt"
-
-on_chroot << EOF
-/etc/init.d/fake-hwclock stop
-hardlink -t /usr/share/doc
-EOF
 
 if [ -d "$MOUNT_DIR/home/$USERNAME/.config" ]; then
   chmod 700 "$MOUNT_DIR/home/$USERNAME/.config"
