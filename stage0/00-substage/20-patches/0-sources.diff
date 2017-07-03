@@ -1,7 +1,0 @@
-Index: export-jessie/rootfs/etc/apt/sources.list.d/raspi.list
-===================================================================
---- export-jessie.orig/rootfs/etc/apt/sources.list.d/raspi.list
-+++ export-jessie/rootfs/etc/apt/sources.list.d/raspi.list
-@@ -1,1 +1,1 @@
--deb http://archive.raspberrypi.org/debian/ jessie main ui staging
-+deb http://archive.raspberrypi.org/debian/ jessie main ui
