@@ -68,6 +68,25 @@ chroot_rootfs() {
   umount "$dev_fs"
 }
 
+chroot_mount() {
+  local proc_fs="$MOUNT_DIR/proc"
+  local dev_fs="$MOUNT_DIR/dev"
+  local devpts_fs="$MOUNT_DIR/dev/pts"
+  local sys_fs="$MOUNT_DIR/sys"
+
+  mount --bind /dev     "$dev_fs"
+  mount --bind /dev/pts "$devpts_fs"
+  mount -t proc proc    "$proc_fs"
+  mount --bind /sys     "$sys_fs"
+
+  capsh --drop=cap_setfcap "--chroot=$MOUNT_DIR/" -- "$@"
+
+  umount "$sys_fs"
+  umount "$proc_fs"
+  umount "$devpts_fs"
+  umount "$dev_fs"
+}
+
 apply_patches() {
   if [ ! -d "$1" ]; then
     echo "Patches directory does not exist: $1"
