@@ -6,7 +6,6 @@ export USERNAME='user'
 export PASSWORD='password'
 
 export BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-export SCRIPT_DIR="$BASE_DIR/scripts"
 export DEPLOY_DIR="$BASE_DIR/deploy"
 export ROOTFS_DIR="$BASE_DIR/rootfs"
 export MOUNT_DIR="$BASE_DIR/mnt"
