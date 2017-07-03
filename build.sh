@@ -294,8 +294,7 @@ dphys-swapfile         \
 raspberrypi-sys-mods   \
 apt-listchanges        \
 usb-modeswitch         \
-apt-transport-https    \
-libpam-chksshpwd
+apt-transport-https
 EOF
 
 apply_patches "$BASE_DIR/patches/02"
@@ -485,8 +484,6 @@ ln -nsf /proc/mounts "$MOUNT_DIR/etc/mtab"
 for _FILE in $(find "$MOUNT_DIR/var/log/" -type f); do
   true > "$_FILE"
 done
-
-rm -f "$MOUNT_DIR/root/.vnc/private.key"
 
 ##
 # Allow services to start.
