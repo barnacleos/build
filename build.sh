@@ -37,7 +37,7 @@ dependencies_check "$BASE_DIR/depends"
 mkdir -p "$DEPLOY_DIR"
 mkdir -p "$MOUNT_DIR"
 
-local SUB_STAGE_DIR="$BASE_DIR/stage0/00-substage"
+SUB_STAGE_DIR="$BASE_DIR/stage0/00-substage"
 
 cd "$SUB_STAGE_DIR"
 
