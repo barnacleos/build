@@ -334,7 +334,7 @@ EOF
 ##
 # DHCP client.
 #
-chroot_rootfs 'apt-get install -y dhcpcd5'
+chroot_rootfs apt-get install -y dhcpcd5
 
 install -v -d "$ROOTFS_DIR/etc/systemd/system/dhcpcd.service.d"
 
