@@ -32,14 +32,17 @@ export QUILT_NO_DIFF_INDEX=1
 export QUILT_NO_DIFF_TIMESTAMPS=1
 export QUILT_REFRESH_ARGS='-p ab'
 
-if [ "$(id -u)" != '0' ]; then
-  echo 'Please run as root' 1>&2
-  exit 1
-fi
-
-dependencies_check "$BASE_DIR/depends"
-
 main() {
+  if [ "$(id -u)" != '0' ]; then
+    echo 'Please run as root' 1>&2
+    exit 1
+  fi
+
+  dependencies_check "$BASE_DIR/depends"
+
+  mkdir -p "$WORK_DIR"
+  mkdir -p "$DEPLOY_DIR"
+
   tput setaf 2 # Green color
   echo "$IMG_DATE $(date +"%T")"
   echo
@@ -54,9 +57,6 @@ main() {
   echo "ZIP file:   $ZIP_FILE"
   echo
   tput sgr0 # No color
-
-  mkdir -p "$WORK_DIR"
-  mkdir -p "$DEPLOY_DIR"
 
   run_sub_stage "$STAGE_DIR/00-substage"
 }
