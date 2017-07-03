@@ -269,10 +269,8 @@ libraspberrypi-bin     \
 libraspberrypi0        \
 raspi-config           \
 less                   \
-fbset                  \
 sudo                   \
 psmisc                 \
-strace                 \
 module-init-tools      \
 ed                     \
 ncdu                   \
@@ -282,11 +280,7 @@ keyboard-configuration \
 debconf-utils          \
 parted                 \
 unzip                  \
-manpages-dev           \
 bash-completion        \
-gdb                    \
-pkg-config             \
-v4l-utils              \
 ca-certificates        \
 curl                   \
 fake-hwclock           \
