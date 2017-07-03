@@ -3,6 +3,13 @@
 source "$FUNCTIONS_DIR/logging.sh"
 source "$FUNCTIONS_DIR/dependencies_check.sh"
 
+if [ "$(id -u)" != '0' ]; then
+  echo 'Please run as root' 1>&2
+  exit 1
+fi
+
+dependencies_check "$BASE_DIR/depends"
+
 export IMG_NAME='BarnacleOS'
 export HOSTNAME='barnacleos'
 export USERNAME='user'
@@ -16,15 +23,15 @@ export ROOTFS_DIR="$BASE_DIR/rootfs"
 export BOOTFS_DIR="$ROOTFS_DIR/boot"
 export MOUNT_DIR="$BASE_DIR/mnt"
 
-export IMG_DATE
-export WORK_DIR
+export IMG_DATE="$(date +%Y-%m-%d)"
+export WORK_DIR="$BASE_DIR/work/$IMG_DATE-$IMG_NAME"
 
-export STAGE
-export STAGE_DIR
-export STAGE_WORK_DIR
+export STAGE='stage0'
+export STAGE_DIR="$BASE_DIR/$STAGE"
+export STAGE_WORK_DIR="$WORK_DIR/$STAGE"
 
-export IMG_FILE
-export ZIP_FILE
+export IMG_FILE="$DEPLOY_DIR/$IMG_DATE-${IMG_NAME}.img"
+export ZIP_FILE="$DEPLOY_DIR/$IMG_DATE-${IMG_NAME}.zip"
 
 export QUILT_NO_DIFF_INDEX=1
 export QUILT_NO_DIFF_TIMESTAMPS=1
@@ -33,23 +40,6 @@ export QUILT_REFRESH_ARGS='-p ab'
 source "$SCRIPT_DIR/common.sh"
 
 main() {
-  dependencies_check "$BASE_DIR/depends"
-
-  if [ "$(id -u)" != '0' ]; then
-    echo 'Please run as root' 1>&2
-    exit 1
-  fi
-
-  IMG_DATE="$(date +%Y-%m-%d)"
-  WORK_DIR="$BASE_DIR/work/$IMG_DATE-$IMG_NAME"
-
-  STAGE='stage0'
-  STAGE_DIR="$BASE_DIR/$STAGE"
-  STAGE_WORK_DIR="$WORK_DIR/$STAGE"
-
-  IMG_FILE="$DEPLOY_DIR/$IMG_DATE-${IMG_NAME}.img"
-  ZIP_FILE="$DEPLOY_DIR/$IMG_DATE-${IMG_NAME}.zip"
-
   tput setaf 2 # Green color
   echo "$IMG_DATE $(date +"%T")"
   echo
