@@ -1,5 +1,6 @@
-deploy/*
-rootfs/*
-work/*
+/deploy/
+/rootfs/
+/work/
+
 .pc
 *-pc
