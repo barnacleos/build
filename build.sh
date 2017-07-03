@@ -25,6 +25,7 @@ source "$FUNCTIONS_DIR/logging.sh"
 source "$FUNCTIONS_DIR/dependencies_check.sh"
 
 source "$SCRIPT_DIR/common.sh"
+source "$SCRIPT_DIR/patching.sh"
 
 main() {
   if [ "$(id -u)" != '0' ]; then
