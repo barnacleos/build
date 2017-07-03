@@ -156,7 +156,7 @@ mount --bind  /dev/pts "$ROOTFS_DIR/dev/pts"
 mount -t proc /proc    "$ROOTFS_DIR/proc"
 mount --bind  /sys     "$ROOTFS_DIR/sys"
 
-echo 'resize2fs "$(findmnt / -o source -n)"' >> "$ROOTFS_DIR/rc.local"
+install -m 755 files/rc.local "$ROOTFS_DIR/etc/rc.local"
 
 install -m 644 files/sources.list "$ROOTFS_DIR/etc/apt/"
 install -m 644 files/raspi.list   "$ROOTFS_DIR/etc/apt/sources.list.d/"
