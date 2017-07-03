@@ -446,9 +446,7 @@ done
 
 rm -f "$MOUNT_DIR/root/.vnc/private.key"
 
-chroot_mount << EOF
-fake-hwclock save
-EOF
+chroot_mount 'fake-hwclock save'
 
 # Allow services to start.
 rm -f "$MOUNT_DIR/usr/sbin/policy-rc.d"
