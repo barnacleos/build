@@ -293,8 +293,7 @@ dosfstools             \
 dphys-swapfile         \
 raspberrypi-sys-mods   \
 apt-listchanges        \
-usb-modeswitch         \
-apt-transport-https
+usb-modeswitch
 EOF
 
 apply_patches "$BASE_DIR/patches/02"
