@@ -42,19 +42,9 @@ main() {
 
   pushd "$SUB_STAGE_DIR" > /dev/null
 
-  task_run "$SUB_STAGE_DIR/00-run.sh"
+  "$SUB_STAGE_DIR/00-run.sh"
 
   popd > /dev/null
-}
-
-task_run() {
-  if [ -x "$1" ]; then
-    log_begin "$1"
-
-    "$1"
-
-    log_end "$1"
-  fi
 }
 
 main
