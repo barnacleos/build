@@ -301,7 +301,7 @@ systemctl enable regenerate_ssh_host_keys
 systemctl enable resize2fs_once
 EOF
 
-chroot_rootfs << \EOF
+chroot_rootfs << EOF
 adduser $USERNAME sudo
 EOF
 
