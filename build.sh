@@ -17,7 +17,6 @@ export WORK_DIR="$BASE_DIR/work"
 export IMG_DATE="$(date +%Y-%m-%d)"
 
 export STAGE='stage0'
-export STAGE_DIR="$BASE_DIR/$STAGE"
 
 export IMG_FILE="$DEPLOY_DIR/$IMG_DATE-${IMG_NAME}.img"
 export ZIP_FILE="$DEPLOY_DIR/$IMG_DATE-${IMG_NAME}.zip"
@@ -46,8 +45,7 @@ main() {
   tput setaf 2 # Green color
   echo "$IMG_DATE $(date +"%T")"
   echo
-  echo "Work dir:       $WORK_DIR"
-  echo "Stage dir:      $STAGE_DIR"
+  echo "Work dir: $WORK_DIR"
   echo
   echo "Root FS dir: $ROOTFS_DIR"
   echo "Boot FS dir: $BOOTFS_DIR"
@@ -57,7 +55,7 @@ main() {
   echo
   tput sgr0 # No color
 
-  local SUB_STAGE_DIR="$STAGE_DIR/00-substage"
+  local SUB_STAGE_DIR="$BASE_DIR/$STAGE/00-substage"
 
   pushd "$SUB_STAGE_DIR" > /dev/null
 
