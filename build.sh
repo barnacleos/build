@@ -399,6 +399,9 @@ fi
 
 install -m 644 files/resolv.conf "$MOUNT_DIR/etc/"
 
+##
+# Store file system UUIDs to configuration files.
+#
 IMGID="$(fdisk -l "$IMG_FILE" | sed -n 's/Disk identifier: 0x\([^ ]*\)/\1/p')"
 
 BOOT_PARTUUID="$IMGID-01"
@@ -408,6 +411,9 @@ sed -i "s/BOOTDEV/PARTUUID=$BOOT_PARTUUID/" "$MOUNT_DIR/etc/fstab"
 sed -i "s/ROOTDEV/PARTUUID=$ROOT_PARTUUID/" "$MOUNT_DIR/etc/fstab"
 sed -i "s/ROOTDEV/PARTUUID=$ROOT_PARTUUID/" "$MOUNT_DIR/boot/cmdline.txt"
 
+##
+# Remove logs and backups, protect files.
+#
 if [ -d "$MOUNT_DIR/home/$USERNAME/.config" ]; then
   chmod 700 "$MOUNT_DIR/home/$USERNAME/.config"
 fi
@@ -444,19 +450,27 @@ done
 
 rm -f "$MOUNT_DIR/root/.vnc/private.key"
 
+##
 # Allow services to start.
+#
 rm -f "$MOUNT_DIR/usr/sbin/policy-rc.d"
 
+##
 # Save fake hardware clock time for more realistic time after startup.
+#
 chroot_mount 'fake-hwclock save'
 
+##
 # Unmount all file systems and minimize image file for distribution.
+#
 ROOT_DEV=$(mount | grep "$MOUNT_DIR " | cut -f1 -d ' ')
 unmount "$MOUNT_DIR"
 zerofree -v "$ROOT_DEV"
 unmount_image "$IMG_FILE"
 
+##
 # Create zip archive with image file for distribution.
+#
 rm -f "$ZIP_FILE"
 pushd $(dirname "$IMG_FILE") > /dev/null
 zip "$ZIP_FILE" $(basename "$IMG_FILE")
