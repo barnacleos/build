@@ -377,10 +377,10 @@ ROOT_DEV=$(losetup --show -f -o $ROOT_OFFSET --sizelimit $ROOT_LENGTH "$IMG_FILE
 mkdosfs -n boot -F 32 -v $BOOT_DEV > /dev/null
 mkfs.ext4 -O ^huge_file $ROOT_DEV > /dev/null
 
-mkdir -p "$MOUNT_DIR"
+mkdir -p           "$MOUNT_DIR"
 mount -v $ROOT_DEV "$MOUNT_DIR" -t ext4
 
-mkdir -p "$MOUNT_DIR/boot"
+mkdir -p           "$MOUNT_DIR/boot"
 mount -v $BOOT_DEV "$MOUNT_DIR/boot" -t vfat
 
 rsync -aHAXx --exclude var/cache/apt/archives "$ROOTFS_DIR/" "$MOUNT_DIR/"
