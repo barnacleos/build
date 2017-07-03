@@ -14,7 +14,7 @@ echo "127.0.1.1 $HOSTNAME" >>/etc/hosts
 
 on_chroot << EOF
 if ! id -u $USERNAME >/dev/null 2>&1; then
-	adduser --disabled-password --gecos "" $USERNAME
+  adduser --disabled-password --gecos "" $USERNAME
 fi
 echo "$USERNAME:$PASSWORD" | chpasswd
 passwd -d root
