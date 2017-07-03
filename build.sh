@@ -49,7 +49,7 @@ dependencies_check() {
   fi
 }
 
-on_chroot() {
+chroot_rootfs() {
   local proc_fs="$ROOTFS_DIR/proc"
   local dev_fs="$ROOTFS_DIR/dev"
   local devpts_fs="$ROOTFS_DIR/dev/pts"
@@ -165,21 +165,21 @@ fi
 install -m 644 files/sources.list "$ROOTFS_DIR/etc/apt/"
 install -m 644 files/raspi.list   "$ROOTFS_DIR/etc/apt/sources.list.d/"
 
-on_chroot apt-key add - < files/raspberrypi.gpg.key
+chroot_rootfs apt-key add - < files/raspberrypi.gpg.key
 
-on_chroot << EOF
+chroot_rootfs << EOF
 apt-get update
 apt-get dist-upgrade -y
 EOF
 
-on_chroot << EOF
+chroot_rootfs << EOF
 debconf-set-selections <<SELEOF
 locales locales/locales_to_be_generated multiselect en_US.UTF-8 UTF-8
 locales locales/default_environment_locale select en_US.UTF-8
 SELEOF
 EOF
 
-on_chroot << EOF
+chroot_rootfs << EOF
 apt-get install -y     \
 locales                \
 raspberrypi-bootloader \
@@ -203,7 +203,7 @@ chmod 644        "$ROOTFS_DIR/etc/hostname"
 
 echo "127.0.1.1 $HOSTNAME" >>"$ROOTFS_DIR/etc/hosts"
 
-on_chroot << EOF
+chroot_rootfs << EOF
 if ! id -u $USERNAME >/dev/null 2>&1; then
   adduser --disabled-password --gecos "" $USERNAME
 fi
@@ -211,19 +211,19 @@ echo "$USERNAME:$PASSWORD" | chpasswd
 passwd -d root
 EOF
 
-on_chroot << EOF
+chroot_rootfs << EOF
 dpkg-divert --add --local /lib/udev/rules.d/75-persistent-net-generator.rules
 EOF
 
 touch "$ROOTFS_DIR/spindle_install"
 
-on_chroot << EOF
+chroot_rootfs << EOF
 apt-get install -y raspi-copies-and-fills
 EOF
 
 rm -f "$ROOTFS_DIR/spindle_install"
 
-on_chroot << EOF
+chroot_rootfs << EOF
 debconf-set-selections <<SELEOF
 
 console-setup console-setup/charmap47  select UTF-8
@@ -243,7 +243,7 @@ keyboard-configuration keyboard-configuration/variant       select English (UK)
 SELEOF
 EOF
 
-on_chroot << EOF
+chroot_rootfs << EOF
 apt-get install -y     \
 libraspberrypi-bin     \
 libraspberrypi0        \
@@ -294,28 +294,28 @@ install -m 644 files/ttyoutput.conf                   "$ROOTFS_DIR/etc/systemd/s
 install -m 644 files/50raspi                          "$ROOTFS_DIR/etc/apt/apt.conf.d/"
 install -m 644 files/console-setup                    "$ROOTFS_DIR/etc/default/"
 
-on_chroot << EOF
+chroot_rootfs << EOF
 systemctl disable hwclock.sh
 systemctl disable rpcbind
 systemctl enable regenerate_ssh_host_keys
 systemctl enable resize2fs_once
 EOF
 
-on_chroot << \EOF
+chroot_rootfs << \EOF
 adduser $USERNAME sudo
 EOF
 
-on_chroot << EOF
+chroot_rootfs << EOF
 setupcon --force --save-only -v
 EOF
 
-on_chroot << EOF
+chroot_rootfs << EOF
 usermod --pass='*' root
 EOF
 
 rm -f "$ROOTFS_DIR/etc/ssh/ssh_host_*_key*"
 
-on_chroot << EOF
+chroot_rootfs << EOF
 apt-get install -y   \
 wpasupplicant        \
 wireless-tools       \
