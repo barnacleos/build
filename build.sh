@@ -27,24 +27,20 @@ source "$FUNCTIONS_DIR/dependencies_check.sh"
 source "$SCRIPT_DIR/common.sh"
 source "$SCRIPT_DIR/patching.sh"
 
-main() {
-  if [ "$(id -u)" != '0' ]; then
-    echo 'Please run as root' 1>&2
-    exit 1
-  fi
+if [ "$(id -u)" != '0' ]; then
+  echo 'Please run as root' 1>&2
+  exit 1
+fi
 
-  dependencies_check "$BASE_DIR/depends"
+dependencies_check "$BASE_DIR/depends"
 
-  mkdir -p "$DEPLOY_DIR"
-  mkdir -p "$MOUNT_DIR"
+mkdir -p "$DEPLOY_DIR"
+mkdir -p "$MOUNT_DIR"
 
-  local SUB_STAGE_DIR="$BASE_DIR/stage0/00-substage"
+local SUB_STAGE_DIR="$BASE_DIR/stage0/00-substage"
 
-  pushd "$SUB_STAGE_DIR" > /dev/null
+pushd "$SUB_STAGE_DIR" > /dev/null
 
-  "$SUB_STAGE_DIR/00-run.sh"
+"$SUB_STAGE_DIR/00-run.sh"
 
-  popd > /dev/null
-}
-
-main
+popd > /dev/null
