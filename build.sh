@@ -68,8 +68,8 @@ main() {
   STAGE_DIR="$BASE_DIR/$STAGE"
   STAGE_WORK_DIR="$WORK_DIR/$STAGE"
 
-  IMG_FILE="$STAGE_WORK_DIR/$IMG_DATE-${IMG_NAME}.img"
-  ZIP_FILE="$DEPLOY_DIR/image_$IMG_DATE-${IMG_NAME}.zip"
+  IMG_FILE="$DEPLOY_DIR/$IMG_DATE-${IMG_NAME}.img"
+  ZIP_FILE="$DEPLOY_DIR/$IMG_DATE-${IMG_NAME}.zip"
 
   tput setaf 2 # Green color
   echo "$IMG_DATE $(date +"%T")"
