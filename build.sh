@@ -1,5 +1,8 @@
 #!/bin/bash -e
 
+source "$FUNCTIONS_DIR/logging.sh"
+source "$FUNCTIONS_DIR/dependencies_check.sh"
+
 export IMG_NAME='BarnacleOS'
 export HOSTNAME='barnacleos'
 export USERNAME='user'
@@ -27,9 +30,7 @@ export QUILT_NO_DIFF_INDEX=1
 export QUILT_NO_DIFF_TIMESTAMPS=1
 export QUILT_REFRESH_ARGS='-p ab'
 
-source "$FUNCTIONS_DIR/logging.sh"
 source "$SCRIPT_DIR/common.sh"
-source "$FUNCTIONS_DIR/dependencies_check.sh"
 
 main() {
   dependencies_check "$BASE_DIR/depends"
