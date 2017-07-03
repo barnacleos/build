@@ -25,13 +25,6 @@ on_chroot << EOF
 dpkg-divert --add --local /lib/udev/rules.d/75-persistent-net-generator.rules
 EOF
 
-on_chroot << EOF
-apt-get install -y \
-libraspberrypi-bin \
-libraspberrypi0    \
-raspi-config
-EOF
-
 touch ${ROOTFS_DIR}/spindle_install
 
 on_chroot << EOF
@@ -62,6 +55,9 @@ EOF
 
 on_chroot << EOF
 apt-get install -y     \
+libraspberrypi-bin     \
+libraspberrypi0        \
+raspi-config           \
 less                   \
 fbset                  \
 sudo                   \
