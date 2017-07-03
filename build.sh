@@ -16,8 +16,6 @@ export WORK_DIR="$BASE_DIR/work"
 
 export IMG_DATE="$(date +%Y-%m-%d)"
 
-export STAGE='stage0'
-
 export IMG_FILE="$DEPLOY_DIR/$IMG_DATE-${IMG_NAME}.img"
 export ZIP_FILE="$DEPLOY_DIR/$IMG_DATE-${IMG_NAME}.zip"
 
@@ -55,7 +53,7 @@ main() {
   echo
   tput sgr0 # No color
 
-  local SUB_STAGE_DIR="$BASE_DIR/$STAGE/00-substage"
+  local SUB_STAGE_DIR="$BASE_DIR/stage0/00-substage"
 
   pushd "$SUB_STAGE_DIR" > /dev/null
 
