@@ -37,19 +37,6 @@ main() {
   mkdir -p "$DEPLOY_DIR"
   mkdir -p "$MOUNT_DIR"
 
-  tput setaf 2 # Green color
-  echo "$IMG_DATE $(date +"%T")"
-  echo
-  echo "Base dir:    $BASE_DIR"
-  echo "Deploy dir:  $DEPLOY_DIR"
-  echo "Root FS dir: $ROOTFS_DIR"
-  echo "Mount dir:   $MOUNT_DIR"
-  echo
-  echo "Image file: $IMG_FILE"
-  echo "ZIP file:   $ZIP_FILE"
-  echo
-  tput sgr0 # No color
-
   local SUB_STAGE_DIR="$BASE_DIR/stage0/00-substage"
 
   pushd "$SUB_STAGE_DIR" > /dev/null
