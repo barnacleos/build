@@ -286,7 +286,6 @@ EOF
 
 apply_patches "$BASE_DIR/patches/02"
 
-install -m 644 files/regenerate_ssh_host_keys.service "$ROOTFS_DIR/lib/systemd/system/"
 install -d                                            "$ROOTFS_DIR/etc/systemd/system/rc-local.service.d"
 install -m 644 files/ttyoutput.conf                   "$ROOTFS_DIR/etc/systemd/system/rc-local.service.d/"
 install -m 644 files/50raspi                          "$ROOTFS_DIR/etc/apt/apt.conf.d/"
@@ -295,7 +294,6 @@ install -m 644 files/console-setup                    "$ROOTFS_DIR/etc/default/"
 chroot_rootfs << EOF
 systemctl disable hwclock.sh
 systemctl disable rpcbind
-systemctl enable regenerate_ssh_host_keys
 EOF
 
 chroot_rootfs << EOF
@@ -305,6 +303,13 @@ EOF
 chroot_rootfs << EOF
 setupcon --force --save-only -v
 EOF
+
+##
+# ?????
+#
+install -m 644 files/regenerate_ssh_host_keys.service "$ROOTFS_DIR/lib/systemd/system/"
+
+chroot_rootfs 'systemctl enable regenerate_ssh_host_keys'
 
 rm -f "$ROOTFS_DIR/etc/ssh/ssh_host_*_key*"
 
