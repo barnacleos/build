@@ -152,6 +152,7 @@ if [ ! -d "$ROOTFS_DIR" ]; then
     http://mirrordirector.raspbian.org/raspbian/" || rmdir "$ROOTFS_DIR/debootstrap"
 fi
 
+unmount "$ROOTFS_DIR"
 mount --bind  /dev     "$ROOTFS_DIR/dev"
 mount --bind  /dev/pts "$ROOTFS_DIR/dev/pts"
 mount -t proc /proc    "$ROOTFS_DIR/proc"
@@ -326,13 +327,8 @@ EOF
 
 install -v -d "$ROOTFS_DIR/etc/systemd/system/dhcpcd.service.d"
 
-umount "$ROOTFS_DIR/sys"
-umount "$ROOTFS_DIR/proc"
-umount "$ROOTFS_DIR/dev/pts"
-umount "$ROOTFS_DIR/dev"
-
+unmount "$ROOTFS_DIR"
 unmount_image "$IMG_FILE"
-
 rm -f "$IMG_FILE"
 
 BOOT_SIZE=$(du --apparent-size -s "$ROOTFS_DIR/boot" --block-size=1 | cut -f 1)
@@ -387,6 +383,7 @@ mount -v $BOOT_DEV "$MOUNT_DIR/boot" -t vfat
 
 rsync -aHAXx --exclude var/cache/apt/archives "$ROOTFS_DIR/" "$MOUNT_DIR/"
 
+unmount "$MOUNT_DIR"
 mount --bind  /dev     "$MOUNT_DIR/dev"
 mount --bind  /dev/pts "$MOUNT_DIR/dev/pts"
 mount -t proc /proc    "$MOUNT_DIR/proc"
@@ -453,20 +450,13 @@ chroot_mount 'fake-hwclock save'
 # Allow services to start.
 rm -f "$MOUNT_DIR/usr/sbin/policy-rc.d"
 
-umount "$MOUNT_DIR/sys"
-umount "$MOUNT_DIR/proc"
-umount "$MOUNT_DIR/dev/pts"
-umount "$MOUNT_DIR/dev"
-
 ROOT_DEV=$(mount | grep "$MOUNT_DIR " | cut -f1 -d ' ')
 
 unmount "$MOUNT_DIR"
 zerofree -v "$ROOT_DEV"
-
 unmount_image "$IMG_FILE"
 
 rm -f "$ZIP_FILE"
-
 pushd $(dirname "$IMG_FILE") > /dev/null
 zip "$ZIP_FILE" $(basename "$IMG_FILE")
 popd > /dev/null
