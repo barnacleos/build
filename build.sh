@@ -492,7 +492,7 @@ rm -f "$MOUNT_DIR/usr/sbin/policy-rc.d"
 ##
 # Save fake hardware clock time for more realistic time after startup.
 #
-chroot_mount 'fake-hwclock save'
+chroot_mount fake-hwclock save
 
 ##
 # Unmount all file systems and minimize image file for distribution.
