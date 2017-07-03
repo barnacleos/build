@@ -11,7 +11,6 @@ export FUNCTIONS_DIR="$BASE_DIR/functions"
 export DEPLOY_DIR="$BASE_DIR/deploy"
 export ROOTFS_DIR="$BASE_DIR/rootfs"
 export MOUNT_DIR="$BASE_DIR/mnt"
-export WORK_DIR="$BASE_DIR/work"
 
 export IMG_DATE="$(date +%Y-%m-%d)"
 
@@ -35,7 +34,6 @@ main() {
 
   dependencies_check "$BASE_DIR/depends"
 
-  mkdir -p "$WORK_DIR"
   mkdir -p "$DEPLOY_DIR"
   mkdir -p "$MOUNT_DIR"
 
@@ -46,7 +44,6 @@ main() {
   echo "Deploy dir:  $DEPLOY_DIR"
   echo "Root FS dir: $ROOTFS_DIR"
   echo "Mount dir:   $MOUNT_DIR"
-  echo "Work dir:    $WORK_DIR"
   echo
   echo "Image file: $IMG_FILE"
   echo "ZIP file:   $ZIP_FILE"
@@ -67,20 +64,13 @@ main() {
 
 task_patches() {
   if [ -d "$1" ]; then
-    local SUB_STAGE_DIR=$(dirname "$1")
-    local SUB_STAGE_NAME=$(basename "$SUB_STAGE_DIR")
-
     log_begin "$1"
-    pushd "$WORK_DIR" > /dev/null
-
-    rm -rf .pc
-    rm -rf *-pc
+    pushd "$ROOTFS_DIR" > /dev/null
 
     export QUILT_PATCHES="$1"
 
-    SUB_STAGE_QUILT_PATCH_DIR="$SUB_STAGE_NAME-pc"
-    mkdir -p "$SUB_STAGE_QUILT_PATCH_DIR"
-    ln -snf "$SUB_STAGE_QUILT_PATCH_DIR" .pc
+    rm -rf   .pc
+    mkdir -p .pc
 
     if [ -e "$1/EDIT" ]; then
       tput setaf 3 # Yellow color
@@ -99,6 +89,8 @@ task_patches() {
     quilt upgrade
     RC=0
     quilt push -a || RC=$?
+
+    rm -rf .pc
 
     case "$RC" in
     0|2)
