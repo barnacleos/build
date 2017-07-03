@@ -12,13 +12,12 @@ export DEPLOY_DIR="$BASE_DIR/deploy"
 export ROOTFS_DIR="$BASE_DIR/rootfs"
 export BOOTFS_DIR="$ROOTFS_DIR/boot"
 export MOUNT_DIR="$BASE_DIR/mnt"
+export WORK_DIR="$BASE_DIR/work"
 
 export IMG_DATE="$(date +%Y-%m-%d)"
-export WORK_DIR="$BASE_DIR/work/$IMG_DATE-$IMG_NAME"
 
 export STAGE='stage0'
 export STAGE_DIR="$BASE_DIR/$STAGE"
-export STAGE_WORK_DIR="$WORK_DIR/$STAGE"
 
 export IMG_FILE="$DEPLOY_DIR/$IMG_DATE-${IMG_NAME}.img"
 export ZIP_FILE="$DEPLOY_DIR/$IMG_DATE-${IMG_NAME}.zip"
@@ -49,7 +48,6 @@ main() {
   echo
   echo "Work dir:       $WORK_DIR"
   echo "Stage dir:      $STAGE_DIR"
-  echo "Stage work dir: $STAGE_WORK_DIR"
   echo
   echo "Root FS dir: $ROOTFS_DIR"
   echo "Boot FS dir: $BOOTFS_DIR"
@@ -77,7 +75,7 @@ task_patches() {
     local SUB_STAGE_NAME=$(basename "$SUB_STAGE_DIR")
 
     log_begin "$1"
-    pushd "$STAGE_WORK_DIR" > /dev/null
+    pushd "$WORK_DIR" > /dev/null
 
     rm -rf .pc
     rm -rf *-pc
