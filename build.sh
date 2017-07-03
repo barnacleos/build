@@ -4,6 +4,8 @@ export BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 export SCRIPT_DIR="$BASE_DIR/scripts"
 export FUNCTIONS_DIR="$BASE_DIR/functions"
 export DEPLOY_DIR="$BASE_DIR/deploy"
+export ROOTFS_DIR="$BASE_DIR/rootfs"
+export BOOTFS_DIR="$ROOTFS_DIR/boot"
 
 export IMG_DATE
 export WORK_DIR
@@ -16,8 +18,6 @@ export PASSWORD
 export STAGE
 export STAGE_DIR
 export STAGE_WORK_DIR
-export ROOTFS_DIR
-export BOOTFS_DIR
 
 export IMG_FILE
 export ZIP_FILE
@@ -66,8 +66,6 @@ main() {
   STAGE='stage0'
   STAGE_DIR="$BASE_DIR/$STAGE"
   STAGE_WORK_DIR="$WORK_DIR/$STAGE"
-  ROOTFS_DIR="$STAGE_WORK_DIR/rootfs"
-  BOOTFS_DIR="$ROOTFS_DIR/boot"
 
   IMG_FILE="$STAGE_WORK_DIR/$IMG_DATE-${IMG_NAME}.img"
   ZIP_FILE="$DEPLOY_DIR/image_$IMG_DATE-${IMG_NAME}.zip"
