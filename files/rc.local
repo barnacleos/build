@@ -14,4 +14,8 @@
 # Increase root file system size to take all available space.
 resize2fs "$(findmnt / -o source -n)"
 
+# Generate the default host keys for each of the key types
+# for which host keys do not exist (rsa1, rsa, dsa, ecdsa and ed25519).
+ssh-keygen -A
+
 exit 0

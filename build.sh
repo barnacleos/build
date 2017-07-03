@@ -325,15 +325,6 @@ setupcon --force --save-only -v
 EOF
 
 ##
-# ?????
-#
-install -m 644 files/regenerate_ssh_host_keys.service "$ROOTFS_DIR/lib/systemd/system/"
-
-chroot_rootfs 'systemctl enable regenerate_ssh_host_keys'
-
-rm -f "$ROOTFS_DIR/etc/ssh/ssh_host_*_key*"
-
-##
 # Wi-Fi firmware and tools.
 #
 chroot_rootfs << EOF
