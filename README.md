@@ -13,8 +13,8 @@ Dependencies
 On Debian-based systems:
 
 ```bash
-apt-get install quilt parted realpath qemu-user-static debootstrap zerofree pxz zip \
-dosfstools bsdtar libcap2-bin grep rsync
+apt-get install quilt parted qemu-user-static debootstrap zerofree zip \
+dosfstools libcap2-bin grep rsync
 ```
 
 The file `depends` contains a list of tools needed. The format of this
