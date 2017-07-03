@@ -71,13 +71,13 @@ on_chroot << EOF
 dpkg-divert --add --local /lib/udev/rules.d/75-persistent-net-generator.rules
 EOF
 
-touch ${ROOTFS_DIR}/spindle_install
+touch "$ROOTFS_DIR/spindle_install"
 
 on_chroot << EOF
 apt-get install -y raspi-copies-and-fills
 EOF
 
-rm -f ${ROOTFS_DIR}/spindle_install
+rm -f "$ROOTFS_DIR/spindle_install"
 
 on_chroot << EOF
 debconf-set-selections <<SELEOF
