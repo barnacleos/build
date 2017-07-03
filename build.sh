@@ -42,9 +42,7 @@ main() {
 
   pushd "$SUB_STAGE_DIR" > /dev/null
 
-  for i in {00..99}; do
-    task_run "$SUB_STAGE_DIR/$i-run.sh"
-  done
+  task_run "$SUB_STAGE_DIR/00-run.sh"
 
   popd > /dev/null
 }
