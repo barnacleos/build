@@ -286,10 +286,6 @@ apt-transport-https    \
 libpam-chksshpwd
 EOF
 
-on_chroot << EOF
-apt-get install --no-install-recommends -y cifs-utils
-EOF
-
 apply_patches "$BASE_DIR/patches/02"
 
 install -m 644 files/regenerate_ssh_host_keys.service "$ROOTFS_DIR/lib/systemd/system/"
