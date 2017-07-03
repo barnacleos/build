@@ -201,7 +201,7 @@ install -m 644 files/interfaces   "$ROOTFS_DIR/etc/network/interfaces"
 echo $HOSTNAME > "$ROOTFS_DIR/etc/hostname"
 chmod 644        "$ROOTFS_DIR/etc/hostname"
 
-echo "127.0.1.1 $HOSTNAME" >>/etc/hosts
+echo "127.0.1.1 $HOSTNAME" >>"$ROOTFS_DIR/etc/hosts"
 
 on_chroot << EOF
 if ! id -u $USERNAME >/dev/null 2>&1; then
