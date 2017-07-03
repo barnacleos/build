@@ -325,9 +325,19 @@ raspberrypi-net-mods \
 dhcpcd5
 EOF
 
+##
+# DHCP client configuration file.
+#
 install -v -d "$ROOTFS_DIR/etc/systemd/system/dhcpcd.service.d"
 
+##
+# Unmount virtual file systems.
+#
 unmount "$ROOTFS_DIR"
+
+##
+# Prepare image file systems.
+#
 unmount_image "$IMG_FILE"
 rm -f "$IMG_FILE"
 
@@ -375,28 +385,46 @@ ROOT_DEV=$(losetup --show -f -o $ROOT_OFFSET --sizelimit $ROOT_LENGTH "$IMG_FILE
 mkdosfs -n boot -F 32 -v $BOOT_DEV > /dev/null
 mkfs.ext4 -O ^huge_file $ROOT_DEV > /dev/null
 
+##
+# Mount image file systems.
+#
 mkdir -p           "$MOUNT_DIR"
 mount -v $ROOT_DEV "$MOUNT_DIR" -t ext4
 
 mkdir -p           "$MOUNT_DIR/boot"
 mount -v $BOOT_DEV "$MOUNT_DIR/boot" -t vfat
 
+##
+# Copy root file system to image file systems.
+#
 rsync -aHAXx --exclude var/cache/apt/archives "$ROOTFS_DIR/" "$MOUNT_DIR/"
 
+##
+# Mount virtual file systems.
+#
 unmount "$MOUNT_DIR"
 mount --bind  /dev     "$MOUNT_DIR/dev"
 mount --bind  /dev/pts "$MOUNT_DIR/dev/pts"
 mount -t proc /proc    "$MOUNT_DIR/proc"
 mount --bind  /sys     "$MOUNT_DIR/sys"
 
+##
+# ?????
+#
 if [ -e "$MOUNT_DIR/etc/ld.so.preload" ]; then
   mv "$MOUNT_DIR/etc/ld.so.preload" "$MOUNT_DIR/etc/ld.so.preload.disabled"
 fi
 
+##
+# ?????
+#
 if [ ! -x "$MOUNT_DIR/usr/bin/qemu-arm-static" ]; then
   cp /usr/bin/qemu-arm-static "$MOUNT_DIR/usr/bin/"
 fi
 
+##
+# DNS resolver configuration file.
+#
 install -m 644 files/resolv.conf "$MOUNT_DIR/etc/"
 
 ##
