@@ -32,25 +32,5 @@ unmount_image() {
 	done
 }
 
-on_chroot() {
-  local proc_fs="$ROOTFS_DIR/proc"
-  local dev_fs="$ROOTFS_DIR/dev"
-  local devpts_fs="$ROOTFS_DIR/dev/pts"
-  local sys_fs="$ROOTFS_DIR/sys"
-
-  mount --bind /dev     "$dev_fs"
-  mount --bind /dev/pts "$devpts_fs"
-  mount -t proc proc    "$proc_fs"
-  mount --bind /sys     "$sys_fs"
-
-  capsh --drop=cap_setfcap "--chroot=$ROOTFS_DIR/" -- "$@"
-
-  umount "$sys_fs"
-  umount "$proc_fs"
-  umount "$devpts_fs"
-  umount "$dev_fs"
-}
-
 export -f unmount
 export -f unmount_image
-export -f on_chroot
