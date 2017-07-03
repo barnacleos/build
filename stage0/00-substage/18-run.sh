@@ -99,16 +99,18 @@ ROOT_DEV=$(losetup --show -f -o $ROOT_OFFSET --sizelimit $ROOT_LENGTH "$IMG_FILE
 mkdosfs -n boot -F 32 -v $BOOT_DEV > /dev/null
 mkfs.ext4 -O ^huge_file $ROOT_DEV > /dev/null
 
-mkdir -p "$ROOTFS_DIR"
-mount -v $ROOT_DEV "$ROOTFS_DIR" -t ext4
+mkdir -p "$MOUNT_DIR"
+mount -v $ROOT_DEV "$MOUNT_DIR" -t ext4
 
-mkdir -p "$BOOTFS_DIR"
-mount -v $BOOT_DEV "$BOOTFS_DIR" -t vfat
+mkdir -p "$MOUNT_DIR/boot"
+mount -v $BOOT_DEV "$MOUNT_DIR/boot" -t vfat
 
-if [ -e ${ROOTFS_DIR}/etc/ld.so.preload ]; then
-	mv ${ROOTFS_DIR}/etc/ld.so.preload ${ROOTFS_DIR}/etc/ld.so.preload.disabled
+rsync -aHAXx --exclude var/cache/apt/archives "$ROOTFS_DIR/" "$MOUNT_DIR/"
+
+if [ -e ${MOUNT_DIR}/etc/ld.so.preload ]; then
+  mv ${MOUNT_DIR}/etc/ld.so.preload ${MOUNT_DIR}/etc/ld.so.preload.disabled
 fi
 
-if [ ! -x ${ROOTFS_DIR}/usr/bin/qemu-arm-static ]; then
-	cp /usr/bin/qemu-arm-static ${ROOTFS_DIR}/usr/bin/
+if [ ! -x ${MOUNT_DIR}/usr/bin/qemu-arm-static ]; then
+  cp /usr/bin/qemu-arm-static ${MOUNT_DIR}/usr/bin/
 fi

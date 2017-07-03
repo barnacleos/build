@@ -6,6 +6,7 @@ export FUNCTIONS_DIR="$BASE_DIR/functions"
 export DEPLOY_DIR="$BASE_DIR/deploy"
 export ROOTFS_DIR="$BASE_DIR/rootfs"
 export BOOTFS_DIR="$ROOTFS_DIR/boot"
+export MOUNT_DIR="$BASE_DIR/mnt"
 
 export IMG_DATE
 export WORK_DIR
