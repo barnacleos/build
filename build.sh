@@ -19,6 +19,16 @@ export QUILT_NO_DIFF_INDEX=1
 export QUILT_NO_DIFF_TIMESTAMPS=1
 export QUILT_REFRESH_ARGS='-p ab'
 
+export ROOTFS_DEV_DIR="$ROOTFS_DIR/dev"
+export ROOTFS_DEVPTS_DIR="$ROOTFS_DIR/dev/pts"
+export ROOTFS_PROC_DIR="$ROOTFS_DIR/proc"
+export ROOTFS_DEV_DIR="$ROOTFS_DIR/sys"
+
+export MOUNT_DEV_DIR="$MOUNT_DIR/dev"
+export MOUNT_DEVPTS_DIR="$MOUNT_DIR/dev/pts"
+export MOUNT_PROC_DIR="$MOUNT_DIR/proc"
+export MOUNT_SYS_DIR="$MOUNT_DIR/sys"
+
 # dependencies_check
 # $@ Dependnecy files to check
 #
@@ -50,41 +60,31 @@ dependencies_check() {
 }
 
 chroot_rootfs() {
-  local proc_fs="$ROOTFS_DIR/proc"
-  local dev_fs="$ROOTFS_DIR/dev"
-  local devpts_fs="$ROOTFS_DIR/dev/pts"
-  local sys_fs="$ROOTFS_DIR/sys"
-
-  mount --bind /dev     "$dev_fs"
-  mount --bind /dev/pts "$devpts_fs"
-  mount -t proc proc    "$proc_fs"
-  mount --bind /sys     "$sys_fs"
+  mount --bind /dev     "$ROOTFS_DEV_DIR"
+  mount --bind /dev/pts "$ROOTFS_DEVPTS_DIR"
+  mount -t proc proc    "$ROOTFS_PROC_DIR"
+  mount --bind /sys     "$ROOTFS_SYS_DIR"
 
   capsh --drop=cap_setfcap "--chroot=$ROOTFS_DIR/" -- "$@"
 
-  umount "$sys_fs"
-  umount "$proc_fs"
-  umount "$devpts_fs"
-  umount "$dev_fs"
+  umount "$ROOTFS_SYS_DIR"
+  umount "$ROOTFS_PROC_DIR"
+  umount "$ROOTFS_DEVPTS_DIR"
+  umount "$ROOTFS_DEV_DIR"
 }
 
 chroot_mount() {
-  local proc_fs="$MOUNT_DIR/proc"
-  local dev_fs="$MOUNT_DIR/dev"
-  local devpts_fs="$MOUNT_DIR/dev/pts"
-  local sys_fs="$MOUNT_DIR/sys"
-
-  mount --bind /dev     "$dev_fs"
-  mount --bind /dev/pts "$devpts_fs"
-  mount -t proc proc    "$proc_fs"
-  mount --bind /sys     "$sys_fs"
+  mount --bind /dev     "$MOUNT_DEV_DIR"
+  mount --bind /dev/pts "$MOUNT_DEVPTS_DIR"
+  mount -t proc proc    "$MOUNT_PROC_DIR"
+  mount --bind /sys     "$MOUNT_SYS_DIR"
 
   capsh --drop=cap_setfcap "--chroot=$MOUNT_DIR/" -- "$@"
 
-  umount "$sys_fs"
-  umount "$proc_fs"
-  umount "$devpts_fs"
-  umount "$dev_fs"
+  umount "$MOUNT_SYS_DIR"
+  umount "$MOUNT_PROC_DIR"
+  umount "$MOUNT_DEVPTS_DIR"
+  umount "$MOUNT_DEV_DIR"
 }
 
 apply_patches() {
