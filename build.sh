@@ -412,7 +412,6 @@ rsync -aHAXx --exclude var/cache/apt/archives "$ROOTFS_DIR/" "$MOUNT_DIR/"
 ##
 # Mount virtual file systems.
 #
-unmount "$MOUNT_DIR"
 mount --bind  /dev     "$MOUNT_DIR/dev"
 mount --bind  /dev/pts "$MOUNT_DIR/dev/pts"
 mount -t proc /proc    "$MOUNT_DIR/proc"
