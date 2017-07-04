@@ -276,7 +276,7 @@ EOF
 
 apply_patches "$BASE_DIR/patches/02"
 
-install -m 644 files/50raspi        "$ROOTFS_DIR/etc/apt/apt.conf.d/"
+install -m 644 files/50raspi "$ROOTFS_DIR/etc/apt/apt.conf.d/"
 
 on_chroot << EOF
 systemctl disable hwclock.sh
