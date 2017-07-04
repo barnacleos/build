@@ -355,7 +355,6 @@ umount "$ROOTFS_DIR/dev"
 ##
 # Prepare image file systems.
 #
-unmount_image "$IMG_FILE"
 rm -f "$IMG_FILE"
 
 BOOT_SIZE=$(du --apparent-size -s "$ROOTFS_DIR/boot" --block-size=1 | cut -f 1)
