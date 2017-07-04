@@ -343,7 +343,7 @@ install -v -d "$ROOTFS_DIR/etc/systemd/system/dhcpcd.service.d"
 ##
 # DNS resolver configuration file.
 #
-install -m 644 files/resolv.conf "$MOUNT_DIR/etc/"
+install -m 644 files/resolv.conf "$ROOTFS_DIR/etc/"
 
 ##
 # Unmount virtual file systems.
