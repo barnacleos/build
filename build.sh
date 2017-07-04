@@ -475,10 +475,6 @@ rm -f "$MOUNT_DIR/var/lib/dpkg/*-old"
 
 rm -f "$MOUNT_DIR/usr/share/icons/*/icon-theme.cache"
 
-rm -f "$MOUNT_DIR/var/lib/dbus/machine-id"
-
-true > "$MOUNT_DIR/etc/machine-id"
-
 ln -nsf /proc/mounts "$MOUNT_DIR/etc/mtab"
 
 for _FILE in $(find "$MOUNT_DIR/var/log/" -type f); do
