@@ -346,6 +346,11 @@ install -v -d "$ROOTFS_DIR/etc/systemd/system/dhcpcd.service.d"
 install -m 644 files/resolv.conf "$ROOTFS_DIR/etc/"
 
 ##
+# Save fake hardware clock time for more realistic time after startup.
+#
+chroot_rootfs fake-hwclock save
+
+##
 # Unmount virtual file systems.
 #
 unmount "$ROOTFS_DIR"
@@ -489,11 +494,6 @@ done
 # Allow services to start.
 #
 rm -f "$MOUNT_DIR/usr/sbin/policy-rc.d"
-
-##
-# Save fake hardware clock time for more realistic time after startup.
-#
-chroot_mount fake-hwclock save
 
 ##
 # Unmount all file systems and minimize image file for distribution.
