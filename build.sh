@@ -241,10 +241,6 @@ rm -f "$ROOTFS_DIR/spindle_install"
 on_chroot << EOF
 debconf-set-selections <<SELEOF
 
-console-setup console-setup/charmap47  select UTF-8
-console-setup console-setup/codeset47  select Guess optimal character set
-console-setup console-setup/fontface47 select Do not change the boot/kernel font
-
 tzdata tzdata/Areas     select Etc
 tzdata tzdata/Zones/Etc select UTC
 
@@ -269,7 +265,6 @@ module-init-tools      \
 ed                     \
 ncdu                   \
 crda                   \
-console-setup          \
 keyboard-configuration \
 debconf-utils          \
 parted                 \
@@ -295,7 +290,6 @@ apply_patches "$BASE_DIR/patches/02"
 install -d                          "$ROOTFS_DIR/etc/systemd/system/rc-local.service.d"
 install -m 644 files/ttyoutput.conf "$ROOTFS_DIR/etc/systemd/system/rc-local.service.d/"
 install -m 644 files/50raspi        "$ROOTFS_DIR/etc/apt/apt.conf.d/"
-install -m 644 files/console-setup  "$ROOTFS_DIR/etc/default/"
 
 on_chroot << EOF
 systemctl disable hwclock.sh
