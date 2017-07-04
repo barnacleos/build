@@ -341,6 +341,11 @@ EOF
 install -v -d "$ROOTFS_DIR/etc/systemd/system/dhcpcd.service.d"
 
 ##
+# DNS resolver configuration file.
+#
+install -m 644 files/resolv.conf "$MOUNT_DIR/etc/"
+
+##
 # Unmount virtual file systems.
 #
 unmount "$ROOTFS_DIR"
@@ -430,11 +435,6 @@ fi
 if [ ! -x "$MOUNT_DIR/usr/bin/qemu-arm-static" ]; then
   cp /usr/bin/qemu-arm-static "$MOUNT_DIR/usr/bin/"
 fi
-
-##
-# DNS resolver configuration file.
-#
-install -m 644 files/resolv.conf "$MOUNT_DIR/etc/"
 
 ##
 # Store file system UUIDs to configuration files.
