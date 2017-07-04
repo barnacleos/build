@@ -188,9 +188,7 @@ EOF
 # Common system configuration.
 #
 on_chroot << EOF
-apt-get install -y     \
-raspberrypi-bootloader \
-ssh
+apt-get install -y raspberrypi-bootloader ssh
 EOF
 
 install -m 644 files/cmdline.txt "$ROOTFS_DIR/boot"
@@ -285,9 +283,7 @@ EOF
 # Wi-Fi firmware and tools.
 #
 on_chroot << EOF
-apt-get install -y \
-wpasupplicant      \
-wireless-tools
+apt-get install -y wpasupplicant wireless-tools
 EOF
 
 ##
