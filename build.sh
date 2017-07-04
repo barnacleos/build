@@ -430,13 +430,6 @@ if [ -e "$MOUNT_DIR/etc/ld.so.preload" ]; then
 fi
 
 ##
-# ?????
-#
-if [ ! -x "$MOUNT_DIR/usr/bin/qemu-arm-static" ]; then
-  cp /usr/bin/qemu-arm-static "$MOUNT_DIR/usr/bin/"
-fi
-
-##
 # Store file system UUIDs to configuration files.
 #
 IMGID="$(fdisk -l "$IMG_FILE" | sed -n 's/Disk identifier: 0x\([^ ]*\)/\1/p')"
@@ -456,7 +449,6 @@ if [ -d "$MOUNT_DIR/home/$USERNAME/.config" ]; then
 fi
 
 rm -f "$MOUNT_DIR/etc/apt/apt.conf.d/51cache"
-rm -f "$MOUNT_DIR/usr/bin/qemu-arm-static"
 
 if [ -e "$MOUNT_DIR/etc/ld.so.preload.disabled" ]; then
   mv "$MOUNT_DIR/etc/ld.so.preload.disabled" "$MOUNT_DIR/etc/ld.so.preload"
