@@ -287,12 +287,7 @@ EOF
 on_chroot << EOF
 apt-get install -y \
 wpasupplicant      \
-wireless-tools     \
-firmware-atheros   \
-firmware-brcm80211 \
-firmware-libertas  \
-firmware-ralink    \
-firmware-realtek
+wireless-tools
 EOF
 
 ##
