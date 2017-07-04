@@ -229,17 +229,8 @@ rm -f "$ROOTFS_DIR/spindle_install"
 
 on_chroot << EOF
 debconf-set-selections <<SELEOF
-
 tzdata tzdata/Areas     select Etc
 tzdata tzdata/Zones/Etc select UTC
-
-keyboard-configuration keyboard-configuration/altgr         select The default for the keyboard layout
-keyboard-configuration keyboard-configuration/model         select Generic 105-key (Intl) PC
-keyboard-configuration keyboard-configuration/xkb-keymap    select gb
-keyboard-configuration keyboard-configuration/compose       select No compose key
-keyboard-configuration keyboard-configuration/ctrl_alt_bksp boolean true
-keyboard-configuration keyboard-configuration/variant       select English (UK)
-
 SELEOF
 EOF
 
@@ -254,7 +245,6 @@ module-init-tools      \
 ed                     \
 ncdu                   \
 crda                   \
-keyboard-configuration \
 debconf-utils          \
 parted                 \
 unzip                  \
