@@ -157,7 +157,6 @@ fi
 ##
 # Mount virtual file systems.
 #
-unmount "$ROOTFS_DIR"
 mount --bind  /dev     "$ROOTFS_DIR/dev"
 mount --bind  /dev/pts "$ROOTFS_DIR/dev/pts"
 mount -t proc /proc    "$ROOTFS_DIR/proc"
