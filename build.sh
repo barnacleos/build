@@ -359,7 +359,7 @@ BOOT_DEV=$(losetup --show -f -o $BOOT_OFFSET --sizelimit $BOOT_LENGTH "$IMG_FILE
 ROOT_DEV=$(losetup --show -f -o $ROOT_OFFSET --sizelimit $ROOT_LENGTH "$IMG_FILE")
 
 mkdosfs -n boot -F 32 -v $BOOT_DEV > /dev/null
-mkfs.ext4 -O ^huge_file $ROOT_DEV > /dev/null
+mkfs.ext4 -O ^huge_file  $ROOT_DEV > /dev/null
 
 ##
 # Mount image file systems.
