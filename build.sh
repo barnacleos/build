@@ -292,8 +292,7 @@ firmware-atheros     \
 firmware-brcm80211   \
 firmware-libertas    \
 firmware-ralink      \
-firmware-realtek     \
-raspberrypi-net-mods
+firmware-realtek
 EOF
 
 ##
