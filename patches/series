@@ -1,3 +1,6 @@
 01-bashrc.diff
 02-persistant-net.diff
 03-no-root-login.diff
+04-useradd.diff
+05-swap.diff
+06-path.diff

@@ -54,21 +54,13 @@ on_chroot() {
 }
 
 apply_patches() {
-  if [ ! -d "$1" ]; then
-    echo "Patches directory does not exist: $1"
-    exit 1
-  fi
-
   pushd "$ROOTFS_DIR" > /dev/null
 
-  export QUILT_PATCHES="$1"
-
-  rm -rf   .pc
-  mkdir -p .pc
+  export QUILT_PATCHES="$BASE_DIR/patches"
 
   quilt upgrade
   RC=0
-  quilt push -a || RC=$?
+  quilt push "$1" || RC=$?
 
   case "$RC" in
   0|2)
@@ -77,8 +69,6 @@ apply_patches() {
     false
     ;;
   esac
-
-  rm -rf .pc
 
   popd > /dev/null
 }
@@ -155,6 +145,12 @@ if [ ! -d "$ROOTFS_DIR" ]; then
 fi
 
 ##
+# Prepare for Quilt patching.
+#
+rm -rf "$ROOTFS_DIR/.pc"
+mkdir  "$ROOTFS_DIR/.pc"
+
+##
 # Mount virtual file systems.
 #
 mount --bind  /dev     "$ROOTFS_DIR/dev"
@@ -194,7 +190,9 @@ EOF
 install -m 644 files/cmdline.txt "$ROOTFS_DIR/boot"
 install -m 644 files/config.txt  "$ROOTFS_DIR/boot"
 
-apply_patches "$BASE_DIR/patches/01"
+apply_patches '01-bashrc.diff'
+apply_patches '02-persistant-net.diff'
+apply_patches '03-no-root-login.diff'
 
 install -m 644 files/fstab      "$ROOTFS_DIR/etc/fstab"
 install -m 644 files/ipv6.conf  "$ROOTFS_DIR/etc/modprobe.d/ipv6.conf"
@@ -262,7 +260,9 @@ apt-listchanges        \
 usb-modeswitch
 EOF
 
-apply_patches "$BASE_DIR/patches/02"
+apply_patches '04-useradd.diff'
+apply_patches '05-swap.diff'
+apply_patches '06-path.diff'
 
 install -m 644 files/50raspi "$ROOTFS_DIR/etc/apt/apt.conf.d/"
 
@@ -306,6 +306,11 @@ umount "$ROOTFS_DIR/sys"
 umount "$ROOTFS_DIR/proc"
 umount "$ROOTFS_DIR/dev/pts"
 umount "$ROOTFS_DIR/dev"
+
+##
+# Cleanup after Quilt patching.
+#
+rm -rf "$ROOTFS_DIR/.pc"
 
 ##
 # Prepare image file systems.
