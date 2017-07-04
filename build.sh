@@ -53,10 +53,6 @@ chroot_rootfs() {
   capsh --drop=cap_setfcap "--chroot=$ROOTFS_DIR/" -- "$@"
 }
 
-chroot_mount() {
-  capsh --drop=cap_setfcap "--chroot=$MOUNT_DIR/" -- "$@"
-}
-
 apply_patches() {
   if [ ! -d "$1" ]; then
     echo "Patches directory does not exist: $1"
