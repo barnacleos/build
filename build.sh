@@ -416,14 +416,6 @@ mount -v $BOOT_DEV "$MOUNT_DIR/boot" -t vfat
 rsync -aHAXx --exclude var/cache/apt/archives "$ROOTFS_DIR/" "$MOUNT_DIR/"
 
 ##
-# Mount virtual file systems.
-#
-mount --bind  /dev     "$MOUNT_DIR/dev"
-mount --bind  /dev/pts "$MOUNT_DIR/dev/pts"
-mount -t proc /proc    "$MOUNT_DIR/proc"
-mount --bind  /sys     "$MOUNT_DIR/sys"
-
-##
 # Store file system UUIDs to configuration files.
 #
 IMGID="$(fdisk -l "$IMG_FILE" | sed -n 's/Disk identifier: 0x\([^ ]*\)/\1/p')"
@@ -472,7 +464,6 @@ rm -f "$MOUNT_DIR/usr/sbin/policy-rc.d"
 # Unmount all file systems and minimize image file for distribution.
 #
 ROOT_DEV=$(mount | grep "$MOUNT_DIR " | cut -f1 -d ' ')
-unmount "$MOUNT_DIR"
 zerofree -v "$ROOT_DEV"
 unmount_image "$IMG_FILE"
 
