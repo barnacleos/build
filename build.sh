@@ -275,10 +275,6 @@ on_chroot << EOF
 adduser $USERNAME sudo
 EOF
 
-on_chroot << EOF
-setupcon --force --save-only -v
-EOF
-
 ##
 # Wi-Fi firmware and tools.
 #
