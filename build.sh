@@ -423,8 +423,8 @@ rm -f "$MOUNT_DIR/usr/sbin/policy-rc.d"
 ##
 # Unmount all file systems and minimize image file for distribution.
 #
-mount "$MOUNT_DIR/boot"
-mount "$MOUNT_DIR"
+umount "$MOUNT_DIR/boot"
+umount "$MOUNT_DIR"
 ROOT_DEV=$(mount | grep "$MOUNT_DIR " | cut -f1 -d ' ')
 zerofree -v "$ROOT_DEV"
 unmount_image "$IMG_FILE"
