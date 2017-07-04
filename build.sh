@@ -49,7 +49,7 @@ dependencies_check() {
   fi
 }
 
-chroot_rootfs() {
+on_chroot() {
   capsh --drop=cap_setfcap "--chroot=$ROOTFS_DIR/" -- "$@"
 }
 
@@ -179,9 +179,9 @@ install -m 755 files/rc.local "$ROOTFS_DIR/etc/rc.local"
 install -m 644 files/sources.list "$ROOTFS_DIR/etc/apt/"
 install -m 644 files/raspi.list   "$ROOTFS_DIR/etc/apt/sources.list.d/"
 
-chroot_rootfs apt-key add - < files/raspberrypi.gpg.key
+on_chroot apt-key add - < files/raspberrypi.gpg.key
 
-chroot_rootfs << EOF
+on_chroot << EOF
 apt-get update
 apt-get dist-upgrade -y
 EOF
@@ -189,14 +189,14 @@ EOF
 ##
 # Common system configuration.
 #
-chroot_rootfs << EOF
+on_chroot << EOF
 debconf-set-selections <<SELEOF
 locales locales/locales_to_be_generated multiselect en_US.UTF-8 UTF-8
 locales locales/default_environment_locale select en_US.UTF-8
 SELEOF
 EOF
 
-chroot_rootfs << EOF
+on_chroot << EOF
 apt-get install -y     \
 locales                \
 raspberrypi-bootloader \
@@ -219,7 +219,7 @@ chmod 644        "$ROOTFS_DIR/etc/hostname"
 
 echo "127.0.1.1 $HOSTNAME" >>"$ROOTFS_DIR/etc/hosts"
 
-chroot_rootfs << EOF
+on_chroot << EOF
 if ! id -u $USERNAME >/dev/null 2>&1; then
   adduser --disabled-password --gecos "" $USERNAME
 fi
@@ -227,19 +227,19 @@ echo "$USERNAME:$PASSWORD" | chpasswd
 passwd -d root
 EOF
 
-chroot_rootfs << EOF
+on_chroot << EOF
 dpkg-divert --add --local /lib/udev/rules.d/75-persistent-net-generator.rules
 EOF
 
 touch "$ROOTFS_DIR/spindle_install"
 
-chroot_rootfs << EOF
+on_chroot << EOF
 apt-get install -y raspi-copies-and-fills
 EOF
 
 rm -f "$ROOTFS_DIR/spindle_install"
 
-chroot_rootfs << EOF
+on_chroot << EOF
 debconf-set-selections <<SELEOF
 
 console-setup console-setup/charmap47  select UTF-8
@@ -259,7 +259,7 @@ keyboard-configuration keyboard-configuration/variant       select English (UK)
 SELEOF
 EOF
 
-chroot_rootfs << EOF
+on_chroot << EOF
 apt-get install -y     \
 libraspberrypi-bin     \
 libraspberrypi0        \
@@ -299,23 +299,23 @@ install -m 644 files/ttyoutput.conf                   "$ROOTFS_DIR/etc/systemd/s
 install -m 644 files/50raspi                          "$ROOTFS_DIR/etc/apt/apt.conf.d/"
 install -m 644 files/console-setup                    "$ROOTFS_DIR/etc/default/"
 
-chroot_rootfs << EOF
+on_chroot << EOF
 systemctl disable hwclock.sh
 systemctl disable rpcbind
 EOF
 
-chroot_rootfs << EOF
+on_chroot << EOF
 adduser $USERNAME sudo
 EOF
 
-chroot_rootfs << EOF
+on_chroot << EOF
 setupcon --force --save-only -v
 EOF
 
 ##
 # Wi-Fi firmware and tools.
 #
-chroot_rootfs << EOF
+on_chroot << EOF
 apt-get install -y   \
 wpasupplicant        \
 wireless-tools       \
@@ -330,7 +330,7 @@ EOF
 ##
 # DHCP client.
 #
-chroot_rootfs << EOF
+on_chroot << EOF
 apt-get install -y dhcpcd5
 EOF
 
@@ -344,7 +344,7 @@ install -m 644 files/resolv.conf "$ROOTFS_DIR/etc/"
 ##
 # Save fake hardware clock time for more realistic time after startup.
 #
-chroot_rootfs fake-hwclock save
+on_chroot fake-hwclock save
 
 ##
 # Unmount virtual file systems.
