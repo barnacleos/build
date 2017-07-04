@@ -347,7 +347,10 @@ on_chroot fake-hwclock save
 ##
 # Unmount virtual file systems.
 #
-unmount "$ROOTFS_DIR"
+umount "$ROOTFS_DIR/sys"
+umount "$ROOTFS_DIR/proc"
+umount "$ROOTFS_DIR/dev/pts"
+umount "$ROOTFS_DIR/dev"
 
 ##
 # Prepare image file systems.
