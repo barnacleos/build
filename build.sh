@@ -176,7 +176,6 @@ install -m 755 files/rc.local "$ROOTFS_DIR/etc/rc.local"
 # Prepare package manager.
 #
 install -m 644 files/sources.list "$ROOTFS_DIR/etc/apt/"
-install -m 644 files/raspi.list   "$ROOTFS_DIR/etc/apt/sources.list.d/"
 
 on_chroot apt-key add - < files/raspberrypi.gpg.key
 
