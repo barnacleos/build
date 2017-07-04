@@ -423,13 +423,6 @@ mount -t proc /proc    "$MOUNT_DIR/proc"
 mount --bind  /sys     "$MOUNT_DIR/sys"
 
 ##
-# ?????
-#
-if [ -e "$MOUNT_DIR/etc/ld.so.preload" ]; then
-  mv "$MOUNT_DIR/etc/ld.so.preload" "$MOUNT_DIR/etc/ld.so.preload.disabled"
-fi
-
-##
 # Store file system UUIDs to configuration files.
 #
 IMGID="$(fdisk -l "$IMG_FILE" | sed -n 's/Disk identifier: 0x\([^ ]*\)/\1/p')"
@@ -449,10 +442,6 @@ if [ -d "$MOUNT_DIR/home/$USERNAME/.config" ]; then
 fi
 
 rm -f "$MOUNT_DIR/etc/apt/apt.conf.d/51cache"
-
-if [ -e "$MOUNT_DIR/etc/ld.so.preload.disabled" ]; then
-  mv "$MOUNT_DIR/etc/ld.so.preload.disabled" "$MOUNT_DIR/etc/ld.so.preload"
-fi
 
 rm -f "$MOUNT_DIR/etc/apt/sources.list~"
 rm -f "$MOUNT_DIR/etc/apt/trusted.gpg~"
