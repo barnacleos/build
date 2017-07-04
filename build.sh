@@ -263,7 +263,6 @@ on_chroot << EOF
 apt-get install -y     \
 libraspberrypi-bin     \
 libraspberrypi0        \
-raspi-config           \
 less                   \
 sudo                   \
 psmisc                 \
