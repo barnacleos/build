@@ -198,8 +198,6 @@ install -m 644 files/config.txt  "$ROOTFS_DIR/boot"
 
 apply_patches "$BASE_DIR/patches/01"
 
-install -d                        "$ROOTFS_DIR/etc/systemd/system/getty@tty1.service.d"
-install -m 644 files/noclear.conf "$ROOTFS_DIR/etc/systemd/system/getty@tty1.service.d/noclear.conf"
 install -m 644 files/fstab        "$ROOTFS_DIR/etc/fstab"
 install -m 644 files/ipv6.conf    "$ROOTFS_DIR/etc/modprobe.d/ipv6.conf"
 install -m 644 files/interfaces   "$ROOTFS_DIR/etc/network/interfaces"
