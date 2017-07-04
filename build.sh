@@ -188,15 +188,7 @@ EOF
 # Common system configuration.
 #
 on_chroot << EOF
-debconf-set-selections <<SELEOF
-locales locales/locales_to_be_generated multiselect en_US.UTF-8 UTF-8
-locales locales/default_environment_locale select en_US.UTF-8
-SELEOF
-EOF
-
-on_chroot << EOF
 apt-get install -y     \
-locales                \
 raspberrypi-bootloader \
 ssh
 EOF
