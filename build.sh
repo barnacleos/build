@@ -285,13 +285,13 @@ EOF
 # Wi-Fi firmware and tools.
 #
 on_chroot << EOF
-apt-get install -y   \
-wpasupplicant        \
-wireless-tools       \
-firmware-atheros     \
-firmware-brcm80211   \
-firmware-libertas    \
-firmware-ralink      \
+apt-get install -y \
+wpasupplicant      \
+wireless-tools     \
+firmware-atheros   \
+firmware-brcm80211 \
+firmware-libertas  \
+firmware-ralink    \
 firmware-realtek
 EOF
 
