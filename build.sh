@@ -281,7 +281,6 @@ apt-get install -y     \
 psmisc                 \
 module-init-tools      \
 ed                     \
-crda                   \
 debconf-utils          \
 parted                 \
 unzip                  \
@@ -310,7 +309,7 @@ apply_patches '06-path.diff'
 # Wi-Fi firmware and tools.
 #
 on_chroot << EOF
-apt-get install -y wpasupplicant wireless-tools
+apt-get install -y wpasupplicant wireless-tools crda
 EOF
 
 ##
