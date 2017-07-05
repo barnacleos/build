@@ -395,28 +395,6 @@ sed -i "s/ROOTDEV/PARTUUID=$ROOT_PARTUUID/" "$MOUNT_DIR/etc/fstab"
 sed -i "s/ROOTDEV/PARTUUID=$ROOT_PARTUUID/" "$MOUNT_DIR/boot/cmdline.txt"
 
 ##
-# Remove logs and backups.
-#
-rm -f "$MOUNT_DIR/etc/apt/apt.conf.d/51cache"
-
-rm -f "$MOUNT_DIR/etc/apt/sources.list~"
-rm -f "$MOUNT_DIR/etc/apt/trusted.gpg~"
-
-rm -f "$MOUNT_DIR/etc/passwd-"
-rm -f "$MOUNT_DIR/etc/group-"
-rm -f "$MOUNT_DIR/etc/shadow-"
-rm -f "$MOUNT_DIR/etc/gshadow-"
-
-rm -f "$MOUNT_DIR/var/cache/debconf/*-old"
-rm -f "$MOUNT_DIR/var/lib/dpkg/*-old"
-
-rm -f "$MOUNT_DIR/usr/share/icons/*/icon-theme.cache"
-
-for _FILE in $(find "$MOUNT_DIR/var/log/" -type f); do
-  true > "$_FILE"
-done
-
-##
 # Allow services to start.
 #
 rm -f "$MOUNT_DIR/usr/sbin/policy-rc.d"
