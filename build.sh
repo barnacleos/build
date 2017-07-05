@@ -309,13 +309,6 @@ apply_patches '06-path.diff'
 install -m 644 files/50raspi "$ROOTFS_DIR/etc/apt/apt.conf.d/"
 
 ##
-# Disable unnecessary files (maybe packages can not be removed).
-#
-on_chroot << EOF
-systemctl disable rpcbind
-EOF
-
-##
 # Wi-Fi firmware and tools.
 #
 on_chroot << EOF
