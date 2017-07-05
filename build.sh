@@ -183,6 +183,14 @@ apt-get dist-upgrade -y
 EOF
 
 ##
+# Prepare Raspberry Pi boot partition.
+#
+mkdir -p "$ROOTFS_DIR/boot/"
+
+install -m 644 files/cmdline.txt "$ROOTFS_DIR/boot/"
+install -m 644 files/config.txt  "$ROOTFS_DIR/boot/"
+
+##
 # This script is executed at the end of each multiuser runlevel.
 #
 install -m 755 files/rc.local "$ROOTFS_DIR/etc/rc.local"
@@ -193,9 +201,6 @@ install -m 755 files/rc.local "$ROOTFS_DIR/etc/rc.local"
 on_chroot << EOF
 apt-get install -y raspberrypi-bootloader ssh
 EOF
-
-install -m 644 files/cmdline.txt "$ROOTFS_DIR/boot"
-install -m 644 files/config.txt  "$ROOTFS_DIR/boot"
 
 apply_patches '01-bashrc.diff'
 apply_patches '02-persistant-net.diff'
