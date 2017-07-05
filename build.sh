@@ -237,10 +237,6 @@ passwd -d root
 EOF
 
 on_chroot << EOF
-apt-get install -y raspi-copies-and-fills
-EOF
-
-on_chroot << EOF
 debconf-set-selections <<SELEOF
 tzdata tzdata/Areas     select Etc
 tzdata tzdata/Zones/Etc select UTC
@@ -274,7 +270,8 @@ dosfstools             \
 dphys-swapfile         \
 raspberrypi-sys-mods   \
 apt-listchanges        \
-usb-modeswitch
+usb-modeswitch         \
+raspi-copies-and-fills
 EOF
 
 apply_patches '04-useradd.diff'
