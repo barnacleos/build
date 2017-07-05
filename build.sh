@@ -151,6 +151,11 @@ rm -rf "$ROOTFS_DIR/.pc"
 mkdir  "$ROOTFS_DIR/.pc"
 
 ##
+# Prevent services to start after package installation in chroot environment.
+#
+install -m 744 files/policy-rc.d "$ROOTFS_DIR/usr/sbin/policy-rc.d"
+
+##
 # Mount virtual file systems.
 #
 mount --bind  /dev     "$ROOTFS_DIR/dev"
@@ -162,11 +167,6 @@ mount --bind  /sys     "$ROOTFS_DIR/sys"
 # Add /etc/mtab
 #
 ln -nsf /proc/mounts "$ROOTFS_DIR/etc/mtab"
-
-##
-# Prevent services to start after package installation in chroot environment.
-#
-install -m 744 files/policy-rc.d "$ROOTFS_DIR/usr/sbin/policy-rc.d"
 
 ##
 # This script is executed at the end of each multiuser runlevel.
@@ -307,11 +307,6 @@ install -m 644 files/resolv.conf "$ROOTFS_DIR/etc/"
 on_chroot fake-hwclock save
 
 ##
-# Allow services to start.
-#
-rm -f "$ROOTFS_DIR/usr/sbin/policy-rc.d"
-
-##
 # Unmount virtual file systems.
 #
 umount "$ROOTFS_DIR/sys"
@@ -323,6 +318,11 @@ umount "$ROOTFS_DIR/dev"
 # Cleanup after Quilt patching.
 #
 rm -rf "$ROOTFS_DIR/.pc"
+
+##
+# Allow services to start.
+#
+rm -f "$ROOTFS_DIR/usr/sbin/policy-rc.d"
 
 ##
 # Prepare image file systems.
