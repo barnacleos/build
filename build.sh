@@ -159,6 +159,11 @@ mount -t proc /proc    "$ROOTFS_DIR/proc"
 mount --bind  /sys     "$ROOTFS_DIR/sys"
 
 ##
+# Add /etc/mtab
+#
+ln -nsf /proc/mounts "$ROOTFS_DIR/etc/mtab"
+
+##
 # Prevent services to start after package installation in chroot environment.
 #
 install -m 744 files/policy-rc.d "$ROOTFS_DIR/usr/sbin/policy-rc.d"
@@ -410,8 +415,6 @@ rm -f "$MOUNT_DIR/var/cache/debconf/*-old"
 rm -f "$MOUNT_DIR/var/lib/dpkg/*-old"
 
 rm -f "$MOUNT_DIR/usr/share/icons/*/icon-theme.cache"
-
-ln -nsf /proc/mounts "$MOUNT_DIR/etc/mtab"
 
 for _FILE in $(find "$MOUNT_DIR/var/log/" -type f); do
   true > "$_FILE"
