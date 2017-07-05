@@ -395,12 +395,8 @@ sed -i "s/ROOTDEV/PARTUUID=$ROOT_PARTUUID/" "$MOUNT_DIR/etc/fstab"
 sed -i "s/ROOTDEV/PARTUUID=$ROOT_PARTUUID/" "$MOUNT_DIR/boot/cmdline.txt"
 
 ##
-# Remove logs and backups, protect files.
+# Remove logs and backups.
 #
-if [ -d "$MOUNT_DIR/home/$USERNAME/.config" ]; then
-  chmod 700 "$MOUNT_DIR/home/$USERNAME/.config"
-fi
-
 rm -f "$MOUNT_DIR/etc/apt/apt.conf.d/51cache"
 
 rm -f "$MOUNT_DIR/etc/apt/sources.list~"
