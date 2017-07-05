@@ -290,7 +290,6 @@ unzip                  \
 bash-completion        \
 ca-certificates        \
 curl                   \
-ntp                    \
 usbutils               \
 libfreetype6-dev       \
 dosfstools             \
@@ -330,7 +329,7 @@ EOF
 # Save fake hardware clock time for more realistic time after startup.
 #
 on_chroot << EOF
-apt-get install -y fake-hwclock
+apt-get install -y fake-hwclock ntp
 systemctl disable hwclock.sh
 fake-hwclock save
 EOF
