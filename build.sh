@@ -293,7 +293,6 @@ curl                   \
 usbutils               \
 libfreetype6-dev       \
 dosfstools             \
-dphys-swapfile         \
 usb-modeswitch
 EOF
 
