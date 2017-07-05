@@ -242,8 +242,8 @@ on_chroot << EOF
 apt-get install -y sudo
 EOF
 
-apply_patches '03-bashrc.diff'
-apply_patches '04-useradd.diff'
+apply_patches '02-bashrc.diff'
+apply_patches '03-useradd.diff'
 
 on_chroot << EOF
 if ! id -u $USERNAME >/dev/null 2>&1; then
@@ -291,12 +291,12 @@ on_chroot << EOF
 apt-get install -y dphys-swapfile
 EOF
 
-apply_patches '05-swap.diff'
+apply_patches '04-swap.diff'
 
 ##
 # Configure environment.
 #
-apply_patches '06-path.diff'
+apply_patches '05-path.diff'
 
 ##
 # Wi-Fi firmware and tools.
