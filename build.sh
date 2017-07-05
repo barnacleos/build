@@ -208,10 +208,18 @@ EOF
 apply_patches '01-no-root-login.diff'
 
 ##
-# Common system configuration.
+# Install typical Raspberry Pi packages which role is unknown.
+# Maybe some can be safely removed.
 #
 on_chroot << EOF
-apt-get install -y raspberrypi-bootloader
+apt-get install -y     \
+raspberrypi-bootloader \
+libraspberrypi-bin     \
+libraspberrypi0        \
+libraspberrypi-dev     \
+libraspberrypi-doc     \
+raspberrypi-sys-mods   \
+raspi-copies-and-fills
 EOF
 
 ##
@@ -264,8 +272,6 @@ EOF
 #
 on_chroot << EOF
 apt-get install -y     \
-libraspberrypi-bin     \
-libraspberrypi0        \
 less                   \
 sudo                   \
 psmisc                 \
@@ -281,14 +287,10 @@ ca-certificates        \
 curl                   \
 ntp                    \
 usbutils               \
-libraspberrypi-dev     \
-libraspberrypi-doc     \
 libfreetype6-dev       \
 dosfstools             \
 dphys-swapfile         \
-raspberrypi-sys-mods   \
-usb-modeswitch         \
-raspi-copies-and-fills
+usb-modeswitch
 EOF
 
 ##
