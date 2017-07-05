@@ -223,8 +223,9 @@ on_chroot << EOF
 dpkg-divert --add --local /lib/udev/rules.d/75-persistent-net-generator.rules
 EOF
 
-install -m 644 files/ipv6.conf  "$ROOTFS_DIR/etc/modprobe.d/ipv6.conf"
-install -m 644 files/interfaces "$ROOTFS_DIR/etc/network/interfaces"
+install -m 644 files/resolv.conf "$ROOTFS_DIR/etc/"
+install -m 644 files/interfaces  "$ROOTFS_DIR/etc/network/interfaces"
+install -m 644 files/ipv6.conf   "$ROOTFS_DIR/etc/modprobe.d/ipv6.conf"
 
 echo $HOSTNAME > "$ROOTFS_DIR/etc/hostname"
 chmod 644        "$ROOTFS_DIR/etc/hostname"
@@ -318,11 +319,6 @@ EOF
 on_chroot << EOF
 apt-get install -y dhcpcd5
 EOF
-
-##
-# DNS resolver configuration file.
-#
-install -m 644 files/resolv.conf "$ROOTFS_DIR/etc/"
 
 ##
 # Save fake hardware clock time for more realistic time after startup.
