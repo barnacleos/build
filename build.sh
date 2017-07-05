@@ -287,7 +287,15 @@ usb-modeswitch         \
 raspi-copies-and-fills
 EOF
 
+##
+# Enable swap.
+#
+on_chroot << EOF
+apt-get install -y dphys-swapfile
+EOF
+
 apply_patches '05-swap.diff'
+
 apply_patches '06-path.diff'
 
 install -m 644 files/50raspi "$ROOTFS_DIR/etc/apt/apt.conf.d/"
