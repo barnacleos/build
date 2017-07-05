@@ -212,9 +212,7 @@ on_chroot << EOF
 apt-get install -y raspberrypi-bootloader
 EOF
 
-apply_patches '02-bashrc.diff'
-
-apply_patches '03-persistant-net.diff'
+apply_patches '02-persistant-net.diff'
 
 on_chroot << EOF
 dpkg-divert --add --local /lib/udev/rules.d/75-persistent-net-generator.rules
@@ -227,6 +225,8 @@ echo $HOSTNAME > "$ROOTFS_DIR/etc/hostname"
 chmod 644        "$ROOTFS_DIR/etc/hostname"
 
 echo "127.0.1.1 $HOSTNAME" >>"$ROOTFS_DIR/etc/hosts"
+
+apply_patches '03-bashrc.diff'
 
 on_chroot << EOF
 if ! id -u $USERNAME >/dev/null 2>&1; then
