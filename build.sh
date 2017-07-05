@@ -295,22 +295,6 @@ EOF
 install -m 644 files/resolv.conf "$ROOTFS_DIR/etc/"
 
 ##
-# Temporary install packages which has beed removed earlier to build
-# driver for my Wi-Fi USD adapter. I don't know what caused the build failure.
-#
-on_chroot << EOF
-apt-get install -y   \
-firmware-atheros     \
-firmware-brcm80211   \
-firmware-libertas    \
-firmware-ralink      \
-firmware-realtek     \
-raspberrypi-net-mods \
-raspi-config         \
-avahi-daemon
-EOF
-
-##
 # Save fake hardware clock time for more realistic time after startup.
 #
 on_chroot fake-hwclock save
