@@ -212,6 +212,9 @@ on_chroot << EOF
 apt-get install -y raspberrypi-bootloader
 EOF
 
+##
+# Configure network.
+#
 apply_patches '02-persistant-net.diff'
 
 on_chroot << EOF
@@ -226,6 +229,9 @@ chmod 644        "$ROOTFS_DIR/etc/hostname"
 
 echo "127.0.1.1 $HOSTNAME" >>"$ROOTFS_DIR/etc/hosts"
 
+##
+# Add user.
+#
 apply_patches '03-bashrc.diff'
 apply_patches '04-useradd.diff'
 
@@ -237,6 +243,9 @@ echo "$USERNAME:$PASSWORD" | chpasswd
 passwd -d root
 EOF
 
+##
+# Configure time zone.
+#
 on_chroot << EOF
 debconf-set-selections <<SELEOF
 tzdata tzdata/Areas     select Etc
@@ -244,6 +253,9 @@ tzdata tzdata/Zones/Etc select UTC
 SELEOF
 EOF
 
+##
+# Install additional packages which maybe can be removed safely.
+#
 on_chroot << EOF
 apt-get install -y     \
 libraspberrypi-bin     \
