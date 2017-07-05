@@ -307,6 +307,11 @@ install -m 644 files/resolv.conf "$ROOTFS_DIR/etc/"
 on_chroot fake-hwclock save
 
 ##
+# Allow services to start.
+#
+rm -f "$ROOTFS_DIR/usr/sbin/policy-rc.d"
+
+##
 # Unmount virtual file systems.
 #
 umount "$ROOTFS_DIR/sys"
@@ -393,11 +398,6 @@ ROOT_PARTUUID="$IMGID-02"
 sed -i "s/BOOTDEV/PARTUUID=$BOOT_PARTUUID/" "$MOUNT_DIR/etc/fstab"
 sed -i "s/ROOTDEV/PARTUUID=$ROOT_PARTUUID/" "$MOUNT_DIR/etc/fstab"
 sed -i "s/ROOTDEV/PARTUUID=$ROOT_PARTUUID/" "$MOUNT_DIR/boot/cmdline.txt"
-
-##
-# Allow services to start.
-#
-rm -f "$MOUNT_DIR/usr/sbin/policy-rc.d"
 
 ##
 # Unmount all file systems and minimize image file for distribution.
