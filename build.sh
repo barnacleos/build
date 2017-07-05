@@ -175,6 +175,8 @@ install -m 644 files/sources.list "$ROOTFS_DIR/etc/apt/"
 
 on_chroot apt-key add - < files/raspberrypi.gpg.key
 
+install -m 644 files/raspberrypi-kernel-and-bootloader "$ROOTFS_DIR/etc/apt/preferences.d/"
+
 on_chroot << EOF
 apt-get update
 apt-get dist-upgrade -y
