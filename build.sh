@@ -196,15 +196,23 @@ install -m 644 files/config.txt  "$ROOTFS_DIR/boot/"
 install -m 755 files/rc.local "$ROOTFS_DIR/etc/rc.local"
 
 ##
+# Install SSH server
+#
+on_chroot << EOF
+apt-get install -y ssh
+EOF
+
+apply_patches '01-no-root-login.diff'
+
+##
 # Common system configuration.
 #
 on_chroot << EOF
-apt-get install -y raspberrypi-bootloader ssh
+apt-get install -y raspberrypi-bootloader
 EOF
 
-apply_patches '01-bashrc.diff'
-apply_patches '02-persistant-net.diff'
-apply_patches '03-no-root-login.diff'
+apply_patches '02-bashrc.diff'
+apply_patches '03-persistant-net.diff'
 
 install -m 644 files/fstab      "$ROOTFS_DIR/etc/fstab"
 install -m 644 files/ipv6.conf  "$ROOTFS_DIR/etc/modprobe.d/ipv6.conf"
