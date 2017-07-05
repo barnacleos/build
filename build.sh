@@ -227,6 +227,7 @@ chmod 644        "$ROOTFS_DIR/etc/hostname"
 echo "127.0.1.1 $HOSTNAME" >>"$ROOTFS_DIR/etc/hosts"
 
 apply_patches '03-bashrc.diff'
+apply_patches '04-useradd.diff'
 
 on_chroot << EOF
 if ! id -u $USERNAME >/dev/null 2>&1; then
@@ -274,7 +275,6 @@ usb-modeswitch         \
 raspi-copies-and-fills
 EOF
 
-apply_patches '04-useradd.diff'
 apply_patches '05-swap.diff'
 apply_patches '06-path.diff'
 
