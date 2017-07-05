@@ -276,7 +276,6 @@ unzip                  \
 bash-completion        \
 ca-certificates        \
 curl                   \
-fake-hwclock           \
 ntp                    \
 usbutils               \
 libraspberrypi-dev     \
@@ -313,7 +312,6 @@ install -m 644 files/50raspi "$ROOTFS_DIR/etc/apt/apt.conf.d/"
 # Disable unnecessary files (maybe packages can not be removed).
 #
 on_chroot << EOF
-systemctl disable hwclock.sh
 systemctl disable rpcbind
 EOF
 
@@ -339,7 +337,11 @@ install -m 644 files/resolv.conf "$ROOTFS_DIR/etc/"
 ##
 # Save fake hardware clock time for more realistic time after startup.
 #
-on_chroot fake-hwclock save
+on_chroot << EOF
+apt-get install -y fake-hwclock
+systemctl disable hwclock.sh
+fake-hwclock save
+EOF
 
 ##
 # Unmount virtual file systems.
