@@ -2,26 +2,6 @@ Package: raspberrypi-kernel
 Pin: version 1.20170515-1
 Pin-Priority: 1100
 
-Package: raspberrypi-kernel-headers
-Pin: version 1.20170515-1
-Pin-Priority: 1100
-
 Package: raspberrypi-bootloader
-Pin: version 1.20170515-1
-Pin-Priority: 1100
-
-Package: libraspberrypi0
-Pin: version 1.20170515-1
-Pin-Priority: 1100
-
-Package: libraspberrypi-bin
-Pin: version 1.20170515-1
-Pin-Priority: 1100
-
-Package: libraspberrypi-dev
-Pin: version 1.20170515-1
-Pin-Priority: 1100
-
-Package: libraspberrypi-doc
 Pin: version 1.20170515-1
 Pin-Priority: 1100
