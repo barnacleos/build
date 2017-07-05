@@ -296,10 +296,19 @@ EOF
 
 apply_patches '05-swap.diff'
 
+##
+# Configure environment.
+#
 apply_patches '06-path.diff'
 
+##
+# Configure APT.
+#
 install -m 644 files/50raspi "$ROOTFS_DIR/etc/apt/apt.conf.d/"
 
+##
+# Disable unnecessary files (maybe packages can not be removed).
+#
 on_chroot << EOF
 systemctl disable hwclock.sh
 systemctl disable rpcbind
