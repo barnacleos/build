@@ -213,7 +213,6 @@ apply_patches '01-no-root-login.diff'
 #
 on_chroot << EOF
 apt-get install -y         \
-raspberrypi-kernel         \
 raspberrypi-bootloader     \
 libraspberrypi-bin         \
 libraspberrypi0            \
