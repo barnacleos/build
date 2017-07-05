@@ -252,6 +252,8 @@ debconf-set-selections <<SELEOF
 tzdata tzdata/Areas     select Etc
 tzdata tzdata/Zones/Etc select UTC
 SELEOF
+
+apt-get install -y tzdata
 EOF
 
 ##
