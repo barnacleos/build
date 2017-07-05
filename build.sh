@@ -169,11 +169,6 @@ mount --bind  /sys     "$ROOTFS_DIR/sys"
 ln -nsf /proc/mounts "$ROOTFS_DIR/etc/mtab"
 
 ##
-# This script is executed at the end of each multiuser runlevel.
-#
-install -m 755 files/rc.local "$ROOTFS_DIR/etc/rc.local"
-
-##
 # Prepare package manager.
 #
 install -m 644 files/sources.list "$ROOTFS_DIR/etc/apt/"
@@ -186,6 +181,11 @@ on_chroot << EOF
 apt-get update
 apt-get dist-upgrade -y
 EOF
+
+##
+# This script is executed at the end of each multiuser runlevel.
+#
+install -m 755 files/rc.local "$ROOTFS_DIR/etc/rc.local"
 
 ##
 # Common system configuration.
