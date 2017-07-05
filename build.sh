@@ -164,9 +164,10 @@ mount -t proc /proc    "$ROOTFS_DIR/proc"
 mount --bind  /sys     "$ROOTFS_DIR/sys"
 
 ##
-# Add /etc/mtab
+# Add /etc/fstab and /etc/mtab
 #
-ln -nsf /proc/mounts "$ROOTFS_DIR/etc/mtab"
+install -m 644 files/fstab "$ROOTFS_DIR/etc/fstab"
+ln -nsf /proc/mounts       "$ROOTFS_DIR/etc/mtab"
 
 ##
 # Prepare package manager.
@@ -214,7 +215,6 @@ EOF
 apply_patches '02-bashrc.diff'
 apply_patches '03-persistant-net.diff'
 
-install -m 644 files/fstab      "$ROOTFS_DIR/etc/fstab"
 install -m 644 files/ipv6.conf  "$ROOTFS_DIR/etc/modprobe.d/ipv6.conf"
 install -m 644 files/interfaces "$ROOTFS_DIR/etc/network/interfaces"
 
