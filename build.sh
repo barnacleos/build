@@ -213,7 +213,12 @@ apt-get install -y raspberrypi-bootloader
 EOF
 
 apply_patches '02-bashrc.diff'
+
 apply_patches '03-persistant-net.diff'
+
+on_chroot << EOF
+dpkg-divert --add --local /lib/udev/rules.d/75-persistent-net-generator.rules
+EOF
 
 install -m 644 files/ipv6.conf  "$ROOTFS_DIR/etc/modprobe.d/ipv6.conf"
 install -m 644 files/interfaces "$ROOTFS_DIR/etc/network/interfaces"
@@ -229,10 +234,6 @@ if ! id -u $USERNAME >/dev/null 2>&1; then
 fi
 echo "$USERNAME:$PASSWORD" | chpasswd
 passwd -d root
-EOF
-
-on_chroot << EOF
-dpkg-divert --add --local /lib/udev/rules.d/75-persistent-net-generator.rules
 EOF
 
 touch "$ROOTFS_DIR/spindle_install"
