@@ -278,18 +278,14 @@ EOF
 #
 on_chroot << EOF
 apt-get install -y     \
-less                   \
 psmisc                 \
 module-init-tools      \
 ed                     \
-ncdu                   \
 crda                   \
 debconf-utils          \
 parted                 \
 unzip                  \
-bash-completion        \
 ca-certificates        \
-curl                   \
 usbutils               \
 libfreetype6-dev       \
 dosfstools             \
