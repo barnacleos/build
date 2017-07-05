@@ -216,10 +216,6 @@ apt-get install -y         \
 raspberrypi-kernel         \
 raspberrypi-kernel-headers \
 raspberrypi-bootloader     \
-libraspberrypi-bin         \
-libraspberrypi0            \
-libraspberrypi-dev         \
-libraspberrypi-doc         \
 raspberrypi-sys-mods       \
 raspi-copies-and-fills
 EOF
