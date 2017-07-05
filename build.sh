@@ -287,7 +287,6 @@ libfreetype6-dev       \
 dosfstools             \
 dphys-swapfile         \
 raspberrypi-sys-mods   \
-apt-listchanges        \
 usb-modeswitch         \
 raspi-copies-and-fills
 EOF
