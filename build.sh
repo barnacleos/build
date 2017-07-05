@@ -245,6 +245,10 @@ echo "127.0.1.1 $HOSTNAME" >>"$ROOTFS_DIR/etc/hosts"
 ##
 # Add user.
 #
+on_chroot << EOF
+apt-get install -y sudo
+EOF
+
 apply_patches '03-bashrc.diff'
 apply_patches '04-useradd.diff'
 
@@ -275,7 +279,6 @@ EOF
 on_chroot << EOF
 apt-get install -y     \
 less                   \
-sudo                   \
 psmisc                 \
 module-init-tools      \
 ed                     \
