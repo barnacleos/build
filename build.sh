@@ -236,13 +236,9 @@ echo "$USERNAME:$PASSWORD" | chpasswd
 passwd -d root
 EOF
 
-touch "$ROOTFS_DIR/spindle_install"
-
 on_chroot << EOF
 apt-get install -y raspi-copies-and-fills
 EOF
-
-rm -f "$ROOTFS_DIR/spindle_install"
 
 on_chroot << EOF
 debconf-set-selections <<SELEOF
