@@ -241,6 +241,7 @@ if ! id -u $USERNAME >/dev/null 2>&1; then
 fi
 echo "$USERNAME:$PASSWORD" | chpasswd
 passwd -d root
+adduser $USERNAME sudo
 EOF
 
 ##
@@ -312,10 +313,6 @@ install -m 644 files/50raspi "$ROOTFS_DIR/etc/apt/apt.conf.d/"
 on_chroot << EOF
 systemctl disable hwclock.sh
 systemctl disable rpcbind
-EOF
-
-on_chroot << EOF
-adduser $USERNAME sudo
 EOF
 
 ##
