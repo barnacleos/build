@@ -140,14 +140,14 @@ if [ ! -d "$ROOTFS_DIR" ]; then
     --keyring ./files/raspberrypi.gpg            \
     jessie                                       \
     $ROOTFS_DIR                                  \
-    http://mirrordirector.raspbian.org/raspbian/" || rmdir "$ROOTFS_DIR/debootstrap"
+    http://mirrordirector.raspbian.org/raspbian/" || rmdir "$ROOTFS_DIR/debootstrap/"
 fi
 
 ##
 # Prepare for Quilt patching.
 #
-rm -rf "$ROOTFS_DIR/.pc"
-mkdir  "$ROOTFS_DIR/.pc"
+rm -rf "$ROOTFS_DIR/.pc/"
+mkdir  "$ROOTFS_DIR/.pc/"
 
 ##
 # Prevent services to start after package installation in chroot environment.
@@ -349,7 +349,7 @@ umount "$ROOTFS_DIR/dev"
 ##
 # Cleanup after Quilt patching.
 #
-rm -rf "$ROOTFS_DIR/.pc"
+rm -rf "$ROOTFS_DIR/.pc/"
 
 ##
 # Allow services to start.
@@ -411,8 +411,8 @@ mkfs.ext4 -O ^huge_file  $ROOT_DEV > /dev/null
 mkdir -p           "$MOUNT_DIR"
 mount -v $ROOT_DEV "$MOUNT_DIR" -t ext4
 
-mkdir -p           "$MOUNT_DIR/boot"
-mount -v $BOOT_DEV "$MOUNT_DIR/boot" -t vfat
+mkdir -p           "$MOUNT_DIR/boot/"
+mount -v $BOOT_DEV "$MOUNT_DIR/boot/" -t vfat
 
 ##
 # Copy root file system to image file systems.
@@ -435,7 +435,7 @@ sed -i "s/ROOTDEV/PARTUUID=$ROOT_PARTUUID/" "$MOUNT_DIR/boot/cmdline.txt"
 # Unmount all file systems and minimize image file for distribution.
 #
 ROOT_DEV=$(mount | grep "$MOUNT_DIR " | cut -f1 -d ' ')
-umount "$MOUNT_DIR/boot"
+umount "$MOUNT_DIR/boot/"
 umount "$MOUNT_DIR"
 zerofree -v "$ROOT_DEV"
 unmount_image "$IMG_FILE"
