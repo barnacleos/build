@@ -1,4 +1,5 @@
 01-no-root-login.diff
+02-hosts.diff
 02-bashrc.diff
 03-useradd.diff
 04-swap.diff

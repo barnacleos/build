@@ -1,7 +1,6 @@
 #!/bin/bash -e
 
 export IMG_NAME='BarnacleOS'
-export HOSTNAME='barnacleos'
 export USERNAME='user'
 export PASSWORD='password'
 
@@ -259,10 +258,9 @@ EOF
 ##
 # Configure network.
 #
-echo $HOSTNAME > "$ROOTFS_DIR/etc/hostname"
-chmod 644        "$ROOTFS_DIR/etc/hostname"
+apply_file 644 '/etc/hostname'
 
-echo "127.0.1.1 $HOSTNAME" >>"$ROOTFS_DIR/etc/hosts"
+apply_patch '02-hosts.diff'
 
 apply_file 644 '/etc/network/interfaces'
 apply_file 644 '/etc/network/interfaces.d/eth0'
