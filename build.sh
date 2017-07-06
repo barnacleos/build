@@ -299,13 +299,6 @@ apply_patch '04-swap.diff'
 apply_patch '05-path.diff'
 
 ##
-# Wi-Fi firmware and tools.
-#
-on_chroot << EOF
-apt-get install -y wpasupplicant wireless-tools crda
-EOF
-
-##
 # DHCP client.
 #
 on_chroot << EOF
