@@ -1,6 +1,6 @@
-auto eth0
-allow-hotplug eth0
-iface eth0 inet static
+auto eth1
+allow-hotplug eth1
+iface eth1 inet static
   netmask   255.255.255.0
   network   192.168.82.0
   gateway   192.168.82.1
