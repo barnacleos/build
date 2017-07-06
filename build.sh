@@ -8,6 +8,7 @@ export BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 export DEPLOY_DIR="$BASE_DIR/deploy"
 export ROOTFS_DIR="$BASE_DIR/rootfs"
 export MOUNT_DIR="$BASE_DIR/mnt"
+export KEYS_DIR="$BASE_DIR/keys"
 export FILES_DIR="$BASE_DIR/files"
 
 export IMG_DATE="$(date +%Y-%m-%d)"
@@ -159,7 +160,7 @@ if [ ! -d "$ROOTFS_DIR" ]; then
   capsh --drop=cap_setfcap -- -c "$BOOTSTRAP_CMD \
     --components=main,contrib,non-free           \
     --arch armhf                                 \
-    --keyring ./keys/raspberrypi.gpg             \
+    --keyring $KEYS_DIR/raspberrypi.gpg          \
     jessie                                       \
     $ROOTFS_DIR                                  \
     http://mirrordirector.raspbian.org/raspbian/" || rmdir "$ROOTFS_DIR/debootstrap/"
@@ -195,7 +196,7 @@ ln -nsf /proc/mounts "$ROOTFS_DIR/etc/mtab"
 #
 apply_file 644 '/etc/apt/sources.list'
 
-on_chroot apt-key add - < keys/raspberrypi.gpg.asc
+on_chroot apt-key add - < "$KEYS_DIR/raspberrypi.gpg.asc"
 
 apply_file 644 '/etc/apt/preferences.d/raspberrypi-kernel-and-bootloader'
 
