@@ -25,7 +25,8 @@ file is `<tool>[:<debian-package>]`.
 Network configuration
 ---------------------
 
-* Hostname:  `barnacleos.local`
+* Hostname:  `barnacleos`
+* FQDN:      `barnacleos.local`
 * Subnet:    `192.168.82.0/24` (netmask `255.255.255.0`)
 * Gateway:   `192.168.82.1`
 * Broadcast: `192.168.82.255`
