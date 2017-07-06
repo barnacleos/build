@@ -333,6 +333,11 @@ install -d                                          "$ROOTFS_DIR/etc/dhcp/dhcpd.
 install -m 644 files/dhcpd.conf.d/192.168.82.0.conf "$ROOTFS_DIR/etc/dhcp/dhcpd.conf.d/"
 
 ##
+# IP forwarding.
+#
+apply_patch '07-ipv4-forwarding.diff'
+
+##
 # Unmount virtual file systems.
 #
 umount "$ROOTFS_DIR/sys"
