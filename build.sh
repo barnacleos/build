@@ -330,8 +330,8 @@ EOF
 
 apply_patch '06-dhcp-server.diff'
 
-install -d                                          "$ROOTFS_DIR/etc/dhcp/dhcpd.conf.d/"
-install -m 644 files/dhcpd.conf.d/192.168.82.0.conf "$ROOTFS_DIR/etc/dhcp/dhcpd.conf.d/192.168.82.0.conf"
+install -d                                                   "$ROOTFS_DIR/etc/dhcp/dhcpd.conf.d/"
+install -m 644 files/etc/dhcp/dhcpd.conf.d/192.168.82.0.conf "$ROOTFS_DIR/etc/dhcp/dhcpd.conf.d/192.168.82.0.conf"
 
 ##
 # IP forwarding.
