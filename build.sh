@@ -54,7 +54,7 @@ on_chroot() {
   capsh --drop=cap_setfcap "--chroot=$ROOTFS_DIR/" -- "$@"
 }
 
-apply_patches() {
+apply_patch() {
   pushd "$ROOTFS_DIR" > /dev/null
 
   quilt upgrade
@@ -209,7 +209,7 @@ on_chroot << EOF
 apt-get install -y ssh
 EOF
 
-apply_patches '01-no-root-login.diff'
+apply_patch '01-no-root-login.diff'
 
 ##
 # ?????
@@ -237,8 +237,8 @@ on_chroot << EOF
 apt-get install -y sudo
 EOF
 
-apply_patches '02-bashrc.diff'
-apply_patches '03-useradd.diff'
+apply_patch '02-bashrc.diff'
+apply_patch '03-useradd.diff'
 
 on_chroot << EOF
 if ! id -u $USERNAME >/dev/null 2>&1; then
@@ -276,12 +276,12 @@ on_chroot << EOF
 apt-get install -y dphys-swapfile
 EOF
 
-apply_patches '04-swap.diff'
+apply_patch '04-swap.diff'
 
 ##
 # Configure environment.
 #
-apply_patches '05-path.diff'
+apply_patch '05-path.diff'
 
 ##
 # Wi-Fi firmware and tools.
