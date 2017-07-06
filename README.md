@@ -31,3 +31,17 @@ Network configuration
 * Gateway:   `192.168.82.1`
 * Broadcast: `192.168.82.255`
 * IP range:  `192.168.82.2` to `192.168.82.254`
+
+
+
+System configuration
+--------------------
+
+* Root login via SSH is disabled
+
+* User `user` has access via SSH with password `password`
+
+* SSH host keys are generated at first startup,
+  so fingerprint is different for each installation of the same image
+
+* User has passwordless sudo
