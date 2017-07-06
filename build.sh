@@ -299,13 +299,6 @@ apply_patch '04-swap.diff'
 apply_patch '05-path.diff'
 
 ##
-# DHCP client.
-#
-on_chroot << EOF
-apt-get install -y dhcpcd5
-EOF
-
-##
 # Make user-friendly environment.
 #
 on_chroot << EOF
