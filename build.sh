@@ -194,8 +194,8 @@ EOF
 ##
 # Prepare Raspberry Pi boot partition.
 #
-install -m 644 files/cmdline.txt "$ROOTFS_DIR/boot/cmdline.txt"
-install -m 644 files/config.txt  "$ROOTFS_DIR/boot/config.txt"
+install -m 644 files/boot/cmdline.txt "$ROOTFS_DIR/boot/cmdline.txt"
+install -m 644 files/boot/config.txt  "$ROOTFS_DIR/boot/config.txt"
 
 ##
 # This script is executed at the end of each multiuser runlevel.
