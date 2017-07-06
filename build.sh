@@ -200,7 +200,7 @@ install -m 644 files/boot/config.txt  "$ROOTFS_DIR/boot/config.txt"
 ##
 # This script is executed at the end of each multiuser runlevel.
 #
-install -m 755 files/rc.local "$ROOTFS_DIR/etc/rc.local"
+install -m 755 files/etc/rc.local "$ROOTFS_DIR/etc/rc.local"
 
 ##
 # Install SSH server
