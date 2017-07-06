@@ -186,10 +186,15 @@ apt-get dist-upgrade -y
 EOF
 
 ##
+# Install kernel and bootloader.
+#
+on_chroot << EOF
+apt-get install -y raspberrypi-kernel raspberrypi-bootloader
+EOF
+
+##
 # Prepare Raspberry Pi boot partition.
 #
-mkdir -p "$ROOTFS_DIR/boot/"
-
 install -m 644 files/cmdline.txt "$ROOTFS_DIR/boot/"
 install -m 644 files/config.txt  "$ROOTFS_DIR/boot/"
 
@@ -208,13 +213,10 @@ EOF
 apply_patches '01-no-root-login.diff'
 
 ##
-# Install typical Raspberry Pi packages which role is unknown.
-# Maybe some can be safely removed.
+# ?????
 #
 on_chroot << EOF
-apt-get install -y     \
-raspberrypi-bootloader \
-raspberrypi-sys-mods
+apt-get install -y raspberrypi-sys-mods
 EOF
 
 ##
