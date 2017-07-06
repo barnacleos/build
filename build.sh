@@ -152,7 +152,7 @@ mkdir  "$ROOTFS_DIR/.pc/"
 ##
 # Prevent services to start after package installation in chroot environment.
 #
-install -m 744 files/policy-rc.d "$ROOTFS_DIR/usr/sbin/policy-rc.d"
+install -m 744 files/usr/sbin/policy-rc.d "$ROOTFS_DIR/usr/sbin/policy-rc.d"
 
 ##
 # Mount virtual file systems.
