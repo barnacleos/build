@@ -211,6 +211,21 @@ EOF
 
 apply_patch '01-no-root-login.diff'
 
+rm -fv '/etc/ssh/ssh_host_key'
+rm -fv '/etc/ssh/ssh_host_key.pub'
+
+rm -fv '/etc/ssh/ssh_host_dsa_key'
+rm -fv '/etc/ssh/ssh_host_dsa_key.pub'
+
+rm -fv '/etc/ssh/ssh_host_ecdsa_key'
+rm -fv '/etc/ssh/ssh_host_ecdsa_key.pub'
+
+rm -fv '/etc/ssh/ssh_host_ed25519_key'
+rm -fv '/etc/ssh/ssh_host_ed25519_key.pub'
+
+rm -fv '/etc/ssh/ssh_host_rsa_key'
+rm -fv '/etc/ssh/ssh_host_rsa_key.pub'
+
 ##
 # ?????
 #
