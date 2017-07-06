@@ -260,7 +260,6 @@ EOF
 # Configure network.
 #
 apply_file 644 '/etc/resolv.conf'
-apply_file 644 '/etc/modprove.d/ipv6.conf'
 
 echo $HOSTNAME > "$ROOTFS_DIR/etc/hostname"
 chmod 644        "$ROOTFS_DIR/etc/hostname"
