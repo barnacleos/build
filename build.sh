@@ -175,9 +175,9 @@ install -m 644 files/apt/sources.list "$ROOTFS_DIR/etc/apt/sources.list"
 
 on_chroot apt-key add - < files/apt/raspberrypi.gpg.asc
 
-install -m 644 files/apt/preferences "$ROOTFS_DIR/etc/apt/preferences.d/raspberrypi-kernel-and-bootloader"
+install -m 644 files/apt/preferences.d/raspberrypi-kernel-and-bootloader "$ROOTFS_DIR/etc/apt/preferences.d/raspberrypi-kernel-and-bootloader"
 
-install -m 644 files/apt/50raspi "$ROOTFS_DIR/etc/apt/apt.conf.d/50raspi"
+install -m 644 files/etc/apt/apt.conf.d/50raspi "$ROOTFS_DIR/etc/apt/apt.conf.d/50raspi"
 
 on_chroot << EOF
 apt-get update
