@@ -194,11 +194,11 @@ ln -nsf /proc/mounts "$ROOTFS_DIR/etc/mtab"
 ##
 # Prepare package manager.
 #
-apply_file 644 '/apt/sources.list'
+apply_file 644 '/etc/apt/sources.list'
 
 on_chroot apt-key add - < keys/raspberrypi.gpg.asc
 
-apply_file 644 '/apt/preferences.d/raspberrypi-kernel-and-bootloader'
+apply_file 644 '/etc/apt/preferences.d/raspberrypi-kernel-and-bootloader'
 
 apply_file 644 '/etc/apt/apt.conf.d/50raspi'
 
