@@ -137,7 +137,7 @@ if [ ! -d "$ROOTFS_DIR" ]; then
   capsh --drop=cap_setfcap -- -c "$BOOTSTRAP_CMD \
     --components=main,contrib,non-free           \
     --arch armhf                                 \
-    --keyring ./files/raspberrypi.gpg            \
+    --keyring ./keys/raspberrypi.gpg             \
     jessie                                       \
     $ROOTFS_DIR                                  \
     http://mirrordirector.raspbian.org/raspbian/" || rmdir "$ROOTFS_DIR/debootstrap/"
@@ -173,7 +173,7 @@ ln -nsf /proc/mounts           "$ROOTFS_DIR/etc/mtab"
 #
 install -m 644 files/apt/sources.list "$ROOTFS_DIR/etc/apt/sources.list"
 
-on_chroot apt-key add - < files/apt/raspberrypi.gpg.asc
+on_chroot apt-key add - < keys/raspberrypi.gpg.asc
 
 install -m 644 files/apt/preferences.d/raspberrypi-kernel-and-bootloader "$ROOTFS_DIR/etc/apt/preferences.d/raspberrypi-kernel-and-bootloader"
 
