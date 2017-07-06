@@ -268,9 +268,7 @@ EOF
 on_chroot << EOF
 apt-get install -y \
 module-init-tools  \
-ca-certificates    \
-usbutils           \
-usb-modeswitch
+ca-certificates
 EOF
 
 ##
