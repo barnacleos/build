@@ -214,8 +214,7 @@ apply_patches '01-no-root-login.diff'
 on_chroot << EOF
 apt-get install -y     \
 raspberrypi-bootloader \
-raspberrypi-sys-mods   \
-raspi-copies-and-fills
+raspberrypi-sys-mods
 EOF
 
 ##
