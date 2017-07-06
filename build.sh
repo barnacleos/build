@@ -73,6 +73,10 @@ apply_patch() {
   popd > /dev/null
 }
 
+apply_dir() {
+  install -d "$ROOTFS_DIR/$1"
+}
+
 apply_file() {
   local MODE="$1"
   local FILE="$2"
@@ -349,7 +353,7 @@ EOF
 
 apply_patch '06-dhcp-server.diff'
 
-install -d "$ROOTFS_DIR/etc/dhcp/dhcpd.conf.d/"
+apply_dir      '/etc/dhcp/dhcpd.conf.d/'
 apply_file 644 '/etc/dhcp/dhcpd.conf.d/192.168.82.0.conf'
 
 ##
