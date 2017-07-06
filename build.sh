@@ -263,7 +263,8 @@ apt-get install -y tzdata
 EOF
 
 ##
-# Install additional packages which maybe can be removed safely.
+# The certificate authorities shipped with Mozilla's browser
+# to allow SSL-based applications to check for the authenticity of SSL connections.
 #
 on_chroot << EOF
 apt-get install -y ca-certificates
