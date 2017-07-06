@@ -267,16 +267,9 @@ EOF
 #
 on_chroot << EOF
 apt-get install -y \
-psmisc             \
 module-init-tools  \
-ed                 \
-debconf-utils      \
-parted             \
-unzip              \
 ca-certificates    \
 usbutils           \
-libfreetype6-dev   \
-dosfstools         \
 usb-modeswitch
 EOF
 
