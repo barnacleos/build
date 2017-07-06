@@ -266,9 +266,7 @@ EOF
 # Install additional packages which maybe can be removed safely.
 #
 on_chroot << EOF
-apt-get install -y \
-module-init-tools  \
-ca-certificates
+apt-get install -y ca-certificates
 EOF
 
 ##
