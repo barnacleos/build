@@ -313,6 +313,18 @@ apt-get install -y dhcpcd5
 EOF
 
 ##
+# Make user-friendly environment.
+#
+on_chroot << EOF
+apt-get install -y \
+bash-completion    \
+less               \
+vim
+
+update-alternatives --set editor /usr/bin/vim.basic
+EOF
+
+##
 # Save fake hardware clock time for more realistic time after startup.
 #
 on_chroot << EOF
