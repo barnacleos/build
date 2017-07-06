@@ -9,6 +9,7 @@ export BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 export DEPLOY_DIR="$BASE_DIR/deploy"
 export ROOTFS_DIR="$BASE_DIR/rootfs"
 export MOUNT_DIR="$BASE_DIR/mnt"
+export FILES_DIR="$BASE_DIR/files"
 
 export IMG_DATE="$(date +%Y-%m-%d)"
 
@@ -70,6 +71,24 @@ apply_patch() {
   esac
 
   popd > /dev/null
+}
+
+apply_file() {
+  local MODE="$1"
+  local FILE="$2"
+
+  local SRC="$FILES_DIR/$FILE"
+  local DST="$ROOTFS_DIR/$FILE"
+
+  if [ ! -f "$SRC" ]; then
+    tput setaf 1 # Red color
+    echo "Source file $FILE does not exist"
+    tput sgr0 # No color
+
+    exit 1
+  fi
+
+  install -m "$MODE" "$SRC" "$DST"
 }
 
 unmount() {
@@ -152,7 +171,7 @@ mkdir  "$ROOTFS_DIR/.pc/"
 ##
 # Prevent services to start after package installation in chroot environment.
 #
-install -m 744 files/usr/sbin/policy-rc.d "$ROOTFS_DIR/usr/sbin/policy-rc.d"
+apply_file 744 '/usr/sbin/policy-rc.d'
 
 ##
 # Mount virtual file systems.
@@ -165,19 +184,19 @@ mount --bind  /sys     "$ROOTFS_DIR/sys"
 ##
 # Add /etc/fstab and /etc/mtab
 #
-install -m 644 files/etc/fstab "$ROOTFS_DIR/etc/fstab"
-ln -nsf /proc/mounts           "$ROOTFS_DIR/etc/mtab"
+apply_file 644 '/etc/fstab'
+ln -nsf /proc/mounts "$ROOTFS_DIR/etc/mtab"
 
 ##
 # Prepare package manager.
 #
-install -m 644 files/apt/sources.list "$ROOTFS_DIR/etc/apt/sources.list"
+apply_file 644 '/apt/sources.list'
 
 on_chroot apt-key add - < keys/raspberrypi.gpg.asc
 
-install -m 644 files/apt/preferences.d/raspberrypi-kernel-and-bootloader "$ROOTFS_DIR/etc/apt/preferences.d/raspberrypi-kernel-and-bootloader"
+apply_file 644 '/apt/preferences.d/raspberrypi-kernel-and-bootloader'
 
-install -m 644 files/etc/apt/apt.conf.d/50raspi "$ROOTFS_DIR/etc/apt/apt.conf.d/50raspi"
+apply_file 644 '/etc/apt/apt.conf.d/50raspi'
 
 on_chroot << EOF
 apt-get update
@@ -194,13 +213,13 @@ EOF
 ##
 # Prepare Raspberry Pi boot partition.
 #
-install -m 644 files/boot/cmdline.txt "$ROOTFS_DIR/boot/cmdline.txt"
-install -m 644 files/boot/config.txt  "$ROOTFS_DIR/boot/config.txt"
+apply_file 644 '/boot/cmdline.txt'
+apply_file 644 '/boot/config.txt'
 
 ##
 # This script is executed at the end of each multiuser runlevel.
 #
-install -m 755 files/etc/rc.local "$ROOTFS_DIR/etc/rc.local"
+apply_file 755 '/etc/rc.local'
 
 ##
 # Install SSH server
@@ -236,16 +255,16 @@ EOF
 ##
 # Configure network.
 #
-install -m 644 files/etc/resolv.conf          "$ROOTFS_DIR/etc/resolv.conf"
-install -m 644 files/etc/modprove.d/ipv6.conf "$ROOTFS_DIR/etc/modprobe.d/ipv6.conf"
+apply_file 644 '/etc/resolv.conf'
+apply_file 644 '/etc/modprove.d/ipv6.conf'
 
 echo $HOSTNAME > "$ROOTFS_DIR/etc/hostname"
 chmod 644        "$ROOTFS_DIR/etc/hostname"
 
 echo "127.0.1.1 $HOSTNAME" >>"$ROOTFS_DIR/etc/hosts"
 
-install -m 644 files/etc/network/interfaces        "$ROOTFS_DIR/etc/network/interfaces"
-install -m 644 files/etc/network/interfaces.d/eth1 "$ROOTFS_DIR/etc/network/interfaces.d/eth1"
+apply_file 644 '/etc/network/interfaces'
+apply_file 644 '/etc/network/interfaces.d/eth1'
 
 ##
 # Add user.
@@ -330,8 +349,8 @@ EOF
 
 apply_patch '06-dhcp-server.diff'
 
-install -d                                                   "$ROOTFS_DIR/etc/dhcp/dhcpd.conf.d/"
-install -m 644 files/etc/dhcp/dhcpd.conf.d/192.168.82.0.conf "$ROOTFS_DIR/etc/dhcp/dhcpd.conf.d/192.168.82.0.conf"
+install -d "$ROOTFS_DIR/etc/dhcp/dhcpd.conf.d/"
+apply_file 644 '/etc/dhcp/dhcpd.conf.d/192.168.82.0.conf'
 
 ##
 # IP forwarding.
