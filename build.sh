@@ -15,6 +15,7 @@ export IMG_DATE="$(date +%Y-%m-%d)"
 export IMG_FILE="$DEPLOY_DIR/$IMG_DATE-${IMG_NAME}.img"
 export ZIP_FILE="$DEPLOY_DIR/$IMG_DATE-${IMG_NAME}.zip"
 
+export QUILT_PATCHES="$BASE_DIR/patches"
 export QUILT_NO_DIFF_INDEX=1
 export QUILT_NO_DIFF_TIMESTAMPS=1
 export QUILT_REFRESH_ARGS='-p ab'
@@ -55,8 +56,6 @@ on_chroot() {
 
 apply_patches() {
   pushd "$ROOTFS_DIR" > /dev/null
-
-  export QUILT_PATCHES="$BASE_DIR/patches"
 
   quilt upgrade
   RC=0
