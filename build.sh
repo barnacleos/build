@@ -275,8 +275,8 @@ on_chroot << EOF
 apt-get install -y sudo
 EOF
 
-apply_patch '02-bashrc.diff'
-apply_patch '03-useradd.diff'
+apply_patch '03-bashrc.diff'
+apply_patch '04-useradd.diff'
 
 on_chroot << EOF
 if ! id -u $USERNAME >/dev/null 2>&1; then
@@ -314,12 +314,12 @@ on_chroot << EOF
 apt-get install -y dphys-swapfile
 EOF
 
-apply_patch '04-swap.diff'
+apply_patch '05-swap.diff'
 
 ##
 # Configure environment.
 #
-apply_patch '05-path.diff'
+apply_patch '06-path.diff'
 
 ##
 # Make user-friendly environment.
@@ -349,7 +349,7 @@ on_chroot << EOF
 apt-get install -y isc-dhcp-server
 EOF
 
-apply_patch '06-dhcp-server.diff'
+apply_patch '07-dhcp-server.diff'
 
 apply_dir      '/etc/dhcp/dhcpd.conf.d/'
 apply_file 644 '/etc/dhcp/dhcpd.conf.d/192.168.82.0.conf'
@@ -357,7 +357,7 @@ apply_file 644 '/etc/dhcp/dhcpd.conf.d/192.168.82.0.conf'
 ##
 # IP forwarding.
 #
-apply_patch '07-ipv4-forwarding.diff'
+apply_patch '08-ipv4-forwarding.diff'
 
 ##
 # Unmount virtual file systems.

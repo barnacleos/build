@@ -1,8 +1,8 @@
 01-no-root-login.diff
 02-hosts.diff
-02-bashrc.diff
-03-useradd.diff
-04-swap.diff
-05-path.diff
-06-dhcp-server.diff
-07-ipv4-forwarding.diff
+03-bashrc.diff
+04-useradd.diff
+05-swap.diff
+06-path.diff
+07-dhcp-server.diff
+08-ipv4-forwarding.diff
