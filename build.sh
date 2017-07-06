@@ -237,7 +237,6 @@ EOF
 # Configure network.
 #
 install -m 644 files/resolv.conf "$ROOTFS_DIR/etc/"
-install -m 644 files/interfaces  "$ROOTFS_DIR/etc/network/interfaces"
 install -m 644 files/ipv6.conf   "$ROOTFS_DIR/etc/modprobe.d/ipv6.conf"
 
 echo $HOSTNAME > "$ROOTFS_DIR/etc/hostname"
