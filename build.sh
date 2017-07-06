@@ -268,6 +268,7 @@ chmod 644        "$ROOTFS_DIR/etc/hostname"
 echo "127.0.1.1 $HOSTNAME" >>"$ROOTFS_DIR/etc/hosts"
 
 apply_file 644 '/etc/network/interfaces'
+apply_file 644 '/etc/network/interfaces.d/eth0'
 apply_file 644 '/etc/network/interfaces.d/eth1'
 
 ##
