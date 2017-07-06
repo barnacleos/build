@@ -244,8 +244,8 @@ chmod 644        "$ROOTFS_DIR/etc/hostname"
 
 echo "127.0.1.1 $HOSTNAME" >>"$ROOTFS_DIR/etc/hosts"
 
-install -m 644 files/interfaces        "$ROOTFS_DIR/etc/network/interfaces"
-install -m 644 files/interfaces.d/eth1 "$ROOTFS_DIR/etc/network/interfaces.d/eth1"
+install -m 644 files/etc/network/interfaces        "$ROOTFS_DIR/etc/network/interfaces"
+install -m 644 files/etc/network/interfaces.d/eth1 "$ROOTFS_DIR/etc/network/interfaces.d/eth1"
 
 ##
 # Add user.
