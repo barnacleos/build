@@ -244,6 +244,8 @@ chmod 644        "$ROOTFS_DIR/etc/hostname"
 
 echo "127.0.1.1 $HOSTNAME" >>"$ROOTFS_DIR/etc/hosts"
 
+install -m 644 files/interfaces.d/eth0 "$ROOTFS_DIR/etc/network/interfaces.d/"
+
 ##
 # Add user.
 #
@@ -317,6 +319,18 @@ apt-get install -y fake-hwclock ntp
 systemctl disable hwclock.sh
 fake-hwclock save
 EOF
+
+##
+# ISC DHCP server
+#
+on_chroot << EOF
+apt-get install -y isc-dhcp-server
+EOF
+
+apply_patch '06-dhcp-server.diff'
+
+install -d                                          "$ROOTFS_DIR/etc/dhcp/dhcpd.conf.d/"
+install -m 644 files/dhcpd.conf.d/192.168.82.0.conf "$ROOTFS_DIR/etc/dhcp/dhcpd.conf.d/"
 
 ##
 # Unmount virtual file systems.

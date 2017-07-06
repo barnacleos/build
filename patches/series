@@ -3,3 +3,4 @@
 03-useradd.diff
 04-swap.diff
 05-path.diff
+06-dhcp-server.diff
