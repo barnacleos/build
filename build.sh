@@ -171,13 +171,13 @@ ln -nsf /proc/mounts       "$ROOTFS_DIR/etc/mtab"
 ##
 # Prepare package manager.
 #
-install -m 644 files/sources.list "$ROOTFS_DIR/etc/apt/"
+install -m 644 files/sources.list "$ROOTFS_DIR/etc/apt/sources.list"
 
 on_chroot apt-key add - < files/raspberrypi.gpg.key
 
-install -m 644 files/raspberrypi-kernel-and-bootloader "$ROOTFS_DIR/etc/apt/preferences.d/"
+install -m 644 files/raspberrypi-kernel-and-bootloader "$ROOTFS_DIR/etc/apt/preferences.d/raspberrypi-kernel-and-bootloader"
 
-install -m 644 files/50raspi "$ROOTFS_DIR/etc/apt/apt.conf.d/"
+install -m 644 files/50raspi "$ROOTFS_DIR/etc/apt/apt.conf.d/50raspi"
 
 on_chroot << EOF
 apt-get update
@@ -194,8 +194,8 @@ EOF
 ##
 # Prepare Raspberry Pi boot partition.
 #
-install -m 644 files/cmdline.txt "$ROOTFS_DIR/boot/"
-install -m 644 files/config.txt  "$ROOTFS_DIR/boot/"
+install -m 644 files/cmdline.txt "$ROOTFS_DIR/boot/cmdline.txt"
+install -m 644 files/config.txt  "$ROOTFS_DIR/boot/config.txt"
 
 ##
 # This script is executed at the end of each multiuser runlevel.
@@ -236,7 +236,7 @@ EOF
 ##
 # Configure network.
 #
-install -m 644 files/resolv.conf "$ROOTFS_DIR/etc/"
+install -m 644 files/resolv.conf "$ROOTFS_DIR/etc/resolv.conf"
 install -m 644 files/ipv6.conf   "$ROOTFS_DIR/etc/modprobe.d/ipv6.conf"
 
 echo $HOSTNAME > "$ROOTFS_DIR/etc/hostname"
@@ -244,8 +244,8 @@ chmod 644        "$ROOTFS_DIR/etc/hostname"
 
 echo "127.0.1.1 $HOSTNAME" >>"$ROOTFS_DIR/etc/hosts"
 
-install -m 644 files/interfaces        "$ROOTFS_DIR/etc/network/"
-install -m 644 files/interfaces.d/eth1 "$ROOTFS_DIR/etc/network/interfaces.d/"
+install -m 644 files/interfaces        "$ROOTFS_DIR/etc/network/interfaces"
+install -m 644 files/interfaces.d/eth1 "$ROOTFS_DIR/etc/network/interfaces.d/eth1"
 
 ##
 # Add user.
@@ -331,7 +331,7 @@ EOF
 apply_patch '06-dhcp-server.diff'
 
 install -d                                          "$ROOTFS_DIR/etc/dhcp/dhcpd.conf.d/"
-install -m 644 files/dhcpd.conf.d/192.168.82.0.conf "$ROOTFS_DIR/etc/dhcp/dhcpd.conf.d/"
+install -m 644 files/dhcpd.conf.d/192.168.82.0.conf "$ROOTFS_DIR/etc/dhcp/dhcpd.conf.d/192.168.82.0.conf"
 
 ##
 # IP forwarding.
