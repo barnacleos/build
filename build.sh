@@ -165,8 +165,8 @@ mount --bind  /sys     "$ROOTFS_DIR/sys"
 ##
 # Add /etc/fstab and /etc/mtab
 #
-install -m 644 files/fstab "$ROOTFS_DIR/etc/fstab"
-ln -nsf /proc/mounts       "$ROOTFS_DIR/etc/mtab"
+install -m 644 files/etc/fstab "$ROOTFS_DIR/etc/fstab"
+ln -nsf /proc/mounts           "$ROOTFS_DIR/etc/mtab"
 
 ##
 # Prepare package manager.
