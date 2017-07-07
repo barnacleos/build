@@ -1,7 +1,7 @@
 bash
 quilt
 parted
-qemu-arm-static:qemu-user-static
+qemu-debootstrap:qemu-user-static
 debootstrap
 zerofree
 zip
