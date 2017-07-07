@@ -198,8 +198,6 @@ apply_file 644 '/etc/apt/sources.list'
 
 on_chroot apt-key add - < "$KEYS_DIR/raspberrypi.gpg.asc"
 
-apply_file 644 '/etc/apt/preferences.d/raspberrypi-kernel-and-bootloader'
-
 apply_file 644 '/etc/apt/apt.conf.d/50raspi'
 
 on_chroot << EOF
