@@ -1,3 +1,4 @@
+bash
 quilt
 parted
 qemu-arm-static:qemu-user-static

@@ -13,7 +13,7 @@ Dependencies
 On Debian-based systems:
 
 ```bash
-apt-get install quilt parted qemu-user-static debootstrap zerofree zip \
+apt-get install bash quilt parted qemu-user-static debootstrap zerofree zip \
 dosfstools libcap2-bin grep rsync
 ```
 
