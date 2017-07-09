@@ -114,7 +114,7 @@ unmount() {
 unmount_image() {
   sync
   sleep 1
-  local LOOP_DEVICES=$(losetup -j "$1" | cut -f1 -d ':')
+  local LOOP_DEVICES=$(losetup -j "$1" | cut -f 1 -d ':')
 
   for LOOP_DEV in $LOOP_DEVICES; do
     if [ -n "$LOOP_DEV" ]; then
@@ -408,13 +408,13 @@ EOF
 PARTED_OUT=$(parted -s "$IMG_FILE" unit b print)
 
 BOOT_OFFSET=$(echo "$PARTED_OUT" | grep -e '^ 1' | xargs echo -n \
-| cut -d" " -f 2 | tr -d B)
+| cut -d ' ' -f 2 | tr -d B)
 BOOT_LENGTH=$(echo "$PARTED_OUT" | grep -e '^ 1' | xargs echo -n \
-| cut -d" " -f 4 | tr -d B)
+| cut -d ' ' -f 4 | tr -d B)
 ROOT_OFFSET=$(echo "$PARTED_OUT" | grep -e '^ 2' | xargs echo -n \
-| cut -d" " -f 2 | tr -d B)
+| cut -d ' ' -f 2 | tr -d B)
 ROOT_LENGTH=$(echo "$PARTED_OUT" | grep -e '^ 2' | xargs echo -n \
-| cut -d" " -f 4 | tr -d B)
+| cut -d ' ' -f 4 | tr -d B)
 
 BOOT_DEV=$(losetup --show -f -o $BOOT_OFFSET --sizelimit $BOOT_LENGTH "$IMG_FILE")
 ROOT_DEV=$(losetup --show -f -o $ROOT_OFFSET --sizelimit $ROOT_LENGTH "$IMG_FILE")
@@ -451,7 +451,7 @@ sed -i "s/ROOTDEV/PARTUUID=$ROOT_PARTUUID/" "$MOUNT_DIR/boot/cmdline.txt"
 ##
 # Unmount all file systems and minimize image file for distribution.
 #
-ROOT_DEV=$(mount | grep "$MOUNT_DIR " | cut -f1 -d ' ')
+ROOT_DEV=$(mount | grep "$MOUNT_DIR " | cut -f 1 -d ' ')
 umount "$MOUNT_DIR/boot/"
 umount "$MOUNT_DIR"
 zerofree -v "$ROOT_DEV"
