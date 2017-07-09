@@ -26,7 +26,7 @@ Network interfaces
 ------------------
 
 Each network interface of Raspberry Pi can be used to connect to the Internet or
-to be the gateway for [the internal Tor network](#network-configuration).
+to be the gateway for [the internal network](#internal-network).
 The [barnaconfig](https://github.com/barnacleos/barnaconfig) utility can be used
 to configure the role of each network interface.
 
@@ -69,10 +69,11 @@ $ ssh user@192.168.0.3
 ### eth1
 
 `eth1` is configured by default to be the gateway and the DHCP server
-for the IPv4 subnet `192.168.82.0/24` (netmask `255.255.255.0`) with static
-address `192.168.82.1` ([see also](#network-configuration)). If your
-Raspberry Pi has two Ethernet ports, you can just plug your computer to it, run
-DHCP client on the corresponding network interface and connect to it via SSH.
+for the IPv4 subnet `192.168.82.0/24` (netmask `255.255.255.0`,
+[the internal network](#internal-network)) with static address `192.168.82.1`.
+If your Raspberry Pi has two Ethernet ports, you can just plug your computer
+to it, run DHCP client on the corresponding network interface and connect
+to it via SSH.
 
 Let's say your computer has network interface `eth42` which is plugged to
 Raspberry Pi. Do the following to connect to Raspberry Pi via SSH:
@@ -100,8 +101,8 @@ and configure it:
 
 
 
-Network configuration
----------------------
+Internal network
+----------------
 
 * Hostname:  `barnacleos`
 * FQDN:      `barnacleos.local`
