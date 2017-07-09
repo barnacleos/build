@@ -104,6 +104,12 @@ and configure it:
 Internal network
 ----------------
 
+BarnacleOS is the typical IPv4 router with it's own internal network. Multiple
+devices can be connected to it. DHCP server assigns IPv4 addresses to devices.
+As a gateway, it sends all traffic from internal network to the Internet through
+[the Tor network](https://torproject.org). The local traffic is not encrypted.
+Here is the internal network configuration:
+
 * Hostname:  `barnacleos`
 * FQDN:      `barnacleos.local`
 * Subnet:    `192.168.82.0/24` (netmask `255.255.255.0`)
