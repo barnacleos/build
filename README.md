@@ -11,6 +11,7 @@ Table of contents
 -----------------
 
 * [Dependencies](#dependencies)
+* [Build](#build)
 * [Network interfaces](#network-interfaces)
   * [eth0](#eth0)
   * [eth1](#eth1)
@@ -31,6 +32,17 @@ dosfstools libcap2-bin grep rsync
 
 The file `depends` contains a list of tools needed. The format of this
 file is `<tool>[:<debian-package>]`.
+
+
+
+Build
+-----
+
+Run `sudo ./build.sh` to build the image. The following files will be created:
+
+* `rootfs/` - the root file system (`/` and `/boot/` partitions)
+* `deploy/YYYY-MM-DD-BarnacleOS.img` - the image to write to SD card
+* `deploy/YYYY-MM-DD-BarnacleOS.zip` - ZIP archive with the image
 
 
 
