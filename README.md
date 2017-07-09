@@ -85,18 +85,6 @@ $ ssh user@192.168.82.1
 
 
 
-Network configuration
----------------------
-
-* Hostname:  `barnacleos`
-* FQDN:      `barnacleos.local`
-* Subnet:    `192.168.82.0/24` (netmask `255.255.255.0`)
-* Gateway:   `192.168.82.1`
-* Broadcast: `192.168.82.255`
-* IP range:  `192.168.82.2` to `192.168.82.254`
-
-
-
 System configuration
 --------------------
 
@@ -110,3 +98,15 @@ System configuration
   so fingerprint is different for each installation of the same image
 
 * User has passwordless sudo
+
+
+
+Network configuration
+---------------------
+
+* Hostname:  `barnacleos`
+* FQDN:      `barnacleos.local`
+* Subnet:    `192.168.82.0/24` (netmask `255.255.255.0`)
+* Gateway:   `192.168.82.1`
+* Broadcast: `192.168.82.255`
+* IP range:  `192.168.82.2` to `192.168.82.254`
