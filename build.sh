@@ -274,6 +274,7 @@ on_chroot << EOF
 apt-get install -y sudo
 EOF
 
+apply_patch '02-passwordless-sudo.diff'
 apply_patch '03-bashrc.diff'
 apply_patch '04-useradd.diff'
 
