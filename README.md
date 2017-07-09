@@ -7,6 +7,18 @@ the official [raspberrypi.org](https://raspberrypi.org) Raspbian images.
 
 
 
+Table of contents
+-----------------
+
+* [Dependencies](#dependencies)
+* [Network interfaces](#network-interfaces)
+  * [eth0](#eth0)
+  * [eth1](#eth1)
+* [System configuration](#system-configuration)
+* [Internal network](#internal-network)
+
+
+
 Dependencies
 ------------
 
