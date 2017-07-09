@@ -1,9 +1,9 @@
 01-no-root-login.diff
 02-hosts.diff
-02-passwordless-sudo.diff
-03-bashrc.diff
-04-useradd.diff
-05-swap.diff
-06-path.diff
-07-dhcp-server.diff
-08-ipv4-forwarding.diff
+03-passwordless-sudo.diff
+04-bashrc.diff
+05-useradd.diff
+06-swap.diff
+07-path.diff
+08-dhcp-server.diff
+09-ipv4-forwarding.diff
