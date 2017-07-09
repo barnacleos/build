@@ -13,8 +13,8 @@ export FILES_DIR="$BASE_DIR/files"
 
 export IMG_DATE="$(date +%Y-%m-%d)"
 
-export IMG_FILE="$DEPLOY_DIR/$IMG_DATE-${IMG_NAME}.img"
-export ZIP_FILE="$DEPLOY_DIR/$IMG_DATE-${IMG_NAME}.zip"
+export IMG_FILE="$DEPLOY_DIR/$IMG_NAME-${IMG_DATE}.img"
+export ZIP_FILE="$DEPLOY_DIR/$IMG_NAME-${IMG_DATE}.zip"
 
 export QUILT_PATCHES="$BASE_DIR/patches"
 export QUILT_NO_DIFF_INDEX=1
