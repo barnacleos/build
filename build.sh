@@ -52,7 +52,7 @@ dependencies_check() {
 }
 
 on_chroot() {
-  capsh --drop=cap_setfcap "--chroot=$ROOTFS_DIR/" -- "$@"
+  capsh --drop=cap_setfcap --chroot="$ROOTFS_DIR" -- "$@"
 }
 
 apply_patch() {
