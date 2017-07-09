@@ -89,14 +89,10 @@ System configuration
 --------------------
 
 * Root login via SSH is disabled
-
 * Root password is disabled
-
 * User `user` has access via SSH with password `password`
-
 * SSH host keys are generated at first startup,
   so fingerprint is different for each installation of the same image
-
 * User has passwordless sudo
 
 
