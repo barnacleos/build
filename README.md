@@ -88,6 +88,9 @@ $ ssh user@192.168.82.1
 System configuration
 --------------------
 
+The following information can be helpful when you connect to BarnacleOS router
+and configure it:
+
 * Root login via SSH is disabled
 * Root password is disabled
 * User `user` has access via SSH with password `password`
