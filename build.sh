@@ -274,9 +274,9 @@ on_chroot << EOF
 apt-get install -y sudo
 EOF
 
-apply_patch '02-passwordless-sudo.diff'
-apply_patch '03-bashrc.diff'
-apply_patch '04-useradd.diff'
+apply_patch '03-passwordless-sudo.diff'
+apply_patch '04-bashrc.diff'
+apply_patch '05-useradd.diff'
 
 on_chroot << EOF
 if ! id -u $USERNAME >/dev/null 2>&1; then
@@ -310,7 +310,7 @@ EOF
 ##
 # Configure environment.
 #
-apply_patch '06-path.diff'
+apply_patch '07-path.diff'
 
 ##
 # Make user-friendly environment.
@@ -340,7 +340,7 @@ on_chroot << EOF
 apt-get install -y isc-dhcp-server
 EOF
 
-apply_patch '07-dhcp-server.diff'
+apply_patch '08-dhcp-server.diff'
 
 apply_dir      '/etc/dhcp/dhcpd.conf.d/'
 apply_file 644 '/etc/dhcp/dhcpd.conf.d/192.168.82.0.conf'
@@ -348,7 +348,7 @@ apply_file 644 '/etc/dhcp/dhcpd.conf.d/192.168.82.0.conf'
 ##
 # IP forwarding.
 #
-apply_patch '08-ipv4-forwarding.diff'
+apply_patch '09-ipv4-forwarding.diff'
 
 ##
 # Unmount virtual file systems.
