@@ -186,6 +186,11 @@ mount -t proc /proc    "$ROOTFS_DIR/proc"
 mount --bind  /sys     "$ROOTFS_DIR/sys"
 
 ##
+# Add /etc/environment
+#
+apply_file 644 '/etc/environment'
+
+##
 # Add /etc/fstab and /etc/mtab
 #
 apply_file 644 '/etc/fstab'
