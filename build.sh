@@ -308,15 +308,6 @@ apt-get install -y ca-certificates
 EOF
 
 ##
-# Enable swap.
-#
-on_chroot << EOF
-apt-get install -y dphys-swapfile
-EOF
-
-apply_patch '05-swap.diff'
-
-##
 # Configure environment.
 #
 apply_patch '06-path.diff'

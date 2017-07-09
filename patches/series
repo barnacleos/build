@@ -3,7 +3,6 @@
 03-passwordless-sudo.diff
 04-bashrc.diff
 05-useradd.diff
-06-swap.diff
 07-path.diff
 08-dhcp-server.diff
 09-ipv4-forwarding.diff
