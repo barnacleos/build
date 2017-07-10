@@ -1,2 +1,2 @@
 deb http://mirrordirector.raspbian.org/raspbian jessie main
-deb http://archive.raspberrypi.org/debian       jessie main
+deb https://barnacleos.github.io/archive        jessie main

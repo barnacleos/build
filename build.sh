@@ -199,9 +199,13 @@ ln -nsf /proc/mounts "$ROOTFS_DIR/etc/mtab"
 ##
 # Prepare package manager.
 #
+on_chroot << EOF
+apt-get install -y apt-transport-https
+EOF
+
 apply_file 644 '/etc/apt/sources.list'
 
-on_chroot apt-key add - < "$KEYS_DIR/raspberrypi.gpg.asc"
+on_chroot apt-key add - < "$KEYS_DIR/barnacleos-archive-keyring.gpg"
 
 apply_file 644 '/etc/apt/apt.conf.d/50raspi'
 
