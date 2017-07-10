@@ -161,6 +161,7 @@ if [ ! -d "$ROOTFS_DIR" ]; then
     --components=main,contrib,non-free               \
     --arch armhf                                     \
     --keyring $KEYS_DIR/raspbian-archive-keyring.gpg \
+    --include=apt-transport-https                    \
     jessie                                           \
     $ROOTFS_DIR                                      \
     http://mirrordirector.raspbian.org/raspbian/" || rmdir "$ROOTFS_DIR/debootstrap/"
@@ -199,10 +200,6 @@ ln -nsf /proc/mounts "$ROOTFS_DIR/etc/mtab"
 ##
 # Prepare package manager.
 #
-on_chroot << EOF
-apt-get install -y apt-transport-https
-EOF
-
 apply_file 644 '/etc/apt/sources.list'
 
 on_chroot apt-key add - < "$KEYS_DIR/barnacleos-archive-keyring.gpg"
