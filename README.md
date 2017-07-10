@@ -131,8 +131,8 @@ Internal network
 BarnacleOS is the typical IPv4 router with it's own internal network. Multiple
 devices can be connected to it. DHCP server assigns IPv4 addresses to devices.
 As a gateway, it sends all traffic from internal network to the Internet through
-[the Tor network](https://torproject.org). The local traffic is not encrypted.
-Here is the internal network configuration:
+[the Tor network](https://torproject.org). The local traffic is rejected. Kernel
+IP forwarding is disabled. Here is the internal network configuration:
 
 * Hostname:  `barnacleos`
 * FQDN:      `barnacleos.local`
