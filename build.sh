@@ -253,11 +253,9 @@ rm -fv '/etc/ssh/ssh_host_rsa_key'
 rm -fv '/etc/ssh/ssh_host_rsa_key.pub'
 
 ##
-# ?????
+# Assign device names by part-UUID
 #
-on_chroot << EOF
-apt-get install -y raspberrypi-sys-mods
-EOF
+apply_file 644 '/lib/udev/rules.d/61-partuuid.rules'
 
 ##
 # Configure network.
