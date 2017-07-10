@@ -41,8 +41,8 @@ Build
 Run `sudo ./build.sh` to build the image. The following files will be created:
 
 * `rootfs/` - the root file system (`/` and `/boot/` partitions)
-* `deploy/YYYY-MM-DD-BarnacleOS.img` - the image to write to SD card
-* `deploy/YYYY-MM-DD-BarnacleOS.zip` - ZIP archive with the image
+* `deploy/BarnacleOS-YYYY-MM-DD.img` - the image to write to SD card
+* `deploy/BarnacleOS-YYYY-MM-DD.zip` - ZIP archive with the image
 
 
 
