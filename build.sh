@@ -161,7 +161,7 @@ if [ ! -d "$ROOTFS_DIR" ]; then
     --components=main,contrib,non-free               \
     --arch armhf                                     \
     --keyring $KEYS_DIR/raspbian-archive-keyring.gpg \
-    --include=apt-transport-https                    \
+    --include=apt-transport-https,ca-certificates    \
     jessie                                           \
     $ROOTFS_DIR                                      \
     http://mirrordirector.raspbian.org/raspbian/" || rmdir "$ROOTFS_DIR/debootstrap/"
@@ -301,14 +301,6 @@ tzdata tzdata/Zones/Etc select UTC
 SELEOF
 
 apt-get install -y tzdata
-EOF
-
-##
-# The certificate authorities shipped with Mozilla's browser
-# to allow SSL-based applications to check for the authenticity of SSL connections.
-#
-on_chroot << EOF
-apt-get install -y ca-certificates
 EOF
 
 ##
