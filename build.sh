@@ -314,6 +314,7 @@ apply_patch '07-path.diff'
 on_chroot << EOF
 apt-get install -y \
 bash-completion    \
+colordiff          \
 less               \
 vim
 
