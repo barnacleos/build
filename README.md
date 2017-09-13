@@ -13,8 +13,6 @@ Table of contents
 * [Dependencies](#dependencies)
 * [Build](#build)
 * [Network interfaces](#network-interfaces)
-  * [eth0](#eth0)
-  * [eth1](#eth1)
 * [System configuration](#system-configuration)
 * [Internal network](#internal-network)
 
@@ -56,12 +54,8 @@ to configure the role of each network interface.
 
 However some initial configuration may be required to use the default BarnacleOS
 image, such as Wi-Fi drivers installation. It can be done via SSH. Network
-interfaces [eth0](#eth0) and [eth1](#eth1) have default configurations to help
-you to connect.
-
-### eth0
-
-`eth0` is configured by default to get IPv4 address from router via DHCP
+interface `eth0` has default configurations to help you to connect.
+It is configured by default to get IPv4 address from router via DHCP
 without any assumptions about subnet configuration. You can just plug
 your Raspberry Pi to router with Ethernet cable, discover which address
 was given to it in router's web interface or with `nmap` utility and connect
@@ -88,24 +82,6 @@ So your Raspbbery Pi has address `192.168.0.3`. Connect to it via SSH:
 
 ```
 $ ssh user@192.168.0.3
-```
-
-### eth1
-
-`eth1` is configured by default to be the gateway and the DHCP server
-for the IPv4 subnet `192.168.82.0/24` (netmask `255.255.255.0`,
-[the internal network](#internal-network)) with static address `192.168.82.1`.
-If your Raspberry Pi has two Ethernet ports, you can just plug your computer
-to it, run DHCP client on the corresponding network interface and connect
-to it via SSH.
-
-Let's say your computer has network interface `eth42` which is plugged to
-Raspberry Pi. Do the following to connect to Raspberry Pi via SSH:
-
-```
-$ printf "allow-hotplug eth42\niface eth42 inet dhcp\n" | sudo tee /etc/network/interfaces.d/eth42
-$ sudo ifup eth42
-$ ssh user@192.168.82.1
 ```
 
 

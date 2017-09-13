@@ -1,8 +1,0 @@
-auto eth1
-allow-hotplug eth1
-iface eth1 inet static
-  netmask   255.255.255.0
-  network   192.168.82.0
-  gateway   192.168.82.1
-  broadcast 192.168.82.255
-  address   192.168.82.1
