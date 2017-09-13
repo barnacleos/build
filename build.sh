@@ -342,11 +342,6 @@ apply_dir      '/etc/dhcp/dhcpd.conf.d/'
 apply_file 644 '/etc/dhcp/dhcpd.conf.d/192.168.82.0.conf'
 
 ##
-# IP forwarding.
-#
-apply_patch '09-ipv4-forwarding.diff'
-
-##
 # Unmount virtual file systems.
 #
 umount "$ROOTFS_DIR/sys"
