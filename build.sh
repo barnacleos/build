@@ -268,8 +268,6 @@ apply_patch '02-hosts.diff'
 apply_file 644 '/etc/network/interfaces'
 apply_file 644 '/etc/network/interfaces.d/eth0'
 
-apply_file 644 '/etc/resolv.conf'
-
 ##
 # Add user.
 #
