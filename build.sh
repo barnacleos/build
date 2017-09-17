@@ -330,18 +330,6 @@ fake-hwclock save
 EOF
 
 ##
-# ISC DHCP server
-#
-on_chroot << EOF
-apt-get install -y isc-dhcp-server
-EOF
-
-apply_patch '08-dhcp-server.diff'
-
-apply_dir      '/etc/dhcp/dhcpd.conf.d/'
-apply_file 644 '/etc/dhcp/dhcpd.conf.d/192.168.82.0.conf'
-
-##
 # Unmount virtual file systems.
 #
 umount "$ROOTFS_DIR/sys"
