@@ -5,5 +5,4 @@ before_install:
 install: sudo ./build.sh
 
 script:
-  - test -f "deploy/BarnacleOS-$(date +%Y-%m-%d).img"
-  - test -f "deploy/BarnacleOS-$(date +%Y-%m-%d).zip"
+  - ./test/archive.sh
