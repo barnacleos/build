@@ -7,7 +7,7 @@ if [ ! -f "$IMG_FILE" ]; then
   exit 1
 fi
 
-RESULT="$(/sbin/fdisk -l "$IMG_FILE" | sed -n 's/Disk identifier: 0x\([^ ]*\)/\1/p')"
+RESULT="$(fdisk -l "$IMG_FILE" | sed -n 's/Disk identifier: 0x\([^ ]*\)/\1/p')"
 
 if [ -z "$RESULT" ]; then
   echo >&2 "ERROR: $IMG_FILE is not an image"
