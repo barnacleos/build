@@ -348,12 +348,17 @@ rm -rf "$ROOTFS_DIR/.pc/"
 rm -f "$ROOTFS_DIR/usr/sbin/policy-rc.d"
 
 ##
+# Clean Apt cache.
+#
+rm -rf "$ROOTFS_DIR/var/cache/apt/archives/*"
+
+##
 # Prepare image file systems.
 #
 rm -f "$IMG_FILE"
 
 BOOT_SIZE=$(du --apparent-size -s "$ROOTFS_DIR/boot" --block-size=1 | cut -f 1)
-TOTAL_SIZE=$(du --apparent-size -s "$ROOTFS_DIR" --exclude var/cache/apt/archives --block-size=1 | cut -f 1)
+TOTAL_SIZE=$(du --apparent-size -s "$ROOTFS_DIR" --block-size=1 | cut -f 1)
 
 ROOT_SIZE=$((TOTAL_SIZE - BOOT_SIZE))
 
@@ -384,7 +389,7 @@ mount -v $BOOT_DEV "$MOUNT_DIR/boot/" -t vfat
 ##
 # Copy root file system to image file systems.
 #
-rsync -aHAXx --exclude var/cache/apt/archives "$ROOTFS_DIR/" "$MOUNT_DIR/"
+rsync -aHAXx "$ROOTFS_DIR/" "$MOUNT_DIR/"
 
 ##
 # Store file system UUIDs to configuration files.
