@@ -161,7 +161,7 @@ if [ ! -d "$ROOTFS_DIR" ]; then
     --components=main,contrib,non-free               \
     --arch armhf                                     \
     --keyring $KEYS_DIR/raspbian-archive-keyring.gpg \
-    jessie                                           \
+    stretch                                          \
     $ROOTFS_DIR                                      \
     http://mirrordirector.raspbian.org/raspbian/" || rmdir "$ROOTFS_DIR/debootstrap/"
 fi
