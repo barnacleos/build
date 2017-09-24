@@ -1,15 +1,4 @@
-#!/bin/bash -e
-
-export BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-
-export IMG_NAME='BarnacleOS'
-
-export DEPLOY_DIR="$BASE_DIR/deploy"
-
-export IMG_DATE="$(date +%Y-%m-%d)"
-
-export IMG_FILE="$DEPLOY_DIR/$IMG_NAME-${IMG_DATE}.img"
-export ZIP_FILE="$DEPLOY_DIR/$IMG_NAME-${IMG_DATE}.zip"
+#!/bin/false
 
 test -f "$IMG_FILE"
 test -f "$ZIP_FILE"

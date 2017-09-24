@@ -1,57 +1,4 @@
-#!/bin/bash -e
-
-export IMG_NAME='BarnacleOS'
-export USERNAME='user'
-export PASSWORD='password'
-
-export BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-export DEPLOY_DIR="$BASE_DIR/deploy"
-export ROOTFS_DIR="$BASE_DIR/rootfs"
-export MOUNT_DIR="$BASE_DIR/mnt"
-export KEYS_DIR="$BASE_DIR/keys"
-export FILES_DIR="$BASE_DIR/files"
-export SCRIPTS="$BASE_DIR/scripts"
-
-export IMG_DATE="$(date +%Y-%m-%d)"
-
-export IMG_FILE="$DEPLOY_DIR/$IMG_NAME-${IMG_DATE}.img"
-export ZIP_FILE="$DEPLOY_DIR/$IMG_NAME-${IMG_DATE}.zip"
-
-export QUILT_PATCHES="$BASE_DIR/patches"
-export QUILT_NO_DIFF_INDEX=1
-export QUILT_NO_DIFF_TIMESTAMPS=1
-export QUILT_REFRESH_ARGS='-p ab'
-
-# dependencies_check
-# $@ Dependnecy files to check
-#
-# Each dependency is in the form of a tool to test for, optionally followed by
-# a : and the name of a package if the package on a Debian-ish system is not
-# named for the tool (i.e., qemu-user-static).
-dependencies_check() {
-  local missing
-
-  if [[ -f "$1" ]]; then
-    for dep in $(cat "$1"); do
-      if ! hash ${dep%:*} 2>/dev/null; then
-        missing="${missing:+$missing }${dep#*:}"
-      fi
-    done
-  fi
-
-  if [[ "$missing" ]]; then
-    tput setaf 1 # Red color
-    echo 'Reqired dependencies not installed.'
-    echo 'This can be resolved on Debian/Raspbian systems by installing the following packages:'
-    for package_name in $missing; do
-      echo "  * $package_name"
-    done
-    tput sgr0 # No color
-
-    false
-  fi
-}
+#!/bin/false
 
 on_chroot() {
   capsh --drop=cap_setfcap --chroot="$ROOTFS_DIR" -- "$@"
@@ -139,8 +86,6 @@ if [ "$(id -u)" != '0' ]; then
   echo 'Please run as root' 1>&2
   exit 1
 fi
-
-dependencies_check "$BASE_DIR/depends"
 
 mkdir -p "$DEPLOY_DIR"
 mkdir -p "$MOUNT_DIR"
