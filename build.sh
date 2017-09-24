@@ -357,7 +357,7 @@ TOTAL_SIZE=$(du --apparent-size -s "$ROOTFS_DIR" --exclude var/cache/apt/archive
 
 ROOT_SIZE=$((TOTAL_SIZE - BOOT_SIZE))
 
-$SCRIPTS/image-prepare "$IMG_FILE" $((BOOT_SIZE * 2)) $((ROOT_SIZE + 800 * 1024 * 1024))
+$SCRIPTS/prepare-image "$IMG_FILE" $((BOOT_SIZE * 2)) $((ROOT_SIZE + 800 * 1024 * 1024))
 
 PARTED_OUT=$(parted -s "$IMG_FILE" unit b print)
 
