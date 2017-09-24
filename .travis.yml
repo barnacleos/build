@@ -6,3 +6,4 @@ install: sudo ./build.sh
 
 script:
   - ./test/archive.sh
+  - ./test/partition_alignment.sh
