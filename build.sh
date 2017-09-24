@@ -209,7 +209,7 @@ on_chroot << EOF
 apt-get update
 apt-get upgrade -y
 apt-get dist-upgrade -y
-apt-get autoremove --purge
+apt-get autoremove -y --purge
 EOF
 
 ##
