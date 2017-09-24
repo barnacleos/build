@@ -11,6 +11,7 @@ export ROOTFS_DIR="$BASE_DIR/rootfs"
 export MOUNT_DIR="$BASE_DIR/mnt"
 export KEYS_DIR="$BASE_DIR/keys"
 export FILES_DIR="$BASE_DIR/files"
+export SCRIPTS="$BASE_DIR/scripts"
 
 export IMG_DATE="$(date +%Y-%m-%d)"
 
@@ -412,7 +413,7 @@ rsync -aHAXx --exclude var/cache/apt/archives "$ROOTFS_DIR/" "$MOUNT_DIR/"
 ##
 # Store file system UUIDs to configuration files.
 #
-IMGID="$(fdisk -l "$IMG_FILE" | sed -n 's/Disk identifier: 0x\([^ ]*\)/\1/p')"
+IMGID=$($SCRIPTS/image-id "$IMG_FILE")
 
 BOOT_PARTUUID="$IMGID-01"
 ROOT_PARTUUID="$IMGID-02"

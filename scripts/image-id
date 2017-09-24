@@ -1,0 +1,17 @@
+#!/bin/bash -e
+
+IMG_FILE="$1"
+
+if [ ! -f "$IMG_FILE" ]; then
+  echo >&2 "ERROR: $IMG_FILE is not a file"
+  exit 1
+fi
+
+RESULT="$(/sbin/fdisk -l "$IMG_FILE" | sed -n 's/Disk identifier: 0x\([^ ]*\)/\1/p')"
+
+if [ -z "$RESULT" ]; then
+  echo >&2 "ERROR: $IMG_FILE is not an image"
+  exit 1
+fi
+
+echo "$RESULT"
