@@ -1,6 +1,8 @@
 barnacleos/build
 ================
 
+[![Build Status](https://travis-ci.org/barnacleos/build.svg)](https://travis-ci.org/barnacleos/build)
+
 Tool used to create the [BarnacleOS](https://github.com/barnacleos) images.
 Based on [pi-gen](https://github.com/rpi-distro/pi-gen) tool used to create
 the official [raspberrypi.org](https://raspberrypi.org) Raspbian images.
