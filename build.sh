@@ -161,7 +161,7 @@ if [ ! -d "$ROOTFS_DIR" ]; then
     --components=main,contrib,non-free               \
     --arch armhf                                     \
     --keyring $KEYS_DIR/raspbian-archive-keyring.gpg \
-    stretch                                          \
+    jessie                                           \
     $ROOTFS_DIR                                      \
     http://mirrordirector.raspbian.org/raspbian/" || rmdir "$ROOTFS_DIR/debootstrap/"
 fi
@@ -207,7 +207,9 @@ apply_file 644 '/etc/apt/apt.conf.d/50raspi'
 
 on_chroot << EOF
 apt-get update
+apt-get upgrade -y
 apt-get dist-upgrade -y
+apt-get autoremove --purge
 EOF
 
 ##
