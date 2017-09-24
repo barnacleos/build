@@ -311,6 +311,7 @@ on_chroot << EOF
 apt-get install -y \
 bash-completion    \
 colordiff          \
+curl               \
 less               \
 vim
 
