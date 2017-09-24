@@ -1,7 +1,6 @@
 /deploy/
 /mnt/
 /rootfs/
-/work/
 
 .pc
 *-pc
