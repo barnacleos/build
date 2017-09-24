@@ -1,0 +1,9 @@
+before_install:
+  - sudo apt-get update  -qq
+  - sudo apt-get install -qq bash quilt parted qemu-user-static debootstrap zerofree zip dosfstools libcap2-bin grep rsync
+
+install: sudo ./build.sh
+
+script:
+  - test -f "deploy/BarnacleOS-$(date +%Y-%m-%d).img"
+  - test -f "deploy/BarnacleOS-$(date +%Y-%m-%d).zip"
