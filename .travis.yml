@@ -7,12 +7,3 @@ install: sudo ./build.sh
 script:
   - test -f "deploy/BarnacleOS-$(date +%Y-%m-%d).img"
   - test -f "deploy/BarnacleOS-$(date +%Y-%m-%d).zip"
-
-deploy:
-  provider: releases
-  skip_cleanup: true
-  api_key: $GITHUB_TOKEN
-  on:
-    tags: true
-  file_glob: true
-  file: 'deploy/BarnacleOS-*.zip'
