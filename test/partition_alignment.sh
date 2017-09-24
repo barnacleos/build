@@ -1,6 +1,6 @@
 #!/bin/false
 
-TABLE="$(/sbin/fdisk -o Device,Start -l "$IMG_FILE" | grep "^$IMG_FILE")"
+TABLE="$(fdisk -o Device,Start -l "$IMG_FILE" | grep "^$IMG_FILE")"
 
 test 2 -eq $(echo "$TABLE" | wc -l)
 
