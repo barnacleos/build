@@ -37,7 +37,8 @@ file is `<tool>[:<debian-package>]`.
 Build
 -----
 
-Run `sudo ./build.sh` to build the image. The following files will be created:
+Run `sudo ./run ./build.sh` to build the image.
+The following files will be created:
 
 * `rootfs/` - the root file system (`/` and `/boot/` partitions)
 * `deploy/BarnacleOS-YYYY-MM-DD.img` - the image to write to SD card
