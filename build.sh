@@ -315,9 +315,29 @@ rm -f "$IMG_FILE"
 BOOT_SIZE=$(du --apparent-size -s "$ROOTFS_DIR/boot" --block-size=1 | cut -f 1)
 TOTAL_SIZE=$(du --apparent-size -s "$ROOTFS_DIR" --block-size=1 | cut -f 1)
 
-ROOT_SIZE=$((TOTAL_SIZE - BOOT_SIZE))
+IMG_SIZE=$((BOOT_SIZE + TOTAL_SIZE + (800 * 1024 * 1024)))
 
-$SCRIPTS/prepare-image "$IMG_FILE" $((BOOT_SIZE * 2)) $((ROOT_SIZE + 800 * 1024 * 1024))
+truncate -s $IMG_SIZE "$IMG_FILE"
+
+fdisk -H 255 -S 63 "$IMG_FILE" <<EOF
+o
+n
+
+
+8192
++$((BOOT_SIZE * 2 / 512))
+p
+t
+c
+n
+
+
+8192
+
+
+p
+w
+EOF
 
 PARTED_OUT=$(parted -s "$IMG_FILE" unit b print)
 
@@ -349,7 +369,7 @@ rsync -aHAXx "$ROOTFS_DIR/" "$MOUNT_DIR/"
 ##
 # Store file system UUIDs to configuration files.
 #
-IMGID=$($SCRIPTS/image-id "$IMG_FILE")
+IMGID="$(fdisk -l "$IMG_FILE" | sed -n 's/Disk identifier: 0x\([^ ]*\)/\1/p')"
 
 BOOT_PARTUUID="$IMGID-01"
 ROOT_PARTUUID="$IMGID-02"

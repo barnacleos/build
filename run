@@ -13,7 +13,6 @@ export ROOTFS_DIR="$BASE_DIR/rootfs"
 export MOUNT_DIR="$BASE_DIR/mnt"
 export KEYS_DIR="$BASE_DIR/keys"
 export FILES_DIR="$BASE_DIR/files"
-export SCRIPTS="$BASE_DIR/scripts"
 
 export IMG_DATE="$(date +%Y-%m-%d)"
 
