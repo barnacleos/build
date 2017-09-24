@@ -147,6 +147,12 @@ mkdir -p "$MOUNT_DIR"
 
 cd "$BASE_DIR"
 
+#################################
+# START OF ROOT FS BUILD        #
+#################################
+if [ ! -d "$ROOTFS_DIR" ]; then
+#################################
+
 ##
 # Bootstrap a basic Debian system.
 #
@@ -351,6 +357,12 @@ rm -f "$ROOTFS_DIR/usr/sbin/policy-rc.d"
 # Clean Apt cache.
 #
 rm -rf "$ROOTFS_DIR/var/cache/apt/archives/*"
+
+########################
+fi
+########################
+# END OF ROOT FS BUILD #
+########################
 
 ##
 # Prepare image file systems.
