@@ -399,9 +399,9 @@ IMGID=$($SCRIPTS/image-id "$IMG_FILE")
 BOOT_PARTUUID="$IMGID-01"
 ROOT_PARTUUID="$IMGID-02"
 
-sed -i "s/BOOTDEV/PARTUUID=$BOOT_PARTUUID/" "$MOUNT_DIR/etc/fstab"
-sed -i "s/ROOTDEV/PARTUUID=$ROOT_PARTUUID/" "$MOUNT_DIR/etc/fstab"
-sed -i "s/ROOTDEV/PARTUUID=$ROOT_PARTUUID/" "$MOUNT_DIR/boot/cmdline.txt"
+sed -i "s/PARTUUID=BOOTUUID/PARTUUID=$BOOT_PARTUUID/" "$MOUNT_DIR/etc/fstab"
+sed -i "s/PARTUUID=ROOTUUID/PARTUUID=$ROOT_PARTUUID/" "$MOUNT_DIR/etc/fstab"
+sed -i "s/PARTUUID=ROOTUUID/PARTUUID=$ROOT_PARTUUID/" "$MOUNT_DIR/boot/cmdline.txt"
 
 ##
 # Unmount all file systems and minimize image file for distribution.
