@@ -237,8 +237,6 @@ on_chroot << EOF
 apt-get install -y ssh
 EOF
 
-apply_patch '01-no-root-login.diff'
-
 rm -fv "$ROOTFS_DIR/etc/ssh/ssh_host_key"
 rm -fv "$ROOTFS_DIR/etc/ssh/ssh_host_key.pub"
 

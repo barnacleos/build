@@ -65,7 +65,6 @@ System configuration
 The following information can be helpful when you connect to BarnacleOS router
 and configure it:
 
-* Root login via SSH is disabled
 * Root password is disabled
 * User `user` has access via SSH with password `password`
 * SSH host keys are generated at first startup,
