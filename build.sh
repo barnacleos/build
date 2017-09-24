@@ -355,29 +355,9 @@ rm -f "$IMG_FILE"
 BOOT_SIZE=$(du --apparent-size -s "$ROOTFS_DIR/boot" --block-size=1 | cut -f 1)
 TOTAL_SIZE=$(du --apparent-size -s "$ROOTFS_DIR" --exclude var/cache/apt/archives --block-size=1 | cut -f 1)
 
-IMG_SIZE=$((BOOT_SIZE + TOTAL_SIZE + (800 * 1024 * 1024)))
+ROOT_SIZE=$((TOTAL_SIZE - BOOT_SIZE))
 
-truncate -s $IMG_SIZE "$IMG_FILE"
-
-fdisk -H 255 -S 63 "$IMG_FILE" <<EOF
-o
-n
-
-
-8192
-+$((BOOT_SIZE * 2 / 512))
-p
-t
-c
-n
-
-
-8192
-
-
-p
-w
-EOF
+$SCRIPTS/image-prepare "$IMG_FILE" $((BOOT_SIZE * 2)) $((ROOT_SIZE + 800 * 1024 * 1024))
 
 PARTED_OUT=$(parted -s "$IMG_FILE" unit b print)
 

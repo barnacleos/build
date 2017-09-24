@@ -1,0 +1,96 @@
+#!/bin/bash -e
+
+BLOCK_SIZE=512
+RESERVED_BLOCKS=8192
+
+IMG_FILE="$1"
+BOOT_SIZE="$2"
+ROOT_SIZE="$3"
+
+if [ -z "$IMG_FILE" ]; then
+  echo >&2 "ERROR: image file is not specified"
+  exit 1
+fi
+
+if [ -z "$BOOT_SIZE" ]; then
+  echo >&2 "ERROR: boot partition size is not specified"
+  exit 1
+fi
+
+if [ -n "$(echo "$BOOT_SIZE" | sed 's|[0-9]||g')" ]; then
+  echo >&2 "ERROR: invalid boot partition size '$BOOT_SIZE'"
+  exit 1
+fi
+
+if [ "$BOOT_SIZE" -le 0 ]; then
+  echo >&2 "ERROR: invalid boot partition size '$BOOT_SIZE'"
+  exit 1
+fi
+
+if [ -z "$ROOT_SIZE" ]; then
+  echo >&2 "ERROR: root partition size is not specified"
+  exit 1
+fi
+
+if [ -n "$(echo "$ROOT_SIZE" | sed 's|[0-9]||g')" ]; then
+  echo >&2 "ERROR: invalid root partition size '$ROOT_SIZE'"
+  exit 1
+fi
+
+if [ "$ROOT_SIZE" -le 0 ]; then
+  echo >&2 "ERROR: invalid root partition size '$ROOT_SIZE'"
+  exit 1
+fi
+
+if [ -e "$IMG_FILE" ]; then
+  echo >&2 "ERROR: file '$IMG_FILE' already exist"
+  exit 1
+fi
+
+echo "Requested boot partition size: $BOOT_SIZE"
+echo "Requested root partition size: $ROOT_SIZE"
+
+if [ $((BOOT_SIZE % BLOCK_SIZE)) -ne 0 ]; then
+  BOOT_SIZE=$((BOOT_SIZE + BLOCK_SIZE - BOOT_SIZE % BLOCK_SIZE))
+fi
+
+if [ $((ROOT_SIZE % BLOCK_SIZE)) -ne 0 ]; then
+  ROOT_SIZE=$((ROOT_SIZE + BLOCK_SIZE - ROOT_SIZE % BLOCK_SIZE))
+fi
+
+echo "Aligned boot partition size: $BOOT_SIZE"
+echo "Aligned root partition size: $ROOT_SIZE"
+
+RESERVED_SIZE=$((RESERVED_BLOCKS * BLOCK_SIZE))
+
+echo "Reserved blocks: $RESERVED_BLOCKS"
+echo "Reserved blocks size: $RESERVED_SIZE"
+
+TOTAL_SIZE=$((RESERVED_SIZE + BOOT_SIZE + ROOT_SIZE))
+
+echo "Total size: $TOTAL_SIZE"
+
+truncate -s $TOTAL_SIZE "$IMG_FILE"
+
+BOOT_BLOCKS=$((BOOT_SIZE / BLOCK_SIZE))
+ROOT_BLOCKS=$((ROOT_SIZE / BLOCK_SIZE))
+
+echo "Boot partition blocks count: $BOOT_BLOCKS"
+echo "Root partition blocks count: $ROOT_BLOCKS"
+
+fdisk -H 255 -S 63 "$IMG_FILE" > /dev/null <<EOF
+o
+n
+p
+1
+$RESERVED_BLOCKS
++$((BOOT_BLOCKS - 1))
+t
+c
+n
+p
+2
+$((RESERVED_BLOCKS + BOOT_BLOCKS))
++$((ROOT_BLOCKS - 1))
+w
+EOF
