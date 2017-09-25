@@ -25,7 +25,7 @@ Dependencies
 On Debian-based systems:
 
 ```bash
-apt-get install bash quilt parted qemu-user-static debootstrap zerofree zip \
+apt-get install bash quilt parted qemu-user-static debootstrap zerofree \
 dosfstools libcap2-bin grep rsync
 ```
 
@@ -42,7 +42,6 @@ The following files will be created:
 
 * `rootfs/` - the root file system (`/` and `/boot/` partitions)
 * `deploy/BarnacleOS-YYYY-MM-DD.img` - the image to write to SD card
-* `deploy/BarnacleOS-YYYY-MM-DD.zip` - ZIP archive with the image
 
 
 

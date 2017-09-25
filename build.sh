@@ -386,11 +386,3 @@ umount "$MOUNT_DIR/boot/"
 umount "$MOUNT_DIR"
 zerofree -v "$ROOT_DEV"
 unmount_image "$IMG_FILE"
-
-##
-# Create zip archive with image file for distribution.
-#
-rm -f "$ZIP_FILE"
-pushd $(dirname "$IMG_FILE") > /dev/null
-zip "$ZIP_FILE" $(basename "$IMG_FILE")
-popd > /dev/null

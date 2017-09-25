@@ -4,7 +4,6 @@ parted
 qemu-debootstrap:qemu-user-static
 debootstrap
 zerofree
-zip
 mkdosfs:dosfstools
 capsh:libcap2-bin
 grep
