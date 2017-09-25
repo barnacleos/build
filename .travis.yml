@@ -2,7 +2,9 @@ before_install:
   - sudo apt-get update
   - sudo apt-get install -y bash quilt parted qemu-user-static debootstrap zerofree dosfstools libcap2-bin grep rsync
 
-install: sudo ./run ./build.sh
+install:
+  - sudo ./run ./build.sh
+  - sudo ./run ./mkimg.sh
 
 script:
   - ./run ./test/partition_alignment.sh

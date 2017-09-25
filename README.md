@@ -37,7 +37,7 @@ file is `<tool>[:<debian-package>]`.
 Build
 -----
 
-Run `sudo ./run ./build.sh` to build the image.
+Run `sudo ./run ./build.sh && sudo ./run ./mkimg.sh` to build the image.
 The following files will be created:
 
 * `rootfs/` - the root file system (`/` and `/boot/` partitions)

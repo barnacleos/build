@@ -55,4 +55,8 @@ dependencies_check() {
 
 dependencies_check "$BASE_DIR/depends"
 
+cd "$BASE_DIR"
+
+mkdir -p "$DEPLOY_DIR"
+
 exec bash -e $@
