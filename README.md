@@ -29,9 +29,6 @@ apt-get install bash quilt parted qemu-user-static debootstrap zerofree \
 dosfstools libcap2-bin grep rsync
 ```
 
-The file `depends` contains a list of tools needed. The format of this
-file is `<tool>[:<debian-package>]`.
-
 
 
 Build
