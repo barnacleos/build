@@ -125,9 +125,6 @@ rsync -aHAXx "$ROOTFS_DIR/" "$MOUNT_DIR/"
 
 IMGID="$(fdisk -l "$IMG_FILE" | sed -n 's/Disk identifier: 0x\([^ ]*\)/\1/p')"
 
-BOOT_PARTUUID="$IMGID-01"
-ROOT_PARTUUID="$IMGID-02"
-
-sed -i "s/PARTUUID=BOOTUUID/PARTUUID=$BOOT_PARTUUID/" "$MOUNT_DIR/etc/fstab"
-sed -i "s/PARTUUID=ROOTUUID/PARTUUID=$ROOT_PARTUUID/" "$MOUNT_DIR/etc/fstab"
-sed -i "s/PARTUUID=ROOTUUID/PARTUUID=$ROOT_PARTUUID/" "$MOUNT_DIR/boot/cmdline.txt"
+sed -i "s/PARTUUID=00000000-01/PARTUUID=$IMGID-01/" "$MOUNT_DIR/etc/fstab"
+sed -i "s/PARTUUID=00000000-02/PARTUUID=$IMGID-02/" "$MOUNT_DIR/etc/fstab"
+sed -i "s/PARTUUID=00000000-02/PARTUUID=$IMGID-02/" "$MOUNT_DIR/boot/cmdline.txt"
