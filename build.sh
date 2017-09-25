@@ -49,7 +49,7 @@ if [ "$(id -u)" != '0' ]; then
   exit 1
 fi
 
-if [ -d "$ROOTFS_DIR" ]; then
+if [ -e "$ROOTFS_DIR" ]; then
   echo "$ROOTFS_DIR already exist"
   exit 1
 fi
