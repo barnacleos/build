@@ -18,23 +18,27 @@ mount -v $ROOT_DEV "$MOUNT_DIR" -t ext4
 mkdir -p           "$MOUNT_DIR/boot/"
 mount -v $BOOT_DEV "$MOUNT_DIR/boot/" -t vfat
 
+echo
+
+function finalize {
+  echo
+
+  umount -v "$MOUNT_DIR/boot/"
+  umount -v "$MOUNT_DIR"
+
+  rmdir "$MOUNT_DIR"
+
+  losetup -d "$BOOT_DEV"
+  losetup -d "$ROOT_DEV"
+}
+
+trap finalize EXIT
+
 IMGID="$(fdisk -l "$IMG_FILE" | sed -n 's/Disk identifier: 0x\([^ ]*\)/\1/p')"
 
 BOOT_PARTUUID="$IMGID-01"
 ROOT_PARTUUID="$IMGID-02"
 
-echo
-
 grep --color "PARTUUID=$BOOT_PARTUUID" "$MOUNT_DIR/etc/fstab"
 grep --color "PARTUUID=$ROOT_PARTUUID" "$MOUNT_DIR/etc/fstab"
 grep --color "PARTUUID=$ROOT_PARTUUID" "$MOUNT_DIR/boot/cmdline.txt"
-
-echo
-
-umount -v "$MOUNT_DIR/boot/"
-umount -v "$MOUNT_DIR"
-
-rmdir "$MOUNT_DIR"
-
-losetup -d "$BOOT_DEV"
-losetup -d "$ROOT_DEV"
