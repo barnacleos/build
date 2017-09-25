@@ -71,7 +71,6 @@ BOOT_SIZE=$((BOOT_SIZE * 2))
 ROOT_SIZE=$((ROOT_SIZE + 800 * 1024 * 1024))
 
 BLOCK_SIZE=512
-RESERVED_BLOCKS=8192
 
 echo "Requested boot partition size: $BOOT_SIZE"
 echo "Requested root partition size: $ROOT_SIZE"
@@ -87,36 +86,42 @@ fi
 echo "Aligned boot partition size: $BOOT_SIZE"
 echo "Aligned root partition size: $ROOT_SIZE"
 
-RESERVED_SIZE=$((RESERVED_BLOCKS * BLOCK_SIZE))
-
-echo "Reserved blocks: $RESERVED_BLOCKS"
-echo "Reserved blocks size: $RESERVED_SIZE"
-
-TOTAL_SIZE=$((RESERVED_SIZE + BOOT_SIZE + ROOT_SIZE))
-
-echo "Total size: $TOTAL_SIZE"
-
-truncate -s $TOTAL_SIZE "$IMG_FILE"
-
 BOOT_BLOCKS=$((BOOT_SIZE / BLOCK_SIZE))
 ROOT_BLOCKS=$((ROOT_SIZE / BLOCK_SIZE))
 
 echo "Boot partition blocks count: $BOOT_BLOCKS"
 echo "Root partition blocks count: $ROOT_BLOCKS"
 
+BOOT_START=8192
+
+ROOT_START=$((BOOT_START + BOOT_BLOCKS + 1))
+
+if [ $((ROOT_START % 4096)) -ne 0 ]; then
+  ROOT_START=$((ROOT_START + 4096 - ROOT_START % 4096))
+fi
+
+echo "Boot partition start block: $BOOT_START"
+echo "Root partition start block: $ROOT_START"
+
+TOTAL_SIZE=$(((ROOT_START + ROOT_BLOCKS) * BLOCK_SIZE))
+
+echo "Total size: $TOTAL_SIZE"
+
+truncate -s $TOTAL_SIZE "$IMG_FILE"
+
 fdisk -H 255 -S 63 "$IMG_FILE" > /dev/null <<EOF
 o
 n
 p
 1
-$RESERVED_BLOCKS
+$BOOT_START
 +$((BOOT_BLOCKS - 1))
 t
 c
 n
 p
 2
-$((RESERVED_BLOCKS + BOOT_BLOCKS))
+$ROOT_START
 +$((ROOT_BLOCKS - 1))
 w
 EOF
