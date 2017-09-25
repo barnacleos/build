@@ -50,8 +50,7 @@ if [ "$(id -u)" != '0' ]; then
 fi
 
 if [ -e "$ROOTFS_DIR" ]; then
-  echo "$ROOTFS_DIR already exist"
-  exit 1
+  rm -rf "$ROOTFS_DIR"
 fi
 
 mkdir "$ROOTFS_DIR"
