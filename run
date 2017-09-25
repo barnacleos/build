@@ -17,11 +17,6 @@ export IMG_DATE="$(date +%Y-%m-%d)"
 
 export IMG_FILE="$DEPLOY_DIR/$IMG_NAME-${IMG_DATE}.img"
 
-export QUILT_PATCHES="$BASE_DIR/patches"
-export QUILT_NO_DIFF_INDEX=1
-export QUILT_NO_DIFF_TIMESTAMPS=1
-export QUILT_REFRESH_ARGS='-p ab'
-
 # dependencies_check
 # $@ Dependnecy files to check
 #

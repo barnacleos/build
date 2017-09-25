@@ -1,5 +1,10 @@
 #!/bin/false
 
+export QUILT_PATCHES="$BASE_DIR/patches"
+export QUILT_NO_DIFF_INDEX=1
+export QUILT_NO_DIFF_TIMESTAMPS=1
+export QUILT_REFRESH_ARGS='-p ab'
+
 on_chroot() {
   capsh --drop=cap_setfcap --chroot="$ROOTFS_DIR" -- "$@"
 }
