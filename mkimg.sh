@@ -55,6 +55,8 @@ if [ ! -d "$(dirname "$IMG_FILE")" ]; then
   exit 1
 fi
 
+export MOUNT_DIR="$(mktemp --directory)"
+
 ##
 # Prepare image file systems.
 #
@@ -134,3 +136,5 @@ umount "$MOUNT_DIR/boot/"
 umount "$MOUNT_DIR"
 zerofree -v "$ROOT_DEV"
 unmount_image "$IMG_FILE"
+
+rmdir "$MOUNT_DIR"
