@@ -7,4 +7,5 @@ install:
   - sudo ./run ./mkimg.sh
 
 script:
-  - ./run ./test/partition_alignment.sh
+  - sudo ./run ./test/partition_alignment.sh
+  - sudo ./run ./test/partuuid.sh
