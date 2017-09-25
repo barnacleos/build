@@ -98,6 +98,15 @@ mount --bind  /dev/pts "$ROOTFS_DIR/dev/pts"
 mount -t proc /proc    "$ROOTFS_DIR/proc"
 mount --bind  /sys     "$ROOTFS_DIR/sys"
 
+function finalize {
+  umount "$ROOTFS_DIR/sys"
+  umount "$ROOTFS_DIR/proc"
+  umount "$ROOTFS_DIR/dev/pts"
+  umount "$ROOTFS_DIR/dev"
+}
+
+trap finalize EXIT
+
 ##
 # Add /etc/environment
 #
@@ -239,14 +248,6 @@ apt-get install -y fake-hwclock ntp
 systemctl disable hwclock.sh
 fake-hwclock save
 EOF
-
-##
-# Unmount virtual file systems.
-#
-umount "$ROOTFS_DIR/sys"
-umount "$ROOTFS_DIR/proc"
-umount "$ROOTFS_DIR/dev/pts"
-umount "$ROOTFS_DIR/dev"
 
 ##
 # Cleanup after Quilt patching.
