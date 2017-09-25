@@ -1,18 +1,11 @@
 #!/bin/false
 
-TABLE="$(fdisk -l "$IMG_FILE" | grep "^$IMG_FILE")"
-
-test 2 -eq $(echo "$TABLE" | wc -l)
-
-TABLE="$(echo "$TABLE" | sed "s|^$IMG_FILE. ||")"
-
-echo '--- table ---'
-echo "$TABLE" | while read -r line; do echo $line; done
-
-STARTS=$(echo "$TABLE" | while read -r line; do echo "$(echo $line | cut -d ' ' -f 1)"; done)
+STARTS=$(partx --show --noheadings --output START - "$IMG_FILE")
 
 echo '--- starts ---'
 echo "$STARTS" | while read -r line; do echo $line; done
+
+test 2 -eq $(echo "$STARTS" | wc -l)
 
 REMS=$(echo "$STARTS" | while read -r line; do echo $(($line % 4096)); done)
 
