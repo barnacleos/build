@@ -13,9 +13,7 @@ export ROOTFS_DIR="$BASE_DIR/rootfs"
 export KEYS_DIR="$BASE_DIR/keys"
 export FILES_DIR="$BASE_DIR/files"
 
-export IMG_DATE="$(date +%Y-%m-%d)"
-
-export IMG_FILE="$DEPLOY_DIR/$IMG_NAME-${IMG_DATE}.img"
+export IMG_FILE="$DEPLOY_DIR/$IMG_NAME.img"
 
 cd "$BASE_DIR"
 
