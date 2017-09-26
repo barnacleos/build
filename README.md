@@ -44,8 +44,7 @@ The following files will be created:
 System configuration
 --------------------
 
-The following information can be helpful when you connect to BarnacleOS router
-and configure it:
+The following information can be helpful when you connect to BarnacleOS:
 
 * Root password is disabled
 * User `user` has access via SSH with password `password`
