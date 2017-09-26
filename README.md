@@ -15,6 +15,7 @@ Table of contents
 * [Dependencies](#dependencies)
 * [Build](#build)
 * [System configuration](#system-configuration)
+* [Connect to Wi-Fi](#connect-to-wi-fi)
 
 
 
@@ -51,3 +52,13 @@ The following information can be helpful when you connect to BarnacleOS:
 * SSH host keys are generated at first startup,
   so fingerprint is different for each installation of the same image
 * User has passwordless sudo
+
+
+
+Connect to Wi-Fi
+----------------
+
+```
+wpa_passphrase "your-wi-fi-ssid" "your-wi-fi-passphrase" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant.conf
+sudo ifup wlan0
+```
