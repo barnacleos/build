@@ -14,7 +14,6 @@ Table of contents
 
 * [Dependencies](#dependencies)
 * [Build](#build)
-* [Network interfaces](#network-interfaces)
 * [System configuration](#system-configuration)
 
 
@@ -39,20 +38,6 @@ The following files will be created:
 
 * `rootfs/` - the root file system (`/` and `/boot/` partitions)
 * `deploy/BarnacleOS.img` - the image to write to SD card
-
-
-
-Network interfaces
-------------------
-
-Some initial configuration may be required to use the default BarnacleOS
-image, such as Wi-Fi drivers installation. It can be done via SSH. Network
-interface `eth0` has default configurations to help you to connect.
-It is configured by default to get IPv4 address from router via DHCP
-without any assumptions about subnet configuration. You can just plug
-your Raspberry Pi to router with Ethernet cable, discover which address
-was given to it in router's web interface or with `nmap` utility and connect
-to it via SSH.
 
 
 
