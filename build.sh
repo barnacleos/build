@@ -260,6 +260,15 @@ fake-hwclock save
 EOF
 
 ##
+# Install Tor (without torsocks because Tor SOCKS proxy is disabled).
+#
+on_chroot << EOF
+apt-get install -y --no-install-recommends tor
+EOF
+
+apply_file 644 '/etc/tor/torrc'
+
+##
 # Cleanup after Quilt patching.
 #
 rm -rf "$ROOTFS_DIR/.pc/"
