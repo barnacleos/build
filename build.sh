@@ -125,6 +125,7 @@ apply_file 644 '/etc/apt/sources.list'
 
 on_chroot apt-key add - < "$KEYS_DIR/raspberrypi-archive-keyring.gpg"
 
+apply_file 644 '/etc/apt/apt.conf.d/02noinstall'
 apply_file 644 '/etc/apt/apt.conf.d/50pdiffs'
 
 on_chroot << EOF
@@ -260,10 +261,10 @@ fake-hwclock save
 EOF
 
 ##
-# Install Tor (without torsocks because Tor SOCKS proxy is disabled).
+# Install Tor.
 #
 on_chroot << EOF
-apt-get install -y --no-install-recommends tor
+apt-get install -y tor
 EOF
 
 apply_file 644 '/etc/tor/torrc'
