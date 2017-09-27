@@ -15,4 +15,15 @@
 # for which host keys do not exist (rsa1, rsa, dsa, ecdsa and ed25519).
 ssh-keygen -A
 
+iptables        -F
+iptables -t nat -F
+
+# SSH
+iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 22   -j REDIRECT --to-ports 22
+# Tor DNS
+iptables -t nat -A PREROUTING -i eth0 -p udp --dport 53   -j REDIRECT --to-ports 5353
+iptables -t nat -A PREROUTING -i eth0 -p udp --dport 5353 -j REDIRECT --to-ports 5353
+# Tor transparent proxy
+iptables -t nat -A PREROUTING -i eth0 -p tcp --syn        -j REDIRECT --to-ports 9040
+
 exit 0
