@@ -125,7 +125,7 @@ apply_file 644 '/etc/apt/sources.list'
 
 on_chroot apt-key add - < "$KEYS_DIR/raspberrypi-archive-keyring.gpg"
 
-apply_file 644 '/etc/apt/apt.conf.d/50raspi'
+apply_file 644 '/etc/apt/apt.conf.d/50pdiffs'
 
 on_chroot << EOF
 apt-get update
