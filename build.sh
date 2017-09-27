@@ -75,6 +75,7 @@ capsh --drop=cap_setfcap -- -c "$BOOTSTRAP_CMD     \
   --components=main,contrib,non-free               \
   --arch armhf                                     \
   --keyring $KEYS_DIR/raspbian-archive-keyring.gpg \
+  --include=ca-certificates                        \
   jessie                                           \
   $ROOTFS_DIR                                      \
   http://mirrordirector.raspbian.org/raspbian/" || rmdir "$ROOTFS_DIR/debootstrap/"
