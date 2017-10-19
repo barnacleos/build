@@ -271,6 +271,14 @@ EOF
 apply_file 644 '/etc/tor/torrc'
 
 ##
+# Remove unnecessary packages.
+#
+on_chroot << EOF
+apt-get purge -y rpcbind exim4 exim4-base exim4-config exim4-daemon-light
+apt-get autoremove -y --purge
+EOF
+
+##
 # Cleanup after Quilt patching.
 #
 rm -rf "$ROOTFS_DIR/.pc/"
