@@ -27,10 +27,6 @@ apply_patch() {
   popd > /dev/null
 }
 
-apply_dir() {
-  install -d "$ROOTFS_DIR/$1"
-}
-
 apply_file() {
   local MODE="$1"
   local FILE="$2"
@@ -269,6 +265,16 @@ apt-get install -y tor
 EOF
 
 apply_file 644 '/etc/tor/torrc'
+
+##
+# Configure firewall.
+#
+on_chroot << EOF
+apt-get install -y iptables-persistent
+EOF
+
+apply_file 644 '/etc/iptables/rules.v4'
+apply_file 644 '/etc/iptables/rules.v6'
 
 ##
 # Remove unnecessary packages.
