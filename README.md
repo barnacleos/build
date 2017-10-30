@@ -40,14 +40,14 @@ The following files will be created:
 * `rootfs/` - the root file system (`/` and `/boot/` partitions)
 * `deploy/BarnacleOS.img` - the image to write to SD card
 
-### WARNING
+#### WARNING
 
-During the execution of `sudo ./run ./build.sh` host directories `/dev`,
-`/dev/pts`, `/proc` and `/sys` are binded info `rootfs/` to provide
-environment for chroot. They are unmounted in the end of script.
-However, script may fail, so they will remain mounted. If you run
-`sudo rm -rf rootfs/`, you can corrupt your host operating system
-state and you will have to reboot. Please be careful.
+> During the execution of `sudo ./run ./build.sh` host directories `/dev`,
+> `/dev/pts`, `/proc` and `/sys` are binded info `rootfs/` to provide
+> environment for chroot. They are unmounted in the end of script.
+> However, script may fail, so they will remain mounted. If you run
+> `sudo rm -rf rootfs/`, you can corrupt your host operating system
+> state and you will have to reboot. Please be careful.
 
 
 
