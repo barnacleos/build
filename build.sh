@@ -188,8 +188,7 @@ apply_file 644 '/lib/udev/rules.d/61-partuuid.rules'
 # Configure network.
 #
 apply_file 644 '/etc/hostname'
-
-apply_patch '02-hosts.diff'
+apply_file 644 '/etc/hosts'
 
 apply_file 644 '/etc/network/interfaces'
 apply_file 644 '/etc/network/interfaces.d/wlan0'

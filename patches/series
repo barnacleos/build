@@ -1,4 +1,3 @@
-02-hosts.diff
 03-passwordless-sudo.diff
 04-bashrc.diff
 05-useradd.diff
