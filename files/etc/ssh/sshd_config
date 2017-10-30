@@ -1,0 +1,26 @@
+# See the sshd_config(5) manpage for details
+
+Protocol 2
+
+Port 22
+AddressFamily inet
+
+HostKey /etc/ssh/ssh_host_key
+HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_dsa_key
+HostKey /etc/ssh/ssh_host_ecdsa_key
+HostKey /etc/ssh/ssh_host_ed25519_key
+
+# Change to "no" after ssh-copy-id
+PasswordAuthentication yes
+
+PermitRootLogin no
+ChallengeResponseAuthentication no
+
+LoginGraceTime 120
+TCPKeepAlive yes
+
+PrintMotd no
+PrintLastLog yes
+
+Subsystem sftp /usr/lib/openssh/sftp-server

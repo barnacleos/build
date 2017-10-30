@@ -162,6 +162,8 @@ on_chroot << EOF
 apt-get install -y ssh
 EOF
 
+apply_file 644 '/etc/ssh/sshd_config'
+
 rm -fv "$ROOTFS_DIR/etc/ssh/ssh_host_key"
 rm -fv "$ROOTFS_DIR/etc/ssh/ssh_host_key.pub"
 
