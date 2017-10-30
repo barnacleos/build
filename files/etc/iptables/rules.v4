@@ -1,3 +1,17 @@
+*nat
+
+# SSH
+-A PREROUTING -i eth0 -p tcp --dport 22   -j REDIRECT --to-ports 22
+# Tor DNS
+-A PREROUTING -i eth0 -p udp --dport 53   -j REDIRECT --to-ports 5353
+-A PREROUTING -i eth0 -p udp --dport 5353 -j REDIRECT --to-ports 5353
+# Tor transparent proxy
+-A PREROUTING -i eth0 -p tcp --syn        -j REDIRECT --to-ports 9040
+
+COMMIT
+
+
+
 *filter
 
 :INPUT   ACCEPT [0:0]
