@@ -105,9 +105,10 @@ function finalize {
 trap finalize EXIT
 
 ##
-# Add /etc/environment
+# Configure environment.
 #
 apply_file 644 '/etc/environment'
+apply_file 644 '/etc/motd'
 
 ##
 # Add /etc/fstab and /etc/mtab

@@ -20,7 +20,7 @@ ChallengeResponseAuthentication no
 LoginGraceTime 120
 TCPKeepAlive yes
 
-PrintMotd no
+PrintMotd yes
 PrintLastLog yes
 
 Subsystem sftp /usr/lib/openssh/sftp-server
