@@ -43,7 +43,7 @@ The following files will be created:
 #### WARNING
 
 > During the execution of `sudo ./run ./build.sh` host directories `/dev`,
-> `/dev/pts`, `/proc` and `/sys` are binded info `rootfs/` to provide
+> `/dev/pts`, `/proc` and `/sys` are binded into `rootfs/` to provide
 > environment for chroot. They are unmounted in the end of script.
 > However, script may fail, so they will remain mounted. If you run
 > `sudo rm -rf rootfs/`, you can corrupt your host operating system
