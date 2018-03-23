@@ -255,6 +255,8 @@ vim
 update-alternatives --set editor /usr/bin/vim.basic
 EOF
 
+apply_file 644 '/etc/vim/vimrc.local'
+
 ##
 # Save fake hardware clock time for more realistic time after startup.
 #
