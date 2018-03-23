@@ -26,7 +26,7 @@ On Debian-based systems:
 
 ```bash
 apt-get install bash quilt parted qemu-user-static debootstrap zerofree \
-dosfstools libcap2-bin grep rsync
+dosfstools libcap2-bin grep rsync binfmt-support
 ```
 
 
