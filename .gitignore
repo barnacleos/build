@@ -1,5 +1,7 @@
 /deploy/
 /rootfs/
 
+/config.sh
+
 .pc
 *-pc
