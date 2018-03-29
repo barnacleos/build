@@ -279,6 +279,13 @@ EOF
 apply_file 644 '/etc/tor/torrc'
 
 ##
+# Install I2P.
+#
+on_chroot << EOF
+apt-get install -y i2p
+EOF
+
+##
 # Configure firewall.
 #
 on_chroot << EOF
