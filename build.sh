@@ -121,10 +121,8 @@ ln -nsf /proc/mounts "$ROOTFS_DIR/etc/mtab"
 #
 apply_file 644 '/etc/apt/sources.list'
 
-on_chroot << EOF
-apt-key add - < "$KEYS_DIR/raspberrypi-archive-keyring.gpg"
-apt-key add - < "$KEYS_DIR/i2p-archive-keyring.gpg"
-EOF
+on_chroot apt-key add - < "$KEYS_DIR/raspberrypi-archive-keyring.gpg"
+on_chroot apt-key add - < "$KEYS_DIR/i2p-archive-keyring.gpg"
 
 apply_file 644 '/etc/apt/apt.conf.d/02noinstall'
 apply_file 644 '/etc/apt/apt.conf.d/50pdiffs'
