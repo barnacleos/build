@@ -71,7 +71,7 @@ capsh --drop=cap_setfcap -- -c "$BOOTSTRAP_CMD     \
   --components=main,contrib,non-free               \
   --arch armhf                                     \
   --keyring $KEYS_DIR/raspbian-archive-keyring.gpg \
-  --include=ca-certificates                        \
+  --include=ca-certificates,apt-transport-https    \
   jessie                                           \
   $ROOTFS_DIR                                      \
   http://mirrordirector.raspbian.org/raspbian/" || rmdir "$ROOTFS_DIR/debootstrap/"
@@ -121,7 +121,10 @@ ln -nsf /proc/mounts "$ROOTFS_DIR/etc/mtab"
 #
 apply_file 644 '/etc/apt/sources.list'
 
-on_chroot apt-key add - < "$KEYS_DIR/raspberrypi-archive-keyring.gpg"
+on_chroot << EOF
+apt-key add - < "$KEYS_DIR/raspberrypi-archive-keyring.gpg"
+apt-key add - < "$KEYS_DIR/i2p-archive-keyring.gpg"
+EOF
 
 apply_file 644 '/etc/apt/apt.conf.d/02noinstall'
 apply_file 644 '/etc/apt/apt.conf.d/50pdiffs'
