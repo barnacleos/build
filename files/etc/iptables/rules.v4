@@ -9,6 +9,8 @@
 -A PREROUTING -i eth0 -p tcp --dport 9050 -j REDIRECT --to-ports 9050
 # I2P router console web interface
 -A PREROUTING -i eth0 -p tcp --dport 7657 -j DNAT     --to-destination 127.0.0.1:7657
+# I2P HTTP proxy
+-A PREROUTING -i eth0 -p tcp --dport 4444 -j DNAT     --to-destination 127.0.0.1:4444
 # Tor transparent proxy
 -A PREROUTING -i eth0 -p tcp --syn        -j REDIRECT --to-ports 9040
 
