@@ -16,6 +16,7 @@ Table of contents
 * [Build](#build)
 * [System configuration](#system-configuration)
 * [Connect to Wi-Fi](#connect-to-wi-fi)
+* [TODO](#todo)
 
 
 
@@ -71,3 +72,15 @@ Connect to Wi-Fi
 wpa_passphrase "your-wi-fi-ssid" "your-wi-fi-passphrase" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant.conf
 sudo ifup wlan0
 ```
+
+
+
+TODO
+----
+
+* Firewall
+* I2P
+* Wi-Fi switcher
+* 3G/4G dongle
+* Tor bridges
+* Tor pluggable transports
