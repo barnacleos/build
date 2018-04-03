@@ -141,6 +141,13 @@ apt-get install -y raspberrypi-kernel raspberrypi-bootloader
 EOF
 
 ##
+# Allow system to boot.
+#
+on_chroot << EOF
+apt-get install -y plymouth mountall
+EOF
+
+##
 # Prepare Raspberry Pi boot partition.
 #
 apply_file 644 '/boot/cmdline.txt'
