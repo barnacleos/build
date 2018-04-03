@@ -86,7 +86,6 @@ TODO
 * [ ] Tor pluggable transports
 * [ ] Use Debian armhf instead of Raspbian
 * [ ] Upgrade from Debian 8 Jessie to Debian 9 Stretch
-* [ ] Use sysvinit instead of systemd
-* [ ] Remove dbus
+* [x] Use sysvinit instead of systemd
 * [ ] Use custom kernel
 * [ ] Build own distribution from scratch

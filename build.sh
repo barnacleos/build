@@ -71,7 +71,7 @@ capsh --drop=cap_setfcap -- -c "$BOOTSTRAP_CMD     \
   --components=main,contrib,non-free               \
   --arch armhf                                     \
   --keyring $KEYS_DIR/raspbian-archive-keyring.gpg \
-  --include=ca-certificates                        \
+  --force-check-gpg                                \
   jessie                                           \
   $ROOTFS_DIR                                      \
   http://mirrordirector.raspbian.org/raspbian/" || rmdir "$ROOTFS_DIR/debootstrap/"
@@ -131,6 +131,15 @@ apt-get update
 apt-get upgrade -y
 apt-get dist-upgrade -y
 apt-get autoremove -y --purge
+EOF
+
+##
+# Replace systemd with sysvinit.
+#
+on_chroot << EOF
+apt-get install -y sysvinit-core
+apt-get purge -y systemd systemd-sysv
+apt-get autoremove -u --purge
 EOF
 
 ##
