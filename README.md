@@ -88,4 +88,5 @@ TODO
 * Upgrade from Debian 8 Jessie to Debian 9 Stretch
 * Use sysvinit instead of systemd
 * Remove dbus
+* Use custom kernel
 * Build own distribution from scratch
