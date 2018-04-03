@@ -87,3 +87,4 @@ TODO
 * Use Debian armhf instead of Raspbian
 * Upgrade from Debian 8 Jessie to Debian 9 Stretch
 * Use sysvinit instead of systemd
+* Build own distribution from scratch
