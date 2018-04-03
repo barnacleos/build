@@ -1,9 +1,18 @@
-# See the sshd_config(5) manpage for details
+# $OpenBSD: sshd_config,v 1.100 2016/08/15 12:32:04 naddy Exp $
 
-Protocol 2
+# This is the sshd server system-wide configuration file.  See
+# sshd_config(5) for more information.
+
+# This sshd was compiled with PATH=/usr/bin:/bin:/usr/sbin:/sbin
+
+# The strategy used for options in the default sshd_config shipped with
+# OpenSSH is to specify options with their default value where
+# possible, but leave them commented.  Uncommented options override the
+# default value.
 
 Port 22
 AddressFamily inet
+ListenAddress 192.168.82.1
 
 HostKey /etc/ssh/ssh_host_key
 HostKey /etc/ssh/ssh_host_rsa_key
@@ -11,16 +20,20 @@ HostKey /etc/ssh/ssh_host_dsa_key
 HostKey /etc/ssh/ssh_host_ecdsa_key
 HostKey /etc/ssh/ssh_host_ed25519_key
 
+LoginGraceTime 2m
+PermitRootLogin no
+MaxSessions 3
+
 # Change to "no" after ssh-copy-id
 PasswordAuthentication yes
 
-PermitRootLogin no
 ChallengeResponseAuthentication no
-
-LoginGraceTime 120
-TCPKeepAlive yes
+KerberosAuthentication no
+GSSAPIAuthentication no
+UsePAM no
 
 PrintMotd yes
 PrintLastLog yes
+TCPKeepAlive yes
 
 Subsystem sftp /usr/lib/openssh/sftp-server
