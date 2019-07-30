@@ -11,7 +11,7 @@
 # default value.
 
 Port 22
-AddressFamily inet
+AddressFamily any
 ListenAddress 0.0.0.0
 
 HostKey /etc/ssh/ssh_host_key
@@ -20,8 +20,12 @@ HostKey /etc/ssh/ssh_host_dsa_key
 HostKey /etc/ssh/ssh_host_ecdsa_key
 HostKey /etc/ssh/ssh_host_ed25519_key
 
+PrintMotd yes
+PrintLastLog yes
+
 LoginGraceTime 2m
 PermitRootLogin no
+MaxAuthTries 2
 MaxSessions 3
 
 # Change to "no" after ssh-copy-id
@@ -32,8 +36,10 @@ KerberosAuthentication no
 GSSAPIAuthentication no
 UsePAM no
 
-PrintMotd yes
-PrintLastLog yes
-TCPKeepAlive yes
+AllowAgentForwarding no
+AllowTcpForwarding no
+X11Forwarding no
+TCPKeepAlive no
+UseDNS no
 
 Subsystem sftp /usr/lib/openssh/sftp-server

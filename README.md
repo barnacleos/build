@@ -65,16 +65,6 @@ The following information can be helpful when you connect to BarnacleOS:
 
 
 
-Connect to Wi-Fi
-----------------
-
-```
-wpa_passphrase "your-wi-fi-ssid" "your-wi-fi-passphrase" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant.conf
-sudo ifup wlan0
-```
-
-
-
 TODO
 ----
 

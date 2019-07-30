@@ -214,10 +214,8 @@ apply_file 644 '/etc/network/interfaces.d/eth0'
 # Configure Wi-Fi.
 #
 on_chroot << EOF
-apt-get install -y wpasupplicant firmware-brcm80211
+apt-get install -y firmware-brcm80211
 EOF
-
-apply_file 600 '/etc/wpa_supplicant/wpa_supplicant.conf'
 
 ##
 # Add user.
