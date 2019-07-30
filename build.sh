@@ -282,15 +282,6 @@ fake-hwclock save
 EOF
 
 ##
-# Install Tor.
-#
-on_chroot << EOF
-apt-get install -y tor
-EOF
-
-apply_file 644 '/etc/tor/torrc'
-
-##
 # Configure firewall.
 #
 on_chroot << EOF
