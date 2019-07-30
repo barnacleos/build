@@ -79,11 +79,8 @@ TODO
 ----
 
 * [ ] Firewall
-* [ ] I2P
 * [ ] Wi-Fi switcher
 * [ ] 3G/4G dongle
-* [ ] Tor bridges
-* [ ] Tor pluggable transports
 * [ ] Use Debian armhf instead of Raspbian
 * [ ] Upgrade from Debian 8 Jessie to Debian 9 Stretch
 * [x] Use sysvinit instead of systemd
