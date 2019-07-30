@@ -138,7 +138,7 @@ EOF
 on_chroot << EOF
 apt-get install -y sysvinit-core
 apt-get purge -y systemd systemd-sysv
-apt-get autoremove -u --purge
+apt-get autoremove -y --purge
 EOF
 
 ##
