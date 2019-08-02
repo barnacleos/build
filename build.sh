@@ -162,11 +162,6 @@ apply_file 644 '/boot/cmdline.txt'
 apply_file 644 '/boot/config.txt'
 
 ##
-# Configure system.
-#
-apply_file 644 '/etc/sysctl.conf'
-
-##
 # This script is executed at the end of each multiuser runlevel.
 #
 apply_file 755 '/etc/rc.local'
