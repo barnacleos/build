@@ -1,9 +1,9 @@
-barnacleos/build
-================
+raspberrypi-build
+=================
 
-[![Build Status](https://travis-ci.org/barnacleos/build.svg)](https://travis-ci.org/barnacleos/build)
+[![Build Status](https://travis-ci.org/kotovalexarian/raspberrypi-build.svg)](https://travis-ci.org/kotovalexarian/raspberrypi-build)
 
-Tool used to create the [BarnacleOS](https://github.com/barnacleos) images.
+Tool used to create custom Debian GNU/Linux images for Raspberry Pi.
 Based on [pi-gen](https://github.com/rpi-distro/pi-gen) tool used to create
 the official [raspberrypi.org](https://raspberrypi.org) Raspbian images.
 
@@ -39,7 +39,7 @@ Run `sudo ./run ./build.sh && sudo ./run ./mkimg.sh` to build the image.
 The following files will be created:
 
 * `rootfs/` - the root file system (`/` and `/boot/` partitions)
-* `deploy/BarnacleOS.img` - the image to write to SD card
+* `deploy/raspberrypi.img` - the image to write to SD card
 
 #### WARNING
 
@@ -55,7 +55,7 @@ The following files will be created:
 System configuration
 --------------------
 
-The following information can be helpful when you connect to BarnacleOS:
+The following information can be helpful when you connect:
 
 * Root password is disabled
 * User `user` has access via SSH with password `password`

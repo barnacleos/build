@@ -4,7 +4,7 @@ export PATH='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
 
 export BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-export IMG_NAME='BarnacleOS'
+export IMG_NAME='raspberrypi'
 export USERNAME='user'
 export PASSWORD='password'
 
