@@ -15,7 +15,6 @@ Table of contents
 * [Dependencies](#dependencies)
 * [Build](#build)
 * [System configuration](#system-configuration)
-* [Connect to Wi-Fi](#connect-to-wi-fi)
 * [TODO](#todo)
 
 
