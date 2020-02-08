@@ -202,8 +202,6 @@ apply_file 644 '/etc/hostname'
 apply_file 644 '/etc/hosts'
 
 apply_file 644 '/etc/network/interfaces'
-apply_file 644 '/etc/network/interfaces.d/wlan0'
-apply_file 644 '/etc/network/interfaces.d/eth0'
 
 ##
 # Configure Wi-Fi.
