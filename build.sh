@@ -133,15 +133,6 @@ apt-get autoremove -y --purge
 EOF
 
 ##
-# Replace systemd with sysvinit.
-#
-on_chroot << EOF
-apt-get install -y sysvinit-core
-apt-get purge -y systemd systemd-sysv
-apt-get autoremove -y --purge
-EOF
-
-##
 # Install kernel and bootloader.
 #
 on_chroot << EOF

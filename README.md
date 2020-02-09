@@ -15,7 +15,6 @@ Table of contents
 * [Dependencies](#dependencies)
 * [Build](#build)
 * [System configuration](#system-configuration)
-* [TODO](#todo)
 
 
 
@@ -61,17 +60,3 @@ The following information can be helpful when you connect:
 * SSH host keys are generated at first startup,
   so fingerprint is different for each installation of the same image
 * User has passwordless sudo
-
-
-
-TODO
-----
-
-* [ ] Firewall
-* [ ] Wi-Fi switcher
-* [ ] 3G/4G dongle
-* [ ] Use Debian armhf instead of Raspbian
-* [ ] Upgrade from Debian 8 Jessie to Debian 9 Stretch
-* [x] Use sysvinit instead of systemd
-* [ ] Use custom kernel
-* [ ] Build own distribution from scratch
