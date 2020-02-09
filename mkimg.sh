@@ -29,7 +29,7 @@ ROOT_SIZE=$((TOTAL_SIZE - BOOT_SIZE))
 
 # Extend to reserve some free space.
 BOOT_SIZE=$((BOOT_SIZE * 2))
-ROOT_SIZE=$((ROOT_SIZE + 12 * 1024 * 1024 * 1024))
+ROOT_SIZE=$((ROOT_SIZE + 8 * 1024 * 1024 * 1024))
 
 BLOCK_SIZE=512
 
