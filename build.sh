@@ -246,6 +246,7 @@ apt-get install -y \
 bash-completion    \
 colordiff          \
 curl               \
+gettext            \
 less               \
 vim
 
