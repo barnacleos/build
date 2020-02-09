@@ -27,9 +27,8 @@ TOTAL_SIZE=$(du --apparent-size -s "$ROOTFS_DIR" --block-size=1 | cut -f 1)
 
 ROOT_SIZE=$((TOTAL_SIZE - BOOT_SIZE))
 
-# Extend to reserve some free space.
 BOOT_SIZE=$((BOOT_SIZE * 2))
-ROOT_SIZE=$((ROOT_SIZE + 8 * 1024 * 1024 * 1024))
+ROOT_SIZE=$((ROOT_SIZE + 800 * 1024 * 1024))
 
 BLOCK_SIZE=512
 
